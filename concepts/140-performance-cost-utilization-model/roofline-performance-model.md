@@ -2,7 +2,14 @@
 id: programmer.roofline-model
 title: Roofline Performance Model
 status: draft
-layer: programmer
+layer: 140-performance-cost-utilization-model
+layer_path: 140-performance-cost-utilization-model/arithmetic-intensity
+parent: hw.gpu.overview
+secondary_layers: [50-memory-data-movement, 110-workload-mapping]
+granularity: model
+concept_type: performance_model
+scale_scope: [tile, die, node]
+reasoning_roles: [indicator, bottleneck]
 tags: [performance, roofline, arithmetic-intensity, bandwidth, gpu]
 aliases: [roofline model]
 sources: [williams-roofline-2009]
@@ -53,4 +60,3 @@ Roofline helps evaluate accelerator claims. More peak FLOPs matter only when wor
 ## Open Questions
 
 - OPEN: Add worked examples for GEMM, attention, elementwise ops, and reductions.
-

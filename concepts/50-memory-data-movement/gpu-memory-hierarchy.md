@@ -2,7 +2,14 @@
 id: hw.gpu.memory-hierarchy
 title: GPU Memory Hierarchy
 status: draft
-layer: hw-sw-system
+layer: 50-memory-data-movement
+layer_path: 50-memory-data-movement/gpu/on-chip-and-package-memory
+parent: hw.gpu.overview
+secondary_layers: [40-compute-substrate, 60-interconnect-power-thermal, 140-performance-cost-utilization-model]
+granularity: concept
+concept_type: memory_pattern
+scale_scope: [unit, tile, die, package, node]
+reasoning_roles: [constraint, bottleneck, locality_strategy]
 tags: [gpu, memory, hbm, cache, shared-memory, bandwidth]
 aliases: [gpu memory system]
 sources: [nvidia-cuda-programming-guide-v13.3, nvidia-a100-architecture-whitepaper-2020, williams-roofline-2009]
@@ -49,10 +56,10 @@ HBM capacity, bandwidth, packaging, and memory supply can become industry bottle
 ## Related Concepts
 
 - [[hw.gpu.overview|GPU Architecture Overview]]
+- [[hw.gpu.tensor-memory-accelerator|Tensor Memory Accelerator]]
 - [[programmer.roofline-model|Roofline Performance Model]]
 
 ## Open Questions
 
 - OPEN: Add HBM-specific concept under `chip.memory`.
 - OPEN: Add interconnect and multi-GPU memory hierarchy concepts.
-

@@ -4,12 +4,15 @@ Agents should treat this repository as a durable knowledge system, not as a scra
 
 ## Write Path
 
+0. Start from `system/agent-operating-manual.md` and choose one harness under `system/harnesses/`.
 1. Put raw notes and unprocessed source snippets under `inbox/`.
 2. Register candidate sources in `sources/source-registry.yaml`.
 3. Create or update concept pages under `concepts/`.
 4. Add typed graph edges to `graph/edges.jsonl`.
-5. Run `python3 knowledge-base/scripts/build_index.py`.
-6. Record meaningful runs in `system/run-ledger.jsonl`.
+5. Run `python3 scripts/build_index.py`.
+6. Run `python3 scripts/validate_ontology.py`.
+7. Run `python3 scripts/validate_harnesses.py` after harness or system edits.
+8. Record meaningful runs in `system/run-ledger.jsonl`.
 
 ## Concept Page Rules
 
@@ -37,4 +40,3 @@ Use these marks consistently:
 - `VERIFY:` claim needs stronger citation.
 - `ASSUMPTION:` explicit reasoning step.
 - `DO_NOT_MERGE:` known conflict or unresolved contradiction.
-

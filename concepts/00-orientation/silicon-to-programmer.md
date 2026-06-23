@@ -2,7 +2,14 @@
 id: stack.silicon-to-programmer
 title: Silicon to Programmer Stack
 status: seed
-layer: stack-map
+layer: 00-orientation
+layer_path: 00-orientation/stack-map
+parent:
+secondary_layers: []
+granularity: map
+concept_type: architecture_pattern
+scale_scope: [ecosystem]
+reasoning_roles: [abstraction, mapping]
 tags: [stack, map, first-principles]
 aliases: [full stack map]
 sources: []
@@ -44,4 +51,3 @@ physical constraint -> architecture choice -> software exposure -> workload fit 
 ## Open Questions
 
 - OPEN: Which concepts should be mandatory before market-level reasoning is allowed?
-

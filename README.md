@@ -5,7 +5,22 @@ This is a local-first knowledge base for understanding AI and semiconductor indu
 The working stack is:
 
 ```text
-silicon -> chip -> hardware/software system -> programmer -> industry and market logic
+physical limits/materials
+  -> manufacturing/process/integration
+  -> circuit/IP primitives
+  -> compute substrate
+  -> memory/data movement
+  -> interconnect/power/thermal
+  -> execution architecture
+  -> programming interface/DSL
+  -> compiler/lowering
+  -> runtime/execution system
+  -> workload mapping
+  -> scale-up system
+  -> scale-out distributed system
+  -> performance/cost/utilization model
+  -> supply-chain/business logic
+  -> market narrative
 ```
 
 The source of truth is Markdown. A small local indexer turns concept files and graph edges into JSON that can power visual interfaces, search, and future agent harnesses.
@@ -26,7 +41,8 @@ knowledge-base/
   graph/                 # Typed edges and generated graph index
   scripts/               # Local tooling
   sources/               # Source registry and citation metadata
-  system/                # Operating rules, templates, workflow docs
+  system/                # Operating rules, harnesses, templates, workflow docs
+  use-cases/             # Recorded tests and user workflows
   inbox/                 # Raw notes and candidate sources
 ```
 
@@ -35,14 +51,32 @@ knowledge-base/
 Build the graph index:
 
 ```bash
-python3 knowledge-base/scripts/build_index.py
+python3 scripts/build_index.py
+python3 scripts/validate_ontology.py
+python3 scripts/validate_harnesses.py
 ```
 
 Inspect the generated file:
 
 ```bash
-less knowledge-base/graph/concept-index.json
+less graph/concept-index.json
 ```
+
+## Agent Entry Point
+
+Agents should start with:
+
+```text
+system/agent-operating-manual.md
+```
+
+Then choose one harness from:
+
+```text
+system/harnesses/
+```
+
+The harness defines mutable surfaces, immutable surfaces, sensors, evaluators, logging, promotion rules, and human escalation boundaries.
 
 ## Concept Status
 
@@ -70,3 +104,14 @@ Example typed edge:
 {"source":"hw.gpu.overview","target":"hw.gpu.memory-hierarchy","type":"decomposes_into","confidence":"working"}
 ```
 
+## Hierarchy Policy
+
+Concept frontmatter carries visual hierarchy fields:
+
+- `layer`: compact filter bucket.
+- `layer_path`: tree path for visual grouping.
+- `parent`: parent concept ID for collapsible views.
+- `granularity`: map, overview, concept, mechanism, model, metric, or case-study.
+- `concept_type`: what kind of thing the concept is.
+- `scale_scope`: where the concept matters, from unit to ecosystem.
+- `reasoning_roles`: how the concept helps explain systems or markets.

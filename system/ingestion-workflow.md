@@ -63,6 +63,7 @@ human_controls:
 2. **Triage**
    - Identify whether the input is primary technical evidence, industry interpretation, market narrative, or unverified lead.
    - Decide which concepts it touches.
+   - For online articles, ignore page-level AI-generated summaries unless the task is explicitly about evaluating that summary.
 
 3. **Extract Claims**
    - Extract claims as atomic statements.
@@ -105,4 +106,3 @@ The first automated version should be conservative:
 - `extract_claims.py`: produce a claim draft, not accepted knowledge.
 - `review_concept.py`: lint frontmatter, citations, and edges.
 - `build_index.py`: generate graph JSON for UI and search.
-

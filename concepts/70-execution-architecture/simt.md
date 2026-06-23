@@ -2,7 +2,14 @@
 id: hw.gpu.simt
 title: SIMT Execution Model
 status: draft
-layer: hw-sw-system
+layer: 70-execution-architecture
+layer_path: 70-execution-architecture/gpu/simt
+parent: hw.gpu.overview
+secondary_layers: [80-programming-interface-dsl]
+granularity: mechanism
+concept_type: execution_model
+scale_scope: [tile, die]
+reasoning_roles: [abstraction, mapping]
 tags: [gpu, simt, cuda, warp, execution]
 aliases: [single instruction multiple threads, warp execution]
 sources: [nvidia-cuda-programming-guide-v13.3]
@@ -51,4 +58,3 @@ SIMT is one reason AI tensor programs are a strong GPU fit: many operations appl
 ## Open Questions
 
 - VERIFY: Add AMD wavefront and Intel Xe terminology for cross-vendor comparison.
-

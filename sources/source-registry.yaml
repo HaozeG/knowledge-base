@@ -38,3 +38,20 @@ sources:
     url: https://arxiv.org/abs/1803.04014
     notes: Research study of Tensor Core programming methods, performance, and precision behavior.
 
+  - id: nvidia-hopper-architecture-in-depth-2022
+    title: NVIDIA Hopper Architecture In-Depth
+    authors: "Michael Andersch; Greg Palmer; Ronny Krashinsky; Nick Stam; Vishal Mehta; Gonzalo Brito; Sridhar Ramaswamy"
+    year: 2022
+    tier: B
+    type: official-technical-blog
+    url: https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/
+    notes: Official NVIDIA technical blog used as an ingestion test source for Hopper SM changes, Tensor Memory Accelerator, thread block clusters, FP8 Tensor Cores, and NVLink Switch System.
+
+  - id: cerebras-wse3-product-page-2026
+    title: The Future of AI is Wafer Scale
+    authors: Cerebras
+    year: 2026
+    tier: B
+    type: official-product-page
+    url: https://www.cerebras.ai/chip
+    notes: Official Cerebras product page for WSE-3; useful for case-study placement, but product and performance claims require independent or whitepaper cross-checking before verified status.

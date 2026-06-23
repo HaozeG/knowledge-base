@@ -3,6 +3,13 @@ id: layer.topic.slug
 title: Concept Title
 status: seed
 layer: layer-name
+layer_path: 00-layer/subdomain/topic
+parent:
+secondary_layers: []
+granularity: concept
+concept_type: concept
+scale_scope: []
+reasoning_roles: []
 tags: [tag1, tag2]
 aliases: []
 sources: []
@@ -39,4 +46,3 @@ Separate durable mechanism from company-specific or market-specific interpretati
 ## Open Questions
 
 - OPEN: What must be verified next?
-

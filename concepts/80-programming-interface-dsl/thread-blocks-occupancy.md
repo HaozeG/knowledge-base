@@ -2,7 +2,14 @@
 id: hw.gpu.thread-blocks-occupancy
 title: Thread Blocks and Occupancy
 status: draft
-layer: hw-sw-system
+layer: 80-programming-interface-dsl
+layer_path: 80-programming-interface-dsl/cuda/thread-hierarchy
+parent: hw.gpu.simt
+secondary_layers: [70-execution-architecture, 140-performance-cost-utilization-model]
+granularity: mechanism
+concept_type: programming_interface
+scale_scope: [tile, die]
+reasoning_roles: [abstraction, mapping, indicator]
 tags: [gpu, cuda, occupancy, scheduling, latency-hiding]
 aliases: [cuda blocks, gpu occupancy]
 sources: [nvidia-cuda-programming-guide-v13.3]
@@ -50,8 +57,8 @@ Occupancy links architecture to software skill. Hardware peak performance does n
 - [[hw.gpu.overview|GPU Architecture Overview]]
 - [[hw.gpu.simt|SIMT Execution Model]]
 - [[hw.gpu.memory-hierarchy|GPU Memory Hierarchy]]
+- [[hw.gpu.thread-block-clusters|Thread Block Clusters]]
 
 ## Open Questions
 
 - VERIFY: Add concrete examples from CUDA occupancy calculator or official occupancy docs.
-

@@ -2,7 +2,14 @@
 id: hw.gpu.overview
 title: GPU Architecture Overview
 status: draft
-layer: hw-sw-system
+layer: 70-execution-architecture
+layer_path: 70-execution-architecture/gpu
+parent: stack.silicon-to-programmer
+secondary_layers: [40-compute-substrate, 50-memory-data-movement, 80-programming-interface-dsl, 140-performance-cost-utilization-model]
+granularity: overview
+concept_type: architecture_pattern
+scale_scope: [tile, die, package, node]
+reasoning_roles: [abstraction, mapping]
 tags: [gpu, architecture, parallelism, ai-systems]
 aliases: [gpu architecture]
 sources: [nvidia-cuda-programming-guide-v13.3, nvidia-a100-architecture-whitepaper-2020, williams-roofline-2009]
@@ -60,6 +67,8 @@ The fragile part is company-specific valuation. That depends on supply, margins,
 - [[hw.gpu.simt|SIMT Execution Model]]
 - [[hw.gpu.memory-hierarchy|GPU Memory Hierarchy]]
 - [[hw.gpu.thread-blocks-occupancy|Thread Blocks and Occupancy]]
+- [[hw.gpu.thread-block-clusters|Thread Block Clusters]]
+- [[hw.gpu.tensor-memory-accelerator|Tensor Memory Accelerator]]
 - [[hw.gpu.tensor-cores|Tensor Cores]]
 - [[programmer.roofline-model|Roofline Performance Model]]
 

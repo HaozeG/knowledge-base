@@ -7,7 +7,22 @@ Build a local-first, agent-friendly knowledge base for AI and semiconductor indu
 The durable reasoning path is:
 
 ```text
-silicon constraint -> chip architecture -> HW/SW system -> programmer model -> industry logic -> market narrative
+physical limits/materials
+  -> manufacturing/process/integration
+  -> circuit/IP primitives
+  -> compute substrate
+  -> memory/data movement
+  -> interconnect/power/thermal
+  -> execution architecture
+  -> programming interface/DSL
+  -> compiler/lowering
+  -> runtime/execution system
+  -> workload mapping
+  -> scale-up system
+  -> scale-out distributed system
+  -> performance/cost/utilization model
+  -> supply-chain/business logic
+  -> market narrative
 ```
 
 ## Design Principles
@@ -25,7 +40,7 @@ silicon constraint -> chip architecture -> HW/SW system -> programmer model -> i
 concept Markdown files
         |
         v
-frontmatter + wikilinks + claim source IDs
+frontmatter + layer_path + parent + wikilinks + claim source IDs
         |
         v
 graph/edges.jsonl --------+
@@ -45,9 +60,12 @@ future graph UI / search / query harness
 | `sources/source-registry.yaml` | Stable source IDs and quality tiers |
 | `graph/edges.jsonl` | Typed graph edges for UI and reasoning |
 | `graph/concept-index.json` | Generated graph/search artifact |
+| `system/agent-operating-manual.md` | Required entry point for agents |
+| `system/harnesses/*.md` | Bounded contracts for agent work |
 | `system/ontology.md` | Layer, edge, and claim-status definitions |
 | `system/source-quality.md` | Citation and verification standard |
 | `system/ingestion-workflow.md` | Harness design for adding new knowledge |
+| `use-cases/*.md` | Recorded user scenarios, tests, and quality evaluations |
 | `system/run-ledger.jsonl` | Append-only operational history |
 
 ## Visual Interface Direction
@@ -60,6 +78,12 @@ Each node already has:
 - `title`
 - `status`
 - `layer`
+- `layer_path`
+- `parent`
+- `granularity`
+- `concept_type`
+- `scale_scope`
+- `reasoning_roles`
 - `tags`
 - `path`
 - `href`
@@ -77,8 +101,10 @@ Each edge has:
 The first UI should be read-only:
 
 - node graph
+- collapsible hierarchy from `parent`
+- layer/tree clustering from `layer_path`
 - click node to open Markdown file path
-- filter by layer, status, tag, source
+- filter by layer, status, tag, source, granularity, concept type, scale scope
 - highlight unverified draft nodes
 
 Editing can stay file-based until the content model stabilizes.
@@ -87,13 +113,15 @@ Editing can stay file-based until the content model stabilizes.
 
 ### Knowledge Ingestion Harness
 
-Turns a paper, vendor doc, report, or user note into source entries, claims, concept updates, graph edges, and open questions.
+Defined in `system/harnesses/knowledge-ingestion.md`. Turns a paper, vendor doc, report, or user note into source entries, claims, concept updates, graph edges, and open questions.
 
 ### Concept Review Harness
 
-Checks concept quality: source IDs, first-principle clarity, graph links, uncertainty marks, and technical/market separation.
+Defined in `system/harnesses/concept-review.md`. Checks concept quality: source IDs, first-principle clarity, graph links, uncertainty marks, and technical/market separation.
 
 ### Query Harness
+
+Defined in `system/harnesses/query-synthesis.md`.
 
 Answers user questions by retrieving related concept pages and returning:
 
@@ -105,11 +133,19 @@ Answers user questions by retrieving related concept pages and returning:
 
 ### Graph Export Harness
 
-Regenerates graph JSON and validates node IDs, edge targets, and source IDs.
+Defined in `system/harnesses/graph-export.md`. Regenerates graph JSON and validates node IDs, edge targets, ontology values, and source IDs.
 
-## GPU Architecture Vertical Slice
+### Ontology Review Harness
 
-The seed slice starts with:
+Defined in `system/harnesses/ontology-review.md`. Places concepts in the pattern-first ontology and prevents product-family-first organization.
+
+### Meta-Harness
+
+Defined in `system/harnesses/meta-harness.md`. Changes system design, ontology, harness contracts, policies, validators, or generated schema with stricter review.
+
+## Accelerator Architecture Vertical Slice
+
+The seed slice started with GPU concepts, but the central organization is accelerator-neutral. Current anchor concepts include:
 
 - `hw.gpu.overview`
 - `hw.gpu.simt`
@@ -117,11 +153,14 @@ The seed slice starts with:
 - `hw.gpu.thread-blocks-occupancy`
 - `hw.gpu.tensor-cores`
 - `programmer.roofline-model`
+- `case.cerebras.wafer-scale-engine`
+- `system.scale.scale-up-vs-scale-out`
+- `software.control.dsl-compiler-runtime`
 
-This slice is intentionally chosen because GPU architecture connects all target levels:
+This slice is intentionally kept pattern-first:
 
 ```text
-chip resources -> GPU system architecture -> CUDA/programmer model -> AI workload fit -> industry logic
+compute substrate -> memory/data movement -> execution/software control -> scaling -> workload fit -> industry logic
 ```
 
 ## Promotion Policy
@@ -134,9 +173,8 @@ chip resources -> GPU system architecture -> CUDA/programmer model -> AI workloa
 
 ## Next Build Steps
 
-1. Add source-registry validation for source quality tier and required fields.
-2. Add concept review script for missing sections and unsupported `verified` status.
-3. Add more GPU concepts: SM, warp scheduler, HBM, NVLink, CUDA libraries, kernel launch overhead.
+1. Add concept review script for missing sections and unsupported `verified` status.
+2. Add neutral examples across TPU, Trainium, Gaudi, FPGA, custom ASIC, and rack-scale systems.
+3. Split mixed concepts such as CUDA thread hierarchy vs GPU occupancy model.
 4. Build a static graph viewer over `graph/concept-index.json`.
 5. Add query examples that separate technical mechanism from market narrative.
-

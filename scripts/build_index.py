@@ -103,6 +103,13 @@ def read_concepts() -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[st
                 "title": title,
                 "status": metadata.get("status", "seed"),
                 "layer": metadata.get("layer", "unknown"),
+                "layer_path": metadata.get("layer_path", metadata.get("layer", "unknown")),
+                "parent": metadata.get("parent", ""),
+                "secondary_layers": metadata.get("secondary_layers", []),
+                "granularity": metadata.get("granularity", "concept"),
+                "concept_type": metadata.get("concept_type", ""),
+                "scale_scope": metadata.get("scale_scope", []),
+                "reasoning_roles": metadata.get("reasoning_roles", []),
                 "tags": metadata.get("tags", []),
                 "aliases": metadata.get("aliases", []),
                 "sources": metadata.get("sources", []),
@@ -164,6 +171,20 @@ def validate_edges(nodes: list[dict[str, Any]], edges: list[dict[str, Any]]) -> 
     return errors
 
 
+def validate_hierarchy(nodes: list[dict[str, Any]]) -> list[str]:
+    errors: list[str] = []
+    ids = {node["id"] for node in nodes}
+    for node in nodes:
+        parent = node.get("parent")
+        if not parent:
+            continue
+        if parent == node["id"]:
+            errors.append(f"node cannot be its own parent: {node['id']}")
+        elif parent not in ids:
+            errors.append(f"parent id not found: {node['id']} -> {parent}")
+    return errors
+
+
 def validate_sources(nodes: list[dict[str, Any]], source_ids: set[str]) -> list[str]:
     errors: list[str] = []
     for node in nodes:
@@ -177,12 +198,24 @@ def validate_sources(nodes: list[dict[str, Any]], source_ids: set[str]) -> list[
     return errors
 
 
+def group_nodes(nodes: list[dict[str, Any]], field: str) -> dict[str, list[str]]:
+    grouped: dict[str, list[str]] = {}
+    for node in nodes:
+        values = node.get(field)
+        if not isinstance(values, list):
+            values = [values] if values else []
+        for value in values:
+            grouped.setdefault(value, []).append(node["id"])
+    return {key: sorted(value) for key, value in sorted(grouped.items())}
+
+
 def main() -> int:
     nodes, mention_edges, concept_errors = read_concepts()
     source_ids, source_registry_errors = read_source_ids()
     typed_edges, edge_errors = read_typed_edges()
     all_edges = typed_edges + mention_edges
     validation_errors = validate_edges(nodes, all_edges)
+    hierarchy_errors = validate_hierarchy(nodes)
     source_errors = validate_sources(nodes, source_ids)
 
     index = {
@@ -191,9 +224,21 @@ def main() -> int:
         "node_count": len(nodes),
         "edge_count": len(all_edges),
         "source_count": len(source_ids),
+        "indexes": {
+            "by_concept_type": group_nodes(nodes, "concept_type"),
+            "by_granularity": group_nodes(nodes, "granularity"),
+            "by_layer": group_nodes(nodes, "layer"),
+            "by_reasoning_role": group_nodes(nodes, "reasoning_roles"),
+            "by_scale_scope": group_nodes(nodes, "scale_scope"),
+        },
         "nodes": nodes,
         "edges": all_edges,
-        "errors": concept_errors + source_registry_errors + edge_errors + validation_errors + source_errors,
+        "errors": concept_errors
+        + source_registry_errors
+        + edge_errors
+        + validation_errors
+        + hierarchy_errors
+        + source_errors,
     }
 
     OUT_FILE.write_text(json.dumps(index, indent=2, sort_keys=True) + "\n", encoding="utf-8")

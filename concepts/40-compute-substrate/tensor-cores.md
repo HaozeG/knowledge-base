@@ -2,7 +2,14 @@
 id: hw.gpu.tensor-cores
 title: Tensor Cores
 status: draft
-layer: hw-sw-system
+layer: 40-compute-substrate
+layer_path: 40-compute-substrate/gpu/matrix-datapath
+parent: hw.gpu.overview
+secondary_layers: [110-workload-mapping, 140-performance-cost-utilization-model]
+granularity: mechanism
+concept_type: component
+scale_scope: [unit, tile, die]
+reasoning_roles: [enabler, bottleneck_mitigation]
 tags: [gpu, tensor-core, matrix-math, ai, precision]
 aliases: [matrix acceleration]
 sources: [nvidia-a100-architecture-whitepaper-2020, markidis-tensor-core-2018, williams-roofline-2009]
