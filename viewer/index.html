@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Knowledge Graph Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="filter-rail" aria-label="Graph filters">
+        <header class="panel-header">
+          <div>
+            <p class="eyebrow">Knowledge Base</p>
+            <h1>Concept Graph</h1>
+          </div>
+          <button class="ghost-button" type="button" id="resetFilters">Reset</button>
+        </header>
+
+        <label class="search-box">
+          <span>Search</span>
+          <input id="searchInput" type="search" autocomplete="off" placeholder="Title, id, tag">
+        </label>
+
+        <div class="result-meter" aria-live="polite">
+          <strong id="visibleNodeCount">0</strong> concepts
+          <span id="visibleEdgeCount">0 edges</span>
+        </div>
+
+        <section class="filter-group" aria-labelledby="layerFiltersLabel">
+          <h2 id="layerFiltersLabel">Layer</h2>
+          <div id="layerFilters" class="check-list"></div>
+        </section>
+
+        <section class="filter-group" aria-labelledby="scaleFiltersLabel">
+          <h2 id="scaleFiltersLabel">Scale Scope</h2>
+          <div id="scaleFilters" class="check-list"></div>
+        </section>
+
+        <section class="filter-group" aria-labelledby="statusFiltersLabel">
+          <h2 id="statusFiltersLabel">Status</h2>
+          <div id="statusFilters" class="check-list compact"></div>
+        </section>
+      </aside>
+
+      <main class="graph-stage">
+        <div class="graph-toolbar" aria-label="Graph controls">
+          <button type="button" id="zoomOut" title="Zoom out" aria-label="Zoom out">-</button>
+          <button type="button" id="zoomIn" title="Zoom in" aria-label="Zoom in">+</button>
+          <button type="button" id="fitGraph">Fit</button>
+        </div>
+        <svg id="graphSvg" role="img" aria-label="Knowledge graph">
+          <defs>
+            <marker id="arrowMarker" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z"></path>
+            </marker>
+          </defs>
+          <g id="graphViewport">
+            <g id="edgeLayer"></g>
+            <g id="nodeLayer"></g>
+          </g>
+        </svg>
+        <div id="emptyState" class="empty-state" hidden></div>
+      </main>
+
+      <aside class="details-panel" aria-label="Concept details">
+        <header class="panel-header">
+          <div>
+            <p class="eyebrow">Selection</p>
+            <h2 id="detailsTitle">No concept selected</h2>
+          </div>
+          <a id="detailsHref" class="ghost-button link-button" href="#" hidden>Open</a>
+        </header>
+        <div id="detailsBody" class="details-body"></div>
+      </aside>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
