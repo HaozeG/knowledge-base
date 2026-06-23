@@ -1,0 +1,467 @@
+{
+  "edge_count": 27,
+  "edges": [
+    {
+      "confidence": "working",
+      "notes": "GPU architecture is an HW/SW-system layer bridge from chip capability to programmer-visible execution.",
+      "source": "stack.silicon-to-programmer",
+      "target": "hw.gpu.overview",
+      "type": "decomposes_into"
+    },
+    {
+      "confidence": "working",
+      "notes": "SIMT is the execution model visible to CUDA programmers.",
+      "source": "hw.gpu.overview",
+      "target": "hw.gpu.simt",
+      "type": "decomposes_into"
+    },
+    {
+      "confidence": "working",
+      "notes": "GPU performance depends heavily on data movement and locality.",
+      "source": "hw.gpu.overview",
+      "target": "hw.gpu.memory-hierarchy",
+      "type": "decomposes_into"
+    },
+    {
+      "confidence": "working",
+      "notes": "Thread/block mapping controls exposed parallelism and scheduler utilization.",
+      "source": "hw.gpu.overview",
+      "target": "hw.gpu.thread-blocks-occupancy",
+      "type": "decomposes_into"
+    },
+    {
+      "confidence": "working",
+      "notes": "Roofline links arithmetic intensity to memory bandwidth and compute ceilings.",
+      "source": "hw.gpu.memory-hierarchy",
+      "target": "programmer.roofline-model",
+      "type": "measured_by"
+    },
+    {
+      "confidence": "working",
+      "notes": "Roofline is a first performance model for GPU workloads.",
+      "source": "hw.gpu.overview",
+      "target": "programmer.roofline-model",
+      "type": "measured_by"
+    },
+    {
+      "confidence": "working",
+      "notes": "Tensor Cores are specialized matrix units inside modern NVIDIA GPU architectures.",
+      "source": "hw.gpu.overview",
+      "target": "hw.gpu.tensor-cores",
+      "type": "decomposes_into"
+    },
+    {
+      "confidence": "working",
+      "notes": "Tensor Core peak throughput is useful only when data movement, precision, and utilization constraints allow it.",
+      "source": "hw.gpu.tensor-cores",
+      "target": "programmer.roofline-model",
+      "type": "measured_by"
+    },
+    {
+      "confidence": "extracted",
+      "notes": "Extracted from wikilink label: GPU Architecture Overview",
+      "source": "stack.silicon-to-programmer",
+      "target": "hw.gpu.overview",
+      "type": "mentions"
+    },
+    {
+      "confidence": "extracted",
+      "notes": "Extracted from wikilink label: GPU Architecture Overview",
+      "source": "hw.gpu.memory-hierarchy",
+      "target": "hw.gpu.overview",
+      "type": "mentions"
+    },
+    {
+      "confidence": "extracted",
+      "notes": "Extracted from wikilink label: Roofline Performance Model",
+      "source": "hw.gpu.memory-hierarchy",
+      "target": "programmer.roofline-model",
+      "type": "mentions"
+    },
+    {
+      "confidence": "extracted",
+      "notes": "Extracted from wikilink label: SIMT Execution Model",
+      "source": "hw.gpu.overview",
+      "target": "hw.gpu.simt",
+      "type": "mentions"
+    },
+    {
+      "confidence": "extracted",
+      "notes": "Extracted from wikilink label: GPU Memory Hierarchy",
+      "source": "hw.gpu.overview",
+      "target": "hw.gpu.memory-hierarchy",
+      "type": "mentions"
+    },
+    {
+      "confidence": "extracted",
+      "notes": "Extracted from wikilink label: Thread Blocks and Occupancy",
+      "source": "hw.gpu.overview",
+      "target": "hw.gpu.thread-blocks-occupancy",
+      "type": "mentions"
+    },
+    {
+      "confidence": "extracted",
+      "notes": "Extracted from wikilink label: Tensor Cores",
+      "source": "hw.gpu.overview",
+      "target": "hw.gpu.tensor-cores",
+      "type": "mentions"
+    },
+    {
+      "confidence": "extracted",
+      "notes": "Extracted from wikilink label: Roofline Performance Model",
+      "source": "hw.gpu.overview",
+      "target": "programmer.roofline-model",
+      "type": "mentions"
+    },
+    {
+      "confidence": "extracted",
+      "notes": "Extracted from wikilink label: GPU Architecture Overview",
+      "source": "hw.gpu.simt",
+      "target": "hw.gpu.overview",
+      "type": "mentions"
+    },
+    {
+      "confidence": "extracted",
+      "notes": "Extracted from wikilink label: Thread Blocks and Occupancy",
+      "source": "hw.gpu.simt",
+      "target": "hw.gpu.thread-blocks-occupancy",
+      "type": "mentions"
+    },
+    {
+      "confidence": "extracted",
+      "notes": "Extracted from wikilink label: GPU Architecture Overview",
+      "source": "hw.gpu.tensor-cores",
+      "target": "hw.gpu.overview",
+      "type": "mentions"
+    },
+    {
+      "confidence": "extracted",
+      "notes": "Extracted from wikilink label: GPU Memory Hierarchy",
+      "source": "hw.gpu.tensor-cores",
+      "target": "hw.gpu.memory-hierarchy",
+      "type": "mentions"
+    },
+    {
+      "confidence": "extracted",
+      "notes": "Extracted from wikilink label: Roofline Performance Model",
+      "source": "hw.gpu.tensor-cores",
+      "target": "programmer.roofline-model",
+      "type": "mentions"
+    },
+    {
+      "confidence": "extracted",
+      "notes": "Extracted from wikilink label: GPU Architecture Overview",
+      "source": "hw.gpu.thread-blocks-occupancy",
+      "target": "hw.gpu.overview",
+      "type": "mentions"
+    },
+    {
+      "confidence": "extracted",
+      "notes": "Extracted from wikilink label: SIMT Execution Model",
+      "source": "hw.gpu.thread-blocks-occupancy",
+      "target": "hw.gpu.simt",
+      "type": "mentions"
+    },
+    {
+      "confidence": "extracted",
+      "notes": "Extracted from wikilink label: GPU Memory Hierarchy",
+      "source": "hw.gpu.thread-blocks-occupancy",
+      "target": "hw.gpu.memory-hierarchy",
+      "type": "mentions"
+    },
+    {
+      "confidence": "extracted",
+      "notes": "Extracted from wikilink label: GPU Architecture Overview",
+      "source": "programmer.roofline-model",
+      "target": "hw.gpu.overview",
+      "type": "mentions"
+    },
+    {
+      "confidence": "extracted",
+      "notes": "Extracted from wikilink label: GPU Memory Hierarchy",
+      "source": "programmer.roofline-model",
+      "target": "hw.gpu.memory-hierarchy",
+      "type": "mentions"
+    },
+    {
+      "confidence": "extracted",
+      "notes": "Extracted from wikilink label: Tensor Cores",
+      "source": "programmer.roofline-model",
+      "target": "hw.gpu.tensor-cores",
+      "type": "mentions"
+    }
+  ],
+  "errors": [],
+  "generated_at": "2026-06-23T09:53:55.746707+00:00",
+  "node_count": 7,
+  "nodes": [
+    {
+      "aliases": [
+        "full stack map"
+      ],
+      "href": "concepts/00-stack-map/silicon-to-programmer.md",
+      "id": "stack.silicon-to-programmer",
+      "layer": "stack-map",
+      "path": "concepts/00-stack-map/silicon-to-programmer.md",
+      "source_refs": [],
+      "sources": [],
+      "status": "seed",
+      "tags": [
+        "stack",
+        "map",
+        "first-principles"
+      ],
+      "title": "Silicon to Programmer Stack",
+      "wikilinks": [
+        {
+          "label": "GPU Architecture Overview",
+          "target": "hw.gpu.overview"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        "gpu memory system"
+      ],
+      "href": "concepts/40-hw-sw-system/gpu-architecture/memory-hierarchy.md",
+      "id": "hw.gpu.memory-hierarchy",
+      "layer": "hw-sw-system",
+      "path": "concepts/40-hw-sw-system/gpu-architecture/memory-hierarchy.md",
+      "source_refs": [
+        "nvidia-a100-architecture-whitepaper-2020",
+        "nvidia-cuda-programming-guide-v13.3",
+        "williams-roofline-2009"
+      ],
+      "sources": [
+        "nvidia-cuda-programming-guide-v13.3",
+        "nvidia-a100-architecture-whitepaper-2020",
+        "williams-roofline-2009"
+      ],
+      "status": "draft",
+      "tags": [
+        "gpu",
+        "memory",
+        "hbm",
+        "cache",
+        "shared-memory",
+        "bandwidth"
+      ],
+      "title": "GPU Memory Hierarchy",
+      "wikilinks": [
+        {
+          "label": "GPU Architecture Overview",
+          "target": "hw.gpu.overview"
+        },
+        {
+          "label": "Roofline Performance Model",
+          "target": "programmer.roofline-model"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        "gpu architecture"
+      ],
+      "href": "concepts/40-hw-sw-system/gpu-architecture/overview.md",
+      "id": "hw.gpu.overview",
+      "layer": "hw-sw-system",
+      "path": "concepts/40-hw-sw-system/gpu-architecture/overview.md",
+      "source_refs": [
+        "nvidia-a100-architecture-whitepaper-2020",
+        "nvidia-cuda-programming-guide-v13.3",
+        "williams-roofline-2009"
+      ],
+      "sources": [
+        "nvidia-cuda-programming-guide-v13.3",
+        "nvidia-a100-architecture-whitepaper-2020",
+        "williams-roofline-2009"
+      ],
+      "status": "draft",
+      "tags": [
+        "gpu",
+        "architecture",
+        "parallelism",
+        "ai-systems"
+      ],
+      "title": "GPU Architecture Overview",
+      "wikilinks": [
+        {
+          "label": "SIMT Execution Model",
+          "target": "hw.gpu.simt"
+        },
+        {
+          "label": "GPU Memory Hierarchy",
+          "target": "hw.gpu.memory-hierarchy"
+        },
+        {
+          "label": "Thread Blocks and Occupancy",
+          "target": "hw.gpu.thread-blocks-occupancy"
+        },
+        {
+          "label": "Tensor Cores",
+          "target": "hw.gpu.tensor-cores"
+        },
+        {
+          "label": "Roofline Performance Model",
+          "target": "programmer.roofline-model"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        "single instruction multiple threads",
+        "warp execution"
+      ],
+      "href": "concepts/40-hw-sw-system/gpu-architecture/simt.md",
+      "id": "hw.gpu.simt",
+      "layer": "hw-sw-system",
+      "path": "concepts/40-hw-sw-system/gpu-architecture/simt.md",
+      "source_refs": [
+        "nvidia-cuda-programming-guide-v13.3"
+      ],
+      "sources": [
+        "nvidia-cuda-programming-guide-v13.3"
+      ],
+      "status": "draft",
+      "tags": [
+        "gpu",
+        "simt",
+        "cuda",
+        "warp",
+        "execution"
+      ],
+      "title": "SIMT Execution Model",
+      "wikilinks": [
+        {
+          "label": "GPU Architecture Overview",
+          "target": "hw.gpu.overview"
+        },
+        {
+          "label": "Thread Blocks and Occupancy",
+          "target": "hw.gpu.thread-blocks-occupancy"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        "matrix acceleration"
+      ],
+      "href": "concepts/40-hw-sw-system/gpu-architecture/tensor-cores.md",
+      "id": "hw.gpu.tensor-cores",
+      "layer": "hw-sw-system",
+      "path": "concepts/40-hw-sw-system/gpu-architecture/tensor-cores.md",
+      "source_refs": [
+        "markidis-tensor-core-2018",
+        "nvidia-a100-architecture-whitepaper-2020",
+        "williams-roofline-2009"
+      ],
+      "sources": [
+        "nvidia-a100-architecture-whitepaper-2020",
+        "markidis-tensor-core-2018",
+        "williams-roofline-2009"
+      ],
+      "status": "draft",
+      "tags": [
+        "gpu",
+        "tensor-core",
+        "matrix-math",
+        "ai",
+        "precision"
+      ],
+      "title": "Tensor Cores",
+      "wikilinks": [
+        {
+          "label": "GPU Architecture Overview",
+          "target": "hw.gpu.overview"
+        },
+        {
+          "label": "GPU Memory Hierarchy",
+          "target": "hw.gpu.memory-hierarchy"
+        },
+        {
+          "label": "Roofline Performance Model",
+          "target": "programmer.roofline-model"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        "cuda blocks",
+        "gpu occupancy"
+      ],
+      "href": "concepts/40-hw-sw-system/gpu-architecture/thread-blocks-occupancy.md",
+      "id": "hw.gpu.thread-blocks-occupancy",
+      "layer": "hw-sw-system",
+      "path": "concepts/40-hw-sw-system/gpu-architecture/thread-blocks-occupancy.md",
+      "source_refs": [
+        "nvidia-cuda-programming-guide-v13.3"
+      ],
+      "sources": [
+        "nvidia-cuda-programming-guide-v13.3"
+      ],
+      "status": "draft",
+      "tags": [
+        "gpu",
+        "cuda",
+        "occupancy",
+        "scheduling",
+        "latency-hiding"
+      ],
+      "title": "Thread Blocks and Occupancy",
+      "wikilinks": [
+        {
+          "label": "GPU Architecture Overview",
+          "target": "hw.gpu.overview"
+        },
+        {
+          "label": "SIMT Execution Model",
+          "target": "hw.gpu.simt"
+        },
+        {
+          "label": "GPU Memory Hierarchy",
+          "target": "hw.gpu.memory-hierarchy"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        "roofline model"
+      ],
+      "href": "concepts/50-programmer-model/roofline-performance-model.md",
+      "id": "programmer.roofline-model",
+      "layer": "programmer",
+      "path": "concepts/50-programmer-model/roofline-performance-model.md",
+      "source_refs": [
+        "williams-roofline-2009"
+      ],
+      "sources": [
+        "williams-roofline-2009"
+      ],
+      "status": "draft",
+      "tags": [
+        "performance",
+        "roofline",
+        "arithmetic-intensity",
+        "bandwidth",
+        "gpu"
+      ],
+      "title": "Roofline Performance Model",
+      "wikilinks": [
+        {
+          "label": "GPU Architecture Overview",
+          "target": "hw.gpu.overview"
+        },
+        {
+          "label": "GPU Memory Hierarchy",
+          "target": "hw.gpu.memory-hierarchy"
+        },
+        {
+          "label": "Tensor Cores",
+          "target": "hw.gpu.tensor-cores"
+        }
+      ]
+    }
+  ],
+  "root": "knowledge-base",
+  "source_count": 4
+}

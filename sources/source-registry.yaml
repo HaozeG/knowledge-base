@@ -1,0 +1,40 @@
+# Source registry for claim-level citation.
+# Keep IDs stable; concept pages cite these IDs.
+
+sources:
+  - id: nvidia-cuda-programming-guide-v13.3
+    title: CUDA Programming Guide
+    authors: NVIDIA
+    year: 2026
+    tier: A
+    type: official-documentation
+    url: https://docs.nvidia.com/cuda/cuda-programming-guide/index.html
+    notes: Official CUDA programming model and technical reference.
+
+  - id: nvidia-a100-architecture-whitepaper-2020
+    title: NVIDIA A100 Tensor Core GPU Architecture
+    authors: NVIDIA
+    year: 2020
+    tier: A
+    type: official-architecture-whitepaper
+    url: https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/nvidia-ampere-architecture-whitepaper.pdf
+    notes: Vendor architecture whitepaper for A100, useful for Ampere-specific SM, Tensor Core, HBM, L2, NVLink, and MIG details.
+
+  - id: williams-roofline-2009
+    title: "Roofline: An Insightful Visual Performance Model for Multicore Architectures"
+    authors: "Samuel Williams; Andrew Waterman; David Patterson"
+    year: 2009
+    tier: A
+    type: peer-reviewed-paper
+    url: https://dl.acm.org/doi/10.1145/1498765.1498785
+    notes: Foundational performance model linking arithmetic intensity, bandwidth ceilings, and compute ceilings.
+
+  - id: markidis-tensor-core-2018
+    title: "NVIDIA Tensor Core Programmability, Performance & Precision"
+    authors: "Stefano Markidis; Steven Wei Der Chien; Erwin Laure; Ivy Bo Peng; Jeffrey S. Vetter"
+    year: 2018
+    tier: A
+    type: research-paper
+    url: https://arxiv.org/abs/1803.04014
+    notes: Research study of Tensor Core programming methods, performance, and precision behavior.
+

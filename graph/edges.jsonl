@@ -1,0 +1,8 @@
+{"source":"stack.silicon-to-programmer","target":"hw.gpu.overview","type":"decomposes_into","confidence":"working","notes":"GPU architecture is an HW/SW-system layer bridge from chip capability to programmer-visible execution."}
+{"source":"hw.gpu.overview","target":"hw.gpu.simt","type":"decomposes_into","confidence":"working","notes":"SIMT is the execution model visible to CUDA programmers."}
+{"source":"hw.gpu.overview","target":"hw.gpu.memory-hierarchy","type":"decomposes_into","confidence":"working","notes":"GPU performance depends heavily on data movement and locality."}
+{"source":"hw.gpu.overview","target":"hw.gpu.thread-blocks-occupancy","type":"decomposes_into","confidence":"working","notes":"Thread/block mapping controls exposed parallelism and scheduler utilization."}
+{"source":"hw.gpu.memory-hierarchy","target":"programmer.roofline-model","type":"measured_by","confidence":"working","notes":"Roofline links arithmetic intensity to memory bandwidth and compute ceilings."}
+{"source":"hw.gpu.overview","target":"programmer.roofline-model","type":"measured_by","confidence":"working","notes":"Roofline is a first performance model for GPU workloads."}
+{"source":"hw.gpu.overview","target":"hw.gpu.tensor-cores","type":"decomposes_into","confidence":"working","notes":"Tensor Cores are specialized matrix units inside modern NVIDIA GPU architectures."}
+{"source":"hw.gpu.tensor-cores","target":"programmer.roofline-model","type":"measured_by","confidence":"working","notes":"Tensor Core peak throughput is useful only when data movement, precision, and utilization constraints allow it."}
