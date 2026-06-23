@@ -40,6 +40,7 @@ knowledge-base/
   concepts/              # Human-readable concept pages
   graph/                 # Typed edges and generated graph index
   scripts/               # Local tooling
+  viewer/                # Static read-only graph viewer
   sources/               # Source registry and citation metadata
   system/                # Operating rules, harnesses, templates, workflow docs
   use-cases/             # Recorded tests and user workflows
@@ -61,6 +62,20 @@ Inspect the generated file:
 ```bash
 less graph/concept-index.json
 ```
+
+Open the static graph viewer:
+
+```bash
+python3 -m http.server
+```
+
+Then visit:
+
+```text
+http://127.0.0.1:8000/viewer/
+```
+
+The viewer is read-only and loads `graph/concept-index.json` directly. It needs a local static server because browser file URLs cannot reliably fetch the JSON index.
 
 ## Agent Entry Point
 
