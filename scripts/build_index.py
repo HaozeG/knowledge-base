@@ -20,11 +20,16 @@ CONCEPTS_DIR = ROOT / "concepts"
 EDGES_FILE = ROOT / "graph" / "edges.jsonl"
 OUT_FILE = ROOT / "graph" / "concept-index.json"
 SOURCE_REGISTRY_FILE = ROOT / "sources" / "source-registry.yaml"
+INDEX_ROOT_NAME = "knowledge-base"
 
 FRONTMATTER_RE = re.compile(r"\A---\n(.*?)\n---\n", re.DOTALL)
 WIKILINK_RE = re.compile(r"\[\[([A-Za-z0-9_.:-]+)(?:\|([^\]]+))?\]\]")
 SOURCE_REF_RE = re.compile(r"\[src:([A-Za-z0-9_.:-]+)\]")
 SOURCE_ID_RE = re.compile(r"^\s*-\s+id:\s*([A-Za-z0-9_.:-]+)\s*$", re.MULTILINE)
+
+
+def index_root_name(root: Path) -> str:
+    return INDEX_ROOT_NAME
 
 
 def parse_scalar(value: str) -> Any:
@@ -220,7 +225,7 @@ def main() -> int:
 
     index = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "root": ROOT.name,
+        "root": index_root_name(ROOT),
         "node_count": len(nodes),
         "edge_count": len(all_edges),
         "source_count": len(source_ids),
