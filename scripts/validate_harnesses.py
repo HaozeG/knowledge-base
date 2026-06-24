@@ -22,6 +22,7 @@ REQUIRED_HARNESS_FILES = {
     "query-synthesis.md",
     "graph-export.md",
     "meta-harness.md",
+    "exploration-loop.md",
 }
 
 REQUIRED_SECTIONS = {

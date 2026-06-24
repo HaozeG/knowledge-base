@@ -22,9 +22,10 @@ Before changing content, read these files in order:
 | --- | --- |
 | Add or process a source | `system/harnesses/knowledge-ingestion.md` |
 | Place or reorganize concepts | `system/harnesses/ontology-review.md` |
-| Review concept quality | `system/harnesses/concept-review.md` |
+| Review concept quality and verification readiness | `system/harnesses/concept-review.md` |
 | Answer a user question from the KB | `system/harnesses/query-synthesis.md` |
 | Regenerate graph/index artifacts | `system/harnesses/graph-export.md` |
+| Run long-lived autonomous exploration from a hardware/software/workload seed | `system/harnesses/exploration-loop.md` |
 | Change ontology, policies, evaluators, or harnesses | `system/harnesses/meta-harness.md` |
 
 ## Default Control Loop
@@ -51,12 +52,15 @@ Allowed without extra approval:
 - Add use-case records.
 - Regenerate `graph/concept-index.json`.
 - Append to `system/run-ledger.jsonl`.
+- Create temporary exploration artifacts under `temp/exploration-runs/<run-id>/`.
+- Promote exploration artifacts to draft content when the exploration-loop hard gates and fixed score pass.
 
 Approval-gated:
 
 - Mark a concept `verified`.
 - Upgrade source quality tier.
 - Change ontology values, source policy, harness contracts, or validators.
+- Change exploration-loop metric weights, thresholds, or evaluator logic.
 - Delete or consolidate existing concepts.
 - Add market or investment conclusions.
 
@@ -107,4 +111,3 @@ Final responses should include:
 - What remains draft or unverified.
 - Which harness was used.
 - Any open questions that block promotion to verified status.
-

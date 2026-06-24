@@ -25,5 +25,5 @@ Agents should pick one harness per task. Combining harnesses is allowed only whe
 | `concept-review.md` | Review concept quality and verification readiness |
 | `query-synthesis.md` | Answer questions from the KB with citations and uncertainty |
 | `graph-export.md` | Regenerate and validate graph/index artifacts |
+| `exploration-loop.md` | Run long-lived, metric-gated autonomous exploration with temporary staging |
 | `meta-harness.md` | Change the system design, ontology, policies, harnesses, or validators |
-
