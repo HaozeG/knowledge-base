@@ -13,7 +13,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "evaluate_exploration.py"
-FIXTURES = ROOT / "use-cases" / "fixtures" / "exploration-loop"
+FIXTURES = Path("use-cases") / "fixtures" / "exploration-loop"
+INDEX = FIXTURES / "index.json"
+LEDGER = FIXTURES / "run-ledger.jsonl"
 
 
 def load_module():
@@ -26,12 +28,20 @@ def load_module():
 
 
 class ExplorationEvaluatorTests(unittest.TestCase):
+    def setUp(self) -> None:
+        if not SCRIPT.exists():
+            self.fail(f"missing evaluator implementation: {SCRIPT}")
+
     def run_eval(self, fixture_name: str, *extra_args: str) -> subprocess.CompletedProcess[str]:
         return subprocess.run(
             [
                 sys.executable,
                 str(SCRIPT),
                 str(FIXTURES / fixture_name),
+                "--index",
+                str(INDEX),
+                "--ledger",
+                str(LEDGER),
                 "--today",
                 "2026-06-24",
                 *extra_args,

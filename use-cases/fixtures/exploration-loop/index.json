@@ -1,0 +1,25 @@
+{
+  "generated_at": "2026-06-24T00:00:00+00:00",
+  "root": "knowledge-base",
+  "node_count": 13,
+  "edge_count": 0,
+  "source_count": 0,
+  "indexes": {},
+  "errors": [],
+  "nodes": [
+    {"id": "hw.gpu.overview", "layer": "70-execution-architecture", "parent": ""},
+    {"id": "hw.gpu.simt", "layer": "70-execution-architecture", "parent": "hw.gpu.overview"},
+    {"id": "hw.gpu.thread-blocks-occupancy", "layer": "70-execution-architecture", "parent": "hw.gpu.overview"},
+    {"id": "hw.gpu.tensor-cores", "layer": "40-compute-substrate", "parent": "hw.gpu.overview"},
+    {"id": "hw.gpu.memory-hierarchy", "layer": "50-memory-data-movement", "parent": "hw.gpu.overview"},
+    {"id": "programmer.roofline-model", "layer": "140-performance-cost-utilization-model", "parent": ""},
+    {"id": "chip.memory.hbm", "layer": "50-memory-data-movement", "parent": ""},
+    {"id": "software.dsl.cuda", "layer": "80-programming-interface-dsl", "parent": ""},
+    {"id": "software.compiler.mlir", "layer": "90-compiler-lowering-stack", "parent": ""},
+    {"id": "system.runtime.launch", "layer": "100-runtime-execution-system", "parent": ""},
+    {"id": "workload.ai.attention", "layer": "110-workload-mapping", "parent": ""},
+    {"id": "system.scale.nvlink-domain", "layer": "120-scale-up-system", "parent": ""},
+    {"id": "industry.capacity", "layer": "150-supply-chain-business", "parent": ""}
+  ],
+  "edges": []
+}
