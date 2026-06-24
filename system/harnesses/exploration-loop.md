@@ -26,7 +26,11 @@ Permanent after acceptance:
 
 ## Immutable Surfaces
 
-- `system/`
+- `system/harnesses/`
+- `system/ontology.md`
+- `system/source-quality.md`
+- `system/agent-operating-manual.md`
+- `system/system-design.md`
 - `scripts/`
 - harness definitions
 - validators
@@ -42,7 +46,7 @@ Permanent after acceptance:
 python3 scripts/build_index.py
 python3 scripts/validate_ontology.py
 python3 scripts/validate_harnesses.py
-python3 scripts/evaluate_exploration.py temp/exploration-runs/<run-id>
+python3 scripts/evaluate_exploration.py temp/exploration-runs/<run-id> --allow-reject
 ```
 
 Also inspect:
