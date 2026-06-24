@@ -1,0 +1,32 @@
+{
+  "run_id": "fixture-verified-status-fail",
+  "target_category": "160-market-narrative",
+  "target_parent": "hw.gpu.overview",
+  "description": "Hard gate failure because verified promotion is forbidden.",
+  "proposed_nodes": [
+    {
+      "id": "market.accelerator-guaranteed-winner",
+      "title": "Accelerator Guaranteed Winner",
+      "status": "verified",
+      "layer": "160-market-narrative",
+      "parent": "hw.gpu.overview",
+      "concept_type": "market_narrative",
+      "sources": ["sample-primary-architecture-doc"],
+      "claim_labels": ["supported"]
+    }
+  ],
+  "proposed_edges": [
+    {
+      "source": "market.accelerator-guaranteed-winner",
+      "target": "hw.gpu.overview",
+      "type": "explains_market_logic_for",
+      "confidence": "working"
+    }
+  ],
+  "proposed_sources": [
+    {
+      "id": "sample-primary-architecture-doc",
+      "tier": "A"
+    }
+  ]
+}

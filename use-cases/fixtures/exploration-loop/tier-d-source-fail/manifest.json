@@ -1,13 +1,13 @@
 {
-  "run_id": "fixture-hard-gate-fail",
+  "run_id": "fixture-tier-d-source-fail",
   "target_category": "160-market-narrative",
   "target_parent": "hw.gpu.overview",
-  "description": "Hard gate failure because verified promotion is forbidden.",
+  "description": "Hard gate failure because tier-D sources cannot support graph promotion.",
   "proposed_nodes": [
     {
-      "id": "market.accelerator-guaranteed-winner",
-      "title": "Accelerator Guaranteed Winner",
-      "status": "verified",
+      "id": "market.accelerator-social-claim",
+      "title": "Accelerator Social Claim",
+      "status": "draft",
       "layer": "160-market-narrative",
       "parent": "hw.gpu.overview",
       "concept_type": "market_narrative",
@@ -17,7 +17,7 @@
   ],
   "proposed_edges": [
     {
-      "source": "market.accelerator-guaranteed-winner",
+      "source": "market.accelerator-social-claim",
       "target": "hw.gpu.overview",
       "type": "explains_market_logic_for",
       "confidence": "working"

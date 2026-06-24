@@ -48,18 +48,26 @@ class ExplorationEvaluatorTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         payload = json.loads(result.stdout)
         self.assertEqual(payload["decision"], "accept")
+        self.assertEqual(payload["creativity_score"], 1.05)
+        self.assertEqual(payload["coverage_gap_score"], 0.3333)
+        self.assertEqual(payload["category_staleness_multiplier"], 1.5)
+        self.assertEqual(payload["quality_risk_penalty"], 0.0)
+        self.assertEqual(payload["score"], 2.075)
         self.assertGreaterEqual(payload["score"], payload["threshold"])
-        self.assertGreaterEqual(payload["category_staleness_multiplier"], 1.0)
-        self.assertLessEqual(payload["category_staleness_multiplier"], 1.5)
-        self.assertEqual(payload["hard_gate_errors"], [])
+        self.assertEqual(payload["hard_gate_codes"], [])
 
     def test_rejected_fixture_can_be_reported_without_failing_command(self) -> None:
         result = self.run_eval("rejected", "--allow-reject")
         self.assertEqual(result.returncode, 0, result.stderr)
         payload = json.loads(result.stdout)
         self.assertEqual(payload["decision"], "reject")
+        self.assertEqual(payload["creativity_score"], 0.25)
+        self.assertEqual(payload["coverage_gap_score"], 0.2667)
+        self.assertEqual(payload["category_staleness_multiplier"], 1.0)
+        self.assertEqual(payload["quality_risk_penalty"], 0.0)
+        self.assertEqual(payload["score"], 0.5167)
         self.assertLess(payload["score"], payload["threshold"])
-        self.assertEqual(payload["hard_gate_errors"], [])
+        self.assertEqual(payload["hard_gate_codes"], [])
 
     def test_rejected_fixture_fails_without_allow_reject(self) -> None:
         result = self.run_eval("rejected")
@@ -67,13 +75,19 @@ class ExplorationEvaluatorTests(unittest.TestCase):
         payload = json.loads(result.stdout)
         self.assertEqual(payload["decision"], "reject")
 
-    def test_hard_gate_failure_returns_error(self) -> None:
-        result = self.run_eval("hard-gate-fail", "--allow-reject")
+    def test_verified_status_hard_gate_failure_returns_error(self) -> None:
+        result = self.run_eval("verified-status-fail", "--allow-reject")
         self.assertEqual(result.returncode, 1)
         payload = json.loads(result.stdout)
         self.assertEqual(payload["decision"], "hard_gate_fail")
-        self.assertTrue(any("verified" in item for item in payload["hard_gate_errors"]))
-        self.assertTrue(any("tier D" in item for item in payload["hard_gate_errors"]))
+        self.assertIn("STATUS_FORBIDDEN", payload["hard_gate_codes"])
+
+    def test_tier_d_source_hard_gate_failure_returns_error(self) -> None:
+        result = self.run_eval("tier-d-source-fail", "--allow-reject")
+        self.assertEqual(result.returncode, 1)
+        payload = json.loads(result.stdout)
+        self.assertEqual(payload["decision"], "hard_gate_fail")
+        self.assertIn("SOURCE_TIER_D", payload["hard_gate_codes"])
 
     def test_multiplier_is_capped(self) -> None:
         module = load_module()
