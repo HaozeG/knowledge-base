@@ -1,0 +1,20 @@
+{
+  "run_id": "fixture-rejected",
+  "target_category": "70-execution-architecture",
+  "target_parent": "hw.gpu.overview",
+  "description": "Rejected fixture with too little graph contribution.",
+  "proposed_nodes": [
+    {
+      "id": "hw.execution.minor-scheduler-note",
+      "title": "Minor Scheduler Note",
+      "status": "seed",
+      "layer": "70-execution-architecture",
+      "parent": "hw.gpu.overview",
+      "concept_type": "execution_model",
+      "sources": [],
+      "claim_labels": ["open"]
+    }
+  ],
+  "proposed_edges": [],
+  "proposed_sources": []
+}

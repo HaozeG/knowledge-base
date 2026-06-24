@@ -1,0 +1,44 @@
+{
+  "run_id": "fixture-accepted",
+  "target_category": "60-interconnect-power-thermal",
+  "target_parent": "hw.gpu.overview",
+  "description": "Accepted fixture with enough graph contribution under a stale category.",
+  "proposed_nodes": [
+    {
+      "id": "chip.interconnect.on-package-fabric",
+      "title": "On-Package Accelerator Fabric",
+      "status": "draft",
+      "layer": "60-interconnect-power-thermal",
+      "parent": "hw.gpu.overview",
+      "concept_type": "interconnect_pattern",
+      "sources": ["sample-primary-architecture-doc"],
+      "claim_labels": ["supported", "open"]
+    }
+  ],
+  "proposed_edges": [
+    {
+      "source": "chip.interconnect.on-package-fabric",
+      "target": "hw.gpu.overview",
+      "type": "depends_on",
+      "confidence": "working"
+    },
+    {
+      "source": "chip.interconnect.on-package-fabric",
+      "target": "programmer.roofline-model",
+      "type": "constrained_by",
+      "confidence": "working"
+    },
+    {
+      "source": "hw.gpu.tensor-cores",
+      "target": "chip.interconnect.on-package-fabric",
+      "type": "depends_on",
+      "confidence": "working"
+    }
+  ],
+  "proposed_sources": [
+    {
+      "id": "sample-primary-architecture-doc",
+      "tier": "A"
+    }
+  ]
+}
