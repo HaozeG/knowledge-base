@@ -80,14 +80,14 @@ class ExplorationEvaluatorTests(unittest.TestCase):
         self.assertEqual(result.returncode, 1)
         payload = json.loads(result.stdout)
         self.assertEqual(payload["decision"], "hard_gate_fail")
-        self.assertIn("STATUS_FORBIDDEN", payload["hard_gate_codes"])
+        self.assertEqual(payload["hard_gate_codes"], ["STATUS_FORBIDDEN"])
 
     def test_tier_d_source_hard_gate_failure_returns_error(self) -> None:
         result = self.run_eval("tier-d-source-fail", "--allow-reject")
         self.assertEqual(result.returncode, 1)
         payload = json.loads(result.stdout)
         self.assertEqual(payload["decision"], "hard_gate_fail")
-        self.assertIn("SOURCE_TIER_D", payload["hard_gate_codes"])
+        self.assertEqual(payload["hard_gate_codes"], ["SOURCE_TIER_D"])
 
     def test_multiplier_is_capped(self) -> None:
         module = load_module()
