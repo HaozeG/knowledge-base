@@ -1,3 +1,13 @@
+---
+id: use-case.exploration-loop-harness-2026-06-24
+title: Exploration Loop Harness Test
+status: recorded
+date: 2026-06-24
+harness: exploration-loop
+source_ids: []
+related_concepts: [stack.ai-accelerator-ontology, hw.gpu.overview, programmer.roofline-model]
+---
+
 # Exploration Loop Harness Use Case
 
 Date: 2026-06-24
