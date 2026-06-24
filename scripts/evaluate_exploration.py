@@ -137,13 +137,19 @@ def hard_gate_results(manifest: dict[str, Any], index: dict[str, Any]) -> tuple[
     proposed_nodes = as_list(manifest.get("proposed_nodes"))
     proposed_edges = as_list(manifest.get("proposed_edges"))
     proposed_sources = as_list(manifest.get("proposed_sources"))
+    target_category = str(manifest.get("target_category") or "")
     proposed_ids = {
         str(node.get("id"))
         for node in proposed_nodes
         if isinstance(node, dict) and node.get("id")
     }
+    declared_source_ids = {
+        str(source.get("id"))
+        for source in proposed_sources
+        if isinstance(source, dict) and source.get("id")
+    }
 
-    if not manifest.get("target_category"):
+    if not target_category:
         add_gate(codes, errors, "TARGET_CATEGORY_EMPTY", "target_category must not be empty")
 
     for node in proposed_nodes:
@@ -155,6 +161,14 @@ def hard_gate_results(manifest: dict[str, Any], index: dict[str, Any]) -> tuple[
         status = str(node.get("status") or "")
         sources = [str(item) for item in as_list(node.get("sources")) if item]
         claim_labels = {str(item) for item in as_list(node.get("claim_labels")) if item}
+
+        if "layer" in node and str(node.get("layer") or "") != target_category:
+            add_gate(
+                codes,
+                errors,
+                "NODE_LAYER_MISMATCH",
+                f"proposed node {node_id or '<missing>'} layer must match target_category",
+            )
 
         if not node_id:
             add_gate(codes, errors, "PROPOSED_NODE_MISSING_ID", "proposed node missing id")
@@ -175,6 +189,15 @@ def hard_gate_results(manifest: dict[str, Any], index: dict[str, Any]) -> tuple[
                 errors,
                 "NODE_NEEDS_SOURCE_OR_UNCERTAINTY",
                 f"proposed node {node_id or '<missing>'} needs sources or open/speculative claim labels",
+            )
+
+        undeclared_sources = sorted(source for source in sources if source not in declared_source_ids)
+        if undeclared_sources:
+            add_gate(
+                codes,
+                errors,
+                "SOURCE_NOT_DECLARED",
+                f"proposed node {node_id or '<missing>'} cites undeclared sources: {undeclared_sources}",
             )
 
         unknown_labels = sorted(claim_labels - SAFE_CLAIM_LABELS)

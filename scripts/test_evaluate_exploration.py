@@ -53,6 +53,12 @@ class ExplorationEvaluatorTests(unittest.TestCase):
             check=False,
         )
 
+    def load_fixture(self, fixture_name: str) -> dict:
+        return json.loads((FIXTURES / fixture_name / "manifest.json").read_text(encoding="utf-8"))
+
+    def load_index(self) -> dict:
+        return json.loads(INDEX.read_text(encoding="utf-8"))
+
     def test_accepts_fixture_that_crosses_threshold(self) -> None:
         result = self.run_eval("accepted")
         self.assertEqual(result.returncode, 0, result.stderr)
@@ -98,6 +104,27 @@ class ExplorationEvaluatorTests(unittest.TestCase):
         payload = json.loads(result.stdout)
         self.assertEqual(payload["decision"], "hard_gate_fail")
         self.assertEqual(payload["hard_gate_codes"], ["SOURCE_TIER_D"])
+
+    def test_layer_mismatch_hard_gate_failure_returns_error(self) -> None:
+        module = load_module()
+        manifest = self.load_fixture("accepted")
+        manifest["proposed_nodes"][0]["layer"] = "70-execution-architecture"
+
+        payload = module.evaluate(manifest, self.load_index(), LEDGER, "2026-06-24")
+
+        self.assertEqual(payload["decision"], "hard_gate_fail")
+        self.assertEqual(payload["hard_gate_codes"], ["NODE_LAYER_MISMATCH"])
+
+    def test_undeclared_source_hard_gate_failure_returns_error(self) -> None:
+        module = load_module()
+        manifest = self.load_fixture("accepted")
+        manifest["proposed_nodes"][0]["sources"] = ["unregistered-social-post"]
+        manifest["proposed_sources"] = []
+
+        payload = module.evaluate(manifest, self.load_index(), LEDGER, "2026-06-24")
+
+        self.assertEqual(payload["decision"], "hard_gate_fail")
+        self.assertEqual(payload["hard_gate_codes"], ["SOURCE_NOT_DECLARED"])
 
     def test_multiplier_is_capped(self) -> None:
         module = load_module()
