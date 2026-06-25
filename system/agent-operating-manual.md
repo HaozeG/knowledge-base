@@ -26,6 +26,7 @@ Before changing content, read these files in order:
 | Answer a user question from the KB | `system/harnesses/query-synthesis.md` |
 | Regenerate graph/index artifacts | `system/harnesses/graph-export.md` |
 | Run long-lived autonomous exploration from a hardware/software/workload seed | `system/harnesses/exploration-loop.md` |
+| Audit low-cost exploration runs for procedure or format drift | `system/harnesses/cheap-model-drift-audit.md` |
 | Change ontology, policies, evaluators, or harnesses | `system/harnesses/meta-harness.md` |
 
 ## Default Control Loop

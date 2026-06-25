@@ -14,6 +14,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+import source_store
+
 
 ROOT = Path(__file__).resolve().parents[1]
 CONCEPTS_DIR = ROOT / "concepts"
@@ -25,7 +27,6 @@ INDEX_ROOT_NAME = "knowledge-base"
 FRONTMATTER_RE = re.compile(r"\A---\n(.*?)\n---\n", re.DOTALL)
 WIKILINK_RE = re.compile(r"\[\[([A-Za-z0-9_.:-]+)(?:\|([^\]]+))?\]\]")
 SOURCE_REF_RE = re.compile(r"\[src:([A-Za-z0-9_.:-]+)\]")
-SOURCE_ID_RE = re.compile(r"^\s*-\s+id:\s*([A-Za-z0-9_.:-]+)\s*$", re.MULTILINE)
 
 
 def index_root_name(root: Path) -> str:
@@ -129,14 +130,12 @@ def read_concepts() -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[st
 
 
 def read_source_ids() -> tuple[set[str], list[str]]:
-    if not SOURCE_REGISTRY_FILE.exists():
-        return set(), [f"{SOURCE_REGISTRY_FILE.relative_to(ROOT)} not found"]
+    source_ids, errors = source_store.read_source_ids()
+    return source_ids, [relative_error(error) for error in errors]
 
-    text = SOURCE_REGISTRY_FILE.read_text(encoding="utf-8")
-    source_ids = set(SOURCE_ID_RE.findall(text))
-    if not source_ids:
-        return source_ids, [f"{SOURCE_REGISTRY_FILE.relative_to(ROOT)} has no source ids"]
-    return source_ids, []
+
+def relative_error(error: str) -> str:
+    return error.replace(str(ROOT) + "/", "")
 
 
 def read_typed_edges() -> tuple[list[dict[str, Any]], list[str]]:

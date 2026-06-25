@@ -1,57 +1,604 @@
-# Source registry for claim-level citation.
-# Keep IDs stable; concept pages cite these IDs.
-
 sources:
-  - id: nvidia-cuda-programming-guide-v13.3
-    title: CUDA Programming Guide
-    authors: NVIDIA
-    year: 2026
-    tier: A
-    type: official-documentation
-    url: https://docs.nvidia.com/cuda/cuda-programming-guide/index.html
-    notes: Official CUDA programming model and technical reference.
-
-  - id: nvidia-a100-architecture-whitepaper-2020
-    title: NVIDIA A100 Tensor Core GPU Architecture
-    authors: NVIDIA
-    year: 2020
-    tier: A
-    type: official-architecture-whitepaper
-    url: https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/nvidia-ampere-architecture-whitepaper.pdf
-    notes: Vendor architecture whitepaper for A100, useful for Ampere-specific SM, Tensor Core, HBM, L2, NVLink, and MIG details.
-
-  - id: williams-roofline-2009
-    title: "Roofline: An Insightful Visual Performance Model for Multicore Architectures"
-    authors: "Samuel Williams; Andrew Waterman; David Patterson"
-    year: 2009
-    tier: A
-    type: peer-reviewed-paper
-    url: https://dl.acm.org/doi/10.1145/1498765.1498785
-    notes: Foundational performance model linking arithmetic intensity, bandwidth ceilings, and compute ceilings.
-
-  - id: markidis-tensor-core-2018
-    title: "NVIDIA Tensor Core Programmability, Performance & Precision"
-    authors: "Stefano Markidis; Steven Wei Der Chien; Erwin Laure; Ivy Bo Peng; Jeffrey S. Vetter"
-    year: 2018
-    tier: A
-    type: research-paper
-    url: https://arxiv.org/abs/1803.04014
-    notes: Research study of Tensor Core programming methods, performance, and precision behavior.
-
-  - id: nvidia-hopper-architecture-in-depth-2022
-    title: NVIDIA Hopper Architecture In-Depth
-    authors: "Michael Andersch; Greg Palmer; Ronny Krashinsky; Nick Stam; Vishal Mehta; Gonzalo Brito; Sridhar Ramaswamy"
-    year: 2022
-    tier: B
-    type: official-technical-blog
-    url: https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/
-    notes: Official NVIDIA technical blog used as an ingestion test source for Hopper SM changes, Tensor Memory Accelerator, thread block clusters, FP8 Tensor Cores, and NVLink Switch System.
-
-  - id: cerebras-wse3-product-page-2026
-    title: The Future of AI is Wafer Scale
-    authors: Cerebras
-    year: 2026
-    tier: B
-    type: official-product-page
-    url: https://www.cerebras.ai/chip
-    notes: Official Cerebras product page for WSE-3; useful for case-study placement, but product and performance claims require independent or whitepaper cross-checking before verified status.
+- id: nvidia-cuda-programming-guide-v13.3
+  title: CUDA Programming Guide
+  authors: NVIDIA
+  year: 2026
+  tier: A
+  type: official-documentation
+  url: https://docs.nvidia.com/cuda/cuda-programming-guide/index.html
+  notes: Official CUDA programming model and technical reference.
+- id: nvidia-a100-architecture-whitepaper-2020
+  title: NVIDIA A100 Tensor Core GPU Architecture
+  authors: NVIDIA
+  year: 2020
+  tier: A
+  type: official-architecture-whitepaper
+  url: https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/nvidia-ampere-architecture-whitepaper.pdf
+  notes: Vendor architecture whitepaper for A100, useful for Ampere-specific SM, Tensor
+    Core, HBM, L2, NVLink, and MIG details.
+- id: williams-roofline-2009
+  title: 'Roofline: An Insightful Visual Performance Model for Multicore Architectures'
+  authors: Samuel Williams; Andrew Waterman; David Patterson
+  year: 2009
+  tier: A
+  type: peer-reviewed-paper
+  url: https://dl.acm.org/doi/10.1145/1498765.1498785
+  notes: Foundational performance model linking arithmetic intensity, bandwidth ceilings,
+    and compute ceilings.
+- id: markidis-tensor-core-2018
+  title: NVIDIA Tensor Core Programmability, Performance & Precision
+  authors: Stefano Markidis; Steven Wei Der Chien; Erwin Laure; Ivy Bo Peng; Jeffrey
+    S. Vetter
+  year: 2018
+  tier: A
+  type: research-paper
+  url: https://arxiv.org/abs/1803.04014
+  notes: Research study of Tensor Core programming methods, performance, and precision
+    behavior.
+- id: nvidia-hopper-architecture-in-depth-2022
+  title: NVIDIA Hopper Architecture In-Depth
+  authors: Michael Andersch; Greg Palmer; Ronny Krashinsky; Nick Stam; Vishal Mehta;
+    Gonzalo Brito; Sridhar Ramaswamy
+  year: 2022
+  tier: B
+  type: official-technical-blog
+  url: https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/
+  notes: Official NVIDIA technical blog used as an ingestion test source for Hopper
+    SM changes, Tensor Memory Accelerator, thread block clusters, FP8 Tensor Cores,
+    and NVLink Switch System.
+- id: cerebras-wse3-product-page-2026
+  title: The Future of AI is Wafer Scale
+  authors: Cerebras
+  year: 2026
+  tier: B
+  type: official-product-page
+  url: https://www.cerebras.ai/chip
+  notes: Official Cerebras product page for WSE-3; useful for case-study placement,
+    but product and performance claims require independent or whitepaper cross-checking
+    before verified status.
+- id: riscv-v-spec-ratified-2021
+  title: RISC-V Vector Extension Version 1.0 Specification
+  authors: RISC-V International
+  year: 2021
+  tier: A
+  type: spec
+  url: https://github.com/riscv/riscv-v-spec/releases/tag/v1.0
+  notes: Ratified RISC-V V extension specification. Defines VLA programming model,
+    32 vector registers, vsetvli, LMUL, SEW, masking, tail/mask policies.
+- id: lee-isc23-rvv-overview
+  title: RISC-V Vector Extension for HPC and AI
+  authors: Lee, Yunsup (SiFive / RISC-V International)
+  year: 2023
+  tier: B
+  type: talk
+  url: https://riscv.epcc.ed.ac.uk/assets/files/isc23/Lee2_ISC23.pdf
+  notes: ISC 2023 presentation covering RVV 1.0 specification status, VLA design rationale,
+    and application to HPC and AI workloads.
+- id: perotti-rvv-embedded-ml-2024
+  title: Performance Evaluation of CNN using RISC-V Vector Extension for Embedded
+    System
+  authors: Perotti, Matteo; et al.
+  year: 2024
+  tier: B
+  type: paper
+  url: https://ieeexplore.ieee.org/document/11318952
+  notes: Evaluates CNN inference using RVV on embedded processors. Reports up to 23x
+    speedup over scalar for GEMM operations with fixed-point arithmetic.
+- id: gupta-conv-rvv-chalmers-2023
+  title: Accelerating CNN inference on long vector architectures via co-design
+  authors: Gupta, Sonia Rani; Papadopoulou, Nikela; Pericas, Miquel
+  year: 2023
+  tier: A
+  type: paper
+  url: https://ieeexplore.ieee.org/document/10177422
+  notes: Peer-reviewed (IEEE IPDPS 2023) study of im2col+GEMM and Winograd kernels
+    on RVV and ARM SVE. Analyzes algorithm selection tradeoffs across VLEN and cache
+    configurations.
+- id: garcia-llm-rvv-sophgo-2025
+  title: Inference performance of large language models on a 64-core RISC-V CPU with
+    silicon-enabled vectors
+  authors: Garcia, Adriano Marques; et al.
+  year: 2025
+  tier: A
+  type: paper
+  url: https://www.sciencedirect.com/science/article/abs/pii/S0167739X25005369
+  notes: Evaluates BERT, GPT-2, Gemma-2, LLaMA-3.2, DeepSeek-LLM on SOPHON SG2042
+    64-core RISC-V CPU with RVV 0.7.1. Found RVV benefits configuration-dependent;
+    speedups up to 1.3x with OpenBLAS.
+- id: tan-opt-sparse-matrix-rvv-2025
+  title: Optimizing Structured-Sparse Matrix Multiplication in RISC-V Vector Processors
+  authors: Tan, et al.
+  year: 2025
+  tier: A
+  type: paper
+  url: https://arxiv.org/abs/2501.10189
+  notes: IEEE Transactions on Computers (2025). Proposes vindexmac instruction for
+    structured-sparse matrix multiply on RVV, achieving 25-33% runtime improvement.
+- id: greenblatt-tvm-rvv-autotune-2026
+  title: Tensor Program Optimization for the RISC-V Vector Extension Using Probabilistic
+    Programs
+  authors: Greenblatt, et al.
+  year: 2026
+  tier: B
+  type: paper
+  url: https://ar5iv.labs.arxiv.org/html/2507.01457
+  notes: Integrates RVV into TVM MetaSchedule. Achieves 46% mean improvement over
+    GCC autovectorization and 29% vs muRISCV-NN on 256-bit RVV 1.0 silicon (Banana
+    Pi BPI-F3).
+- id: esperanto-risc-v-ai-2021
+  title: 'Esperanto ET-SoC-1: 1088 RISC-V Cores for AI Inference'
+  authors: Esperanto Technologies
+  year: 2021
+  tier: B
+  type: vendor-doc
+  url: https://www.forbes.com/sites/tiriasresearch/2021/08/24/esperanto-delivers-massive-ai-processing-with-less-than-20w-for-data-center-inference-workloads/
+  notes: Vendor technical overview of pre-RVV proprietary vector/tensor extension.
+    Useful as case study for RISC-V AI acceleration design patterns.
+- id: ventana-veyron-v2-rvv-2023
+  title: 'Ventana Veyron V2: Server-Class RISC-V with 512-bit RVV 1.0'
+  authors: Ventana Micro Systems
+  year: 2023
+  tier: B
+  type: talk
+  url: https://www.hc2023.hotchips.org/assets/program/conference/day1/CPU1/Ventana%20HotChips23%20-%20Final.pdf
+  notes: Hot Chips 2023 presentation. Veyron V2 adds 512-bit RVV 1.0 vector units
+    and matrix acceleration to a server-class RISC-V core.
+- id: tenstorrent-ocelot-rvv-2024
+  title: 'Tenstorrent Ocelot: Open-Source RISC-V Core with RVV 1.0'
+  authors: Tenstorrent
+  year: 2024
+  tier: B
+  type: vendor-doc
+  url: https://github.com/tenstorrent/riscv-ocelot
+  notes: Tenstorrent's open-source Ocelot core implements RVV 1.0. Used in Wormhole
+    and Blackhole AI accelerators as control/data-movement processors.
+- id: siFive-ame-proposal-2025
+  title: SiFive Attached Matrix Extension (AME) Proposal for RISC-V
+  authors: SiFive (Krste Asanovic)
+  year: 2025
+  tier: B
+  type: talk
+  url: https://lists.riscv.org/g/tech-attached-matrix-extension/topic/111360072
+  notes: SiFive's Zvma proposal to the RISC-V AME Task Group. Tile-based matrix multiply
+    using outer product. Not yet ratified -- treat as speculative.
+- id: ventus-gpgpu-whitepaper
+  title: Ventus GPGPU Architecture Whitepaper
+  authors: Tsinghua University
+  year: 2024
+  tier: B
+  type: paper
+  url: https://toscode.mulanos.cn/tsinghua-sh/ventus-gpgpu/raw/master/docs/ventus%20GPGPU%20architecture%20whitepaper%20v2.01.pdf
+  notes: Open-source GPGPU using RVV as instruction set substrate. Adds SIMT-stack
+    divergence handling, warp scheduling, and barrier instructions. Demonstrates RVV
+    as SIMT substrate.
+- id: riscv-ame-tg-charter
+  title: Attached Matrix Extension (AME) Task Group Charter
+  authors:
+  - RISC-V International
+  url: https://github.com/riscv-admin/attached-matrix-extension/blob/main/charter.adoc
+  accessed: 2026-06-25
+  tier: B
+  description: Official charter for the RISC-V AME Task Group. Defines scope, deliverables,
+    target workloads (DL/AI inference and training), and architectural approach (standalone
+    matrix unit with dedicated tile registers).
+- id: sifive-zvma-proposal-2024
+  title: 'Zvma: SiFive Attached Matrix Extension Specification (Draft 2024-12-18)'
+  authors:
+  - SiFive
+  url: https://lists.riscv.org/g/tech-attached-matrix-extension/attachment/257/0/zvma-20241218.pdf
+  accessed: 2026-06-25
+  tier: B
+  description: SiFive's Zvma specification for AME. Defines tile registers, TE dimensions,
+    KMAX=4 outer product, sub-extension variants for different data types.
+- id: sifive-zvma-slides-2025
+  title: SiFive AME Proposal Slides (2025-02-24 AME TG Meeting)
+  authors:
+  - Krste Asanovic (SiFive)
+  url: https://lists.riscv.org/g/tech-attached-matrix-extension/attachment/279/0/SiFive-20250224-AME-Proposal.pdf
+  accessed: 2026-06-25
+  tier: B
+  description: SiFive presentation to AME TG. Details 4 tile accumulators, KMAX=4
+    requirement, random read/write costs, implementation concerns.
+- id: riscv-ame-mailing-list-2025
+  title: AME TG Mailing List Discussions (2025)
+  authors:
+  - RISC-V International
+  url: https://lists.riscv.org/g/tech-attached-matrix-extension/
+  accessed: 2026-06-25
+  tier: B
+  description: Mailing list archives including debates on KMAX, tile accumulator count,
+    random read costs, and convergence with VME.
+- id: riscv-ime-spec-draft
+  title: Integrated Matrix Extension (IME) Specification Draft
+  authors:
+  - RISC-V Integrated Matrix TG
+  url: https://raw.githubusercontent.com/riscv/integrated-matrix-extension/main/src/integrated-matrix.adoc
+  accessed: 2026-06-25
+  tier: B
+  description: IME draft specification. Defines Zvvm family of extensions operating
+    on RVV vector registers, with inner-product and outer-product variants.
+- id: riscv-ime-ratification-plan
+  title: IME Ratification Plan (Jira)
+  authors:
+  - RISC-V International
+  url: https://riscv.atlassian.net/wiki/spaces/IMEX/pages/598867969/IME+Ratification+Plan
+  accessed: 2026-06-25
+  tier: B
+  description: IME TG timetable and milestone plan. Target ratification August 2026.
+    Defines charter goals of ~90% peak GEMM and ~2x vs. vector for other kernels.
+- id: riscv-ime-mailing-list-2025
+  title: IME TG Mailing List Discussions (2024-2025)
+  authors:
+  - RISC-V International
+  url: https://lists.riscv.org/g/tech-integrated-matrix-extension/
+  accessed: 2026-06-25
+  tier: B
+  description: Inner product vs. outer product debate in IME group. Key contributions
+    from Andrew Waterman (SiFive), Guido Araujo (UNICAMP), Greg Favor.
+- id: riscv-vme-charter
+  title: Vector-Matrix Extension (VME) Charter
+  authors:
+  - RISC-V International
+  url: https://riscv.atlassian.net/wiki/spaces/VMEX/pages/663912452/Vector-Matrix+Extension+VME+Charter
+  accessed: 2026-06-25
+  tier: B
+  description: VME TG charter. Outer-product formulation closely coupled with RVV.
+    New accumulator register file, no 2D load/store instructions.
+- id: riscv-vme-ratification-plan
+  title: VME Ratification Plan (Jira)
+  authors:
+  - RISC-V International
+  url: https://riscv.atlassian.net/wiki/spaces/VMEX/pages/663617995/Ratification+Plan
+  accessed: 2026-06-25
+  tier: B
+  description: VME TG timetable. Targets TSC ratification July 2026, BoD ratification
+    July 30, 2026.
+- id: riscv-ame-vme-poll-2025
+  title: Upcoming Poll of IME/AME Members Regarding Support for Three Matrix Extension
+    Approaches
+  authors:
+  - Rafael Sene (RISC-V)
+  url: https://lists.riscv.org/g/tech-attached-matrix-extension/message/312
+  accessed: 2026-06-25
+  tier: B
+  description: April 2025 'sense' poll launched by RISC-V TPM. Results showed support
+    for all three approaches, leading to formalization of VME TG.
+- id: riscv-tsc-gap-analysis-2025
+  title: 2025 RISC-V TSC Gap Analyses Consolidation
+  authors:
+  - RISC-V International
+  url: https://riscv.atlassian.net/wiki/spaces/TSCX/pages/785055764/2025+RISC-V+TSC+Gap+Analyses+Consolidation
+  accessed: 2026-06-25
+  tier: B
+  description: TSC gap analysis confirming AI/Vector/Matrix extensions as top priority.
+    All three TGs (IME, VME, AME) confirmed as 'already in place.'
+- id: riscv-matrix-blog-alibaba
+  title: Architectures for Matrix Extension in CPU
+  authors:
+  - Jiang Zhao (Alibaba Cloud)
+  url: https://riscv.org/blog/architectures-for-matrix-extension-in-cpu-jiang-zhao-alibaba-cloud/
+  accessed: 2026-06-25
+  tier: B
+  description: RISC-V blog post comparing vector-register-reuse vs. independent-matrix-register
+    architectures. Analysis of tradeoffs in tile sizes, accumulator cost, and RVV
+    coupling.
+- id: t1-zvma-microarchitecture-2025
+  title: T1 Zvma Microarchitecture Proposal
+  authors:
+  - Jiuyang Liu (T1 Team)
+  url: https://lists.riscv.org/g/tech-attached-matrix-extension/attachment/296/0/t1-zvma-uarch.pdf
+  accessed: 2026-06-25
+  tier: B
+  description: Reference microarchitecture for Zvma. Proposes 'fat K' approach, PingPong
+    SRAM banks, DTE parameter for PE array sizing.
+- id: arm-sme-introduction-blog
+  title: Introducing the Scalable Matrix Extension for the Armv9-A Architecture
+  authors:
+  - Arm Developer
+  url: https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/scalable-matrix-extension-armv9-a-architecture
+  accessed: 2026-06-25
+  tier: A
+  description: Arm's official introduction of SME. Covers streaming SVE mode, ZA tile
+    register, outer-product engine, and relationship to SVE2.
+- id: arm-sme-learning-paths
+  title: Accelerate Matrix Multiplication Performance with SME2
+  authors:
+  - Arm Learning Paths
+  url: https://learn.arm.com/learning-paths/cross-platform/multiplying-matrices-with-sme2/overview/
+  accessed: 2026-06-25
+  tier: A
+  description: Arm's official SME2 documentation. Covers multi-vector instructions,
+    ZT0 register, predicate-as-counter, compressed NN support.
+- id: riscv-summit-matrix-session-2024
+  title: Matrix Extension Session at 2024 RISC-V NA Summit
+  authors:
+  - RISC-V International
+  url: https://lists.riscv.org/g/tech-attached-matrix-extension/attachment/204/1/Matrix%20session%20at%202024%20NA%20Summit%20presentation.pdf
+  accessed: 2026-06-25
+  tier: B
+  description: RISC-V NA Summit 2024 presentation on matrix extension landscape. Discussion
+    of all three approaches and industry alignment.
+- id: cnx-c908-aiot-2022
+  title: T-Head XuanTie C908 RISC-V core targets AIoT applications
+  authors: Liu, Chang (T-Head / Alibaba Cloud)
+  year: 2022
+  tier: B
+  type: article
+  url: https://www.cnx-software.com/2022/11/04/t-head-xuantie-c908-risc-v-core-targets-aiot-applications/
+  notes: Technical overview of C908 core with 128-bit RVV 1.0, cache configuration,
+    and AIoT target applications.
+- id: t-head-c908-aliyun-2022
+  title: High-performance RISC-V Processor Xuantie C908
+  authors: T-Head (Alibaba Cloud)
+  year: 2022
+  tier: B
+  type: vendor-doc
+  url: https://developer.aliyun.com/article/1067042
+  notes: Alibaba Cloud developer article with C908 microarchitecture details, cache
+    hierarchy, and vector unit specifications.
+- id: k230-technical-manual
+  title: Canaan K230 Technical Reference Manual
+  authors: Canaan
+  year: 2024
+  tier: B
+  type: official-documentation
+  url: https://www.manualslib.com/manual/3980427/Canaan-K230.html
+  notes: Official technical manual for Canaan K230 SoC containing C908 core cache
+    configuration, memory map, and DRAM controller details.
+- id: spacemit-k1-datasheet-2024
+  title: SpacemiT Key Stone K1 RISC-V CPU Datasheet
+  authors: SpacemiT Technology
+  year: 2024
+  tier: B
+  type: official-documentation
+  url: https://docs.bit-brick.com/zh/docs/k1/hardware/processor-brief
+  notes: Official K1 processor brief detailing X60 core configuration, 256-bit RVV
+    1.0, cache hierarchy (32K L1I/D, 512K L2 per cluster), 512KB TCM, and LPDDR4X-2666
+    memory.
+- id: ventana-veyron-v2-hc2023
+  title: 'Ventana Veyron V2: Server-Class RISC-V with 512-bit RVV 1.0'
+  authors: Ventana Micro Systems
+  year: 2023
+  tier: A
+  type: talk
+  url: https://www.hotchips.org/hc2023-program/
+  notes: 'Hot Chips 2023 presentation. Veyron V2 specifications: 4nm, 3.6-3.85 GHz,
+    512-bit RVV 1.0, 128KB L1D, 512KB L1I, 1.5MB private L2, 128MB shared L3 per 32-core
+    cluster, 12-channel DDR5-5600, UCIe chiplet.'
+- id: esperanto-etsoc1-hc2021
+  title: 'Esperanto ET-SoC-1: 1088 RISC-V/Tensor Processors for ML Recommendation'
+  authors: Ditzel, David R. (Esperanto Technologies)
+  year: 2021
+  tier: A
+  type: talk
+  url: https://riscv.org/blog/accelerating-ml-recommendation-with-over-1000-risc-v-tensor-processors-on-esperantos-et-soc-1-chip/
+  notes: 'Hot Chips 2021 / RISC-V Summit presentation detailing ET-SoC-1 memory hierarchy:
+    per-core 4KB L1 scratchpad, 4MB SRAM per shire, cooperative load mechanism, mesh
+    NoC, LPDDR4x DRAM.'
+- id: epi-vpu-bandwidth-2023
+  title: Short Reasons for Long Vectors in HPC CPUs
+  authors: Vizcaino, et al. (Barcelona Supercomputing Center / EPI)
+  year: 2023
+  tier: A
+  type: paper
+  url: http://riscv.epcc.ed.ac.uk/assets/files/sc23/Short-reasons-for-long-vectors-in-HPC-CPUs.pdf
+  notes: SC23 paper. FPGA study of Vitruvius VPU (8 lanes, up to 256 FP64 elements)
+    bandwidth scaling. Quantified bytes/cycle achievable at various VLEN levels. Shows
+    scalar plateaus at ~2 B/cycle, vector sustains up to 64 B/cycle.
+- id: semidynamics-vector-unit
+  title: RISC-V Vector Unit (Semidynamics)
+  authors: Semidynamics
+  year: 2024
+  tier: B
+  type: vendor-doc
+  url: https://semidynamics.com/technology/vector-unit
+  notes: Commercial RVV IP with VLEN up to 4096b, DLEN from 128b to 2048b, configurable
+    lane counts (4, 8, 16, 32). VLEN/DLEN ratio up to 8x.
+- id: gemmini-berkeley-eecs2022
+  title: 'Gemmini: An Agile Systolic Array Generator Enabling Systematic Evaluations
+    of ML Accelerators'
+  authors: Genc, et al. (UC Berkeley)
+  year: 2022
+  tier: A
+  type: paper
+  url: https://www2.eecs.berkeley.edu/Pubs/TechRpts/2022/EECS-2022-247.pdf
+  notes: 'UC Berkeley EECS technical report. Full Gemmini architecture description:
+    TileLink DMA, mvin/mvout scratchpad access, output-stationary/weight-stationary
+    dataflows, access-execute decoupling.'
+- id: chipyard-gemmini-docs-2024
+  title: Chipyard Documentation -- Gemmini Generator
+  authors: UC Berkeley ASPIRE Lab
+  year: 2024
+  tier: B
+  type: official-documentation
+  url: https://chipyard.readthedocs.io/en/1.4.0/Generators/Gemmini.html
+  notes: 'Official Chipyard documentation for Gemmini configuration parameters: systolic
+    array dimensions, scratchpad capacity, DMA parameters, dataflow selection.'
+- id: magia-fractalsync-2025
+  title: 'FractalSync: Lightweight Scalable Global Synchronization of Massive Bulk
+    Synchronous Parallel AI Accelerators'
+  authors: Isachi, et al. (University of Bologna)
+  year: 2025
+  tier: A
+  type: paper
+  url: https://dl.acm.org/doi/10.1145/3719276.3725203
+  notes: 'ISCA 2025 paper. MAGIA architecture: RISC-V cv32e40x + RedMulE GEMM accelerator
+    + 1MiB L1 scratchpad + iDMA per tile. AXI4 NoC. FractalSync barrier synchronization
+    for BSP.'
+- id: riscv-iommu-spec
+  title: RISC-V IOMMU Specification (Draft)
+  authors: RISC-V International
+  year: 2024
+  tier: A
+  type: spec
+  url: https://github.com/riscv-non-isa/riscv-iommu
+  notes: RISC-V IOMMU specification for I/O virtualization. Maps per-process virtual
+    pages into DMA address spaces for accelerators. Supports type-1 and type-2 virtualization.
+- id: riscv-cmo-zicbop-spec
+  title: RISC-V Cache Management Operation (CMO) Specification
+  authors: RISC-V International
+  year: 2023
+  tier: A
+  type: spec
+  url: https://github.com/riscv/riscv-cmo
+  notes: Ratified CMO specification including Zicbop prefetch instructions (PREFETCH.R/W/I).
+    Defines scalar cache-block prefetch hints.
+- id: riscv-chiplet-ucie-patterns-2025
+  title: Full-System Methodology for Multi-Accelerator SoCs
+  authors: UC Berkeley
+  year: 2025
+  tier: A
+  type: paper
+  url: https://www2.eecs.berkeley.edu/Pubs/TechRpts/2025/EECS-2025-222.pdf
+  notes: UC Berkeley tech report covering TileLink coherent fabrics, DMA scratchpad
+    patterns, and multi-accelerator SoC data movement for AI.
+- id: spacemit-x60-gcc-cost-2026
+  title: 'RISC-V: Add LMUL-aware RVV cost model for the Spacemit-X60 core'
+  authors: GCC mailing list / SpacemiT
+  year: 2026
+  tier: B
+  type: patch-discussion
+  url: https://gcc.gnu.org/pipermail/gcc-patches/2026-February/708956.html
+  notes: GCC patch discussion revealing SpacemiT X60 core memory latency jitter >10%,
+    LMUL cost model non-ideal scaling, no L3 cache behavior.
+- id: modin-kth-rvv-autovec-2024
+  title: A comparison of auto-vectorization performance between GCC and LLVM for the
+    RISC-V vector extension
+  authors: Klara Modin (KTH Royal Institute of Technology)
+  year: 2024
+  tier: A
+  type: bachelor-thesis
+  url: http://kth.diva-portal.org/smash/get/diva2:1905944/FULLTEXT01.pdf
+  notes: Direct comparison of GCC 14 vs LLVM 17 RVV auto-vectorization using TSVC-2
+    benchmark suite. Covers VLA vs VLS code generation, instruction count vs cycle
+    count, and scalability analysis.
+- id: arras-gcc-rvv-vs-aarch64-cauldron-2025
+  title: 'RISC-V vs. AArch64: Comparative Analysis of GCC Codegen'
+  authors: Paul-Antoine Arras (Baylibre)
+  year: 2025
+  tier: B
+  type: conference-presentation
+  url: https://conf.gnu-tools-cauldron.org/media/opo25/submissions/NM7MDT/resources/Comparative_Analysis_5bJOkCa.pdf
+  notes: GNU Tools Cauldron 2025 presentation comparing GCC 15.2 for RISC-V (RVV)
+    vs AArch64 (SVE2) on SPEC CPU 2017. Quantifies DIC gap, identifies root causes
+    (scaled addressing, LMUL tuning, vector-scalar fusion, memset, vector math library).
+- id: luke-lau-llvm-rvv-improvements-2025
+  title: Improvements to RISC-V Vector code generation in LLVM
+  authors: Luke Lau, Alex Bradbury (Igalia)
+  year: 2025
+  tier: B
+  type: conference-presentation
+  url: https://www.igalia.com/downloads/slides/lukelau-alexbradbury-Improvements_to_RISC-V_Vector_code_generation_in_LLVM.pdf
+  notes: RISC-V Summit Europe 2025 presentation. Documents SPEC CPU 2017 8.7% geomean
+    improvement from Clang 17 to Clang 20, SLP non-power-of-2 VF, bfloat16/FP16, vsetvli
+    optimization, tail folding.
+- id: risc-v-tsvc-hpc-sc25
+  title: 'RISC-V Vectorization Coverage for HPC: A TSVC-Based Analysis'
+  authors: Various (RISC-V HPC community)
+  year: 2025
+  tier: A
+  type: workshop-paper
+  url: https://sc25.supercomputing.org/proceedings/workshops/workshop_pages/ws_risc114.html
+  notes: 'SC25 workshop paper analyzing RVV auto-vectorization coverage with TSVC.
+    Classifies missed vectorization into backend limits, absent TSVC uses, and non-trivial
+    patterns. Identifies specific TSVC kernels with large performance gaps (s231:
+    16.5x, s2275: 4.2x, etc.).'
+- id: arm-ssve-auto-vec-paper-2025
+  title: Improving compiler support for SIMD offload using Arm Streaming SVE
+  authors: Arm Research
+  year: 2025
+  tier: A
+  type: research-paper
+  url: http://export.arxiv.org/pdf/2506.02233
+  notes: Evaluates LLVM auto-vectorization for Streaming SVE (SSVE) on SME hardware.
+    Finds SSVE geomean 0.52x vs scalar, 0.32x vs NEON, with only ~35% loops vectorized
+    to SSVE. Cost model assumes linear scaling with vector width, which does not capture
+    SSVE overhead.
+- id: comparison-vec-x86-arm-2025
+  title: Comparison of Vectorization Capabilities of Different Compilers for X86 and
+    ARM CPUs
+  authors: Various
+  year: 2025
+  tier: A
+  type: research-paper
+  url: https://export.arxiv.org/abs/2502.11906v1
+  notes: 'TSVC2-based comparison of GCC, Clang, ICX across x86 and ARM. Reports coverage
+    rates (GCC 54% x86, 56% ARM; Clang 46% x86, 47% ARM). Key finding: vectorized
+    code does not always outperform unvectorized code.'
+- id: llvm-rvv-strided-loads-rise-2025
+  title: CT_01_025 - Support RVV strided loads/stores in the autovectorization (LLVM)
+  authors: RISE Project
+  year: 2025
+  tier: B
+  type: project-tracker
+  url: https://lf-rise.atlassian.net/wiki/spaces/HOME/pages/709787649/CT_01_025+-+Support+RVV+strided+loads+stores+in+the+autovectorization+LLVM
+  notes: RISE project tracking strided load/store autovectorization for RVV in LLVM.
+    Documents VPlan representation challenges, SCEV-based stride analysis, and conversion
+    of gather loads with invariant stride to strided loads.
+- id: llvm-rvv-vp-gather-scatter-2025
+  title: '[RISCV] Support vp.{gather,scatter} in RISCVGatherScatterLowering'
+  authors: Luke Lau (Igalia)
+  year: 2025
+  tier: B
+  type: patch
+  url: https://github.com/llvm/llvm-project/pull/122232
+  notes: LLVM PR
+- id: arras-gcc-rvv-cost-model-tuning-2024
+  title: 'RISC-V: Increase scalar_to_vec_cost from 1 to 3'
+  authors: GCC Mailing List (Rivos / Baylibre)
+  year: 2024
+  tier: B
+  type: patch-discussion
+  url: https://gcc.gnu.org/pipermail/gcc-patches/2024-January/642662.html
+  notes: GCC patch discussion revealing RVV cost model tuning needs. AArch64 uses
+    scalar_to_vec=4 (more conservative). ARM SVE with -msve-vector-bits=2048 vectorizes
+    loops Clang for RVV does not, suggesting LLVM has better heuristics in some cases.
+- id: bataev-llvm-rvv-book-2026
+  title: LLVM Compiler for RISC-V Architecture
+  authors: Alexey Bataev (LLVM SLP Vectorizer maintainer)
+  year: 2026
+  tier: A
+  type: book
+  url: https://link.springer.com/book/10.1007/979-8-8688-2169-1
+  notes: Comprehensive book covering LLVM's VPlan-based Loop Vectorizer and SLP Vectorizer
+    for RVV, VLA vectorization vs ARM SVE/SVE2, Clang directives, and OpenMP support.
+- id: multicoreware-valve-cross-isa-2025
+  title: 'Achieving Performance Parity across Architectures: A Deeper Dive into Vector
+    Portability'
+  authors: MulticoreWare
+  year: 2025
+  tier: B
+  type: technical-blog
+  url: https://multicorewareinc.com/achieving-performance-parity-across-architectures-a-deeper-dive-into-vector-portability/
+  notes: Cross-ISA vector abstraction library (VaLVe) supporting x86 AVX, ARM NEON/SVE,
+    RISC-V RVV. Highlights runtime vector length discovery challenge for VLA ISAs.
+- id: gcc-avx512-masked-vec-2023
+  title: AVX512 fully masked vectorization (GCC commit r14-1925)
+  authors: Richard Biener (GCC)
+  year: 2023
+  tier: B
+  type: patch
+  url: https://gcc.gnu.org/pipermail/gcc-patches/2023-June/621877.html
+  notes: GCC 14 AVX512 fully masked vectorization implementation. Uses integer-mode
+    masks from vector compares, different from SVE's while_ult. Not enabled by default.
+    Requires --param vect-partial-vector-usage=2.
+- id: ffmpeg-rvv-autovec-discussion-2025
+  title: 'FFmpeg-devel discussion: Remove auto-vectorization limitation for RISC-V'
+  authors: FFmpeg Developers
+  year: 2025
+  tier: B
+  type: mailing-list-discussion
+  url: https://ffmpeg.org/pipermail/ffmpeg-devel/2025-May/344068.html
+  notes: 'Confirms GCC and LLVM cannot do runtime dispatch for RVV/SVE. Highlights
+    auto-vectorization limitation: vector length and presence must be known at compile
+    time, unlike x86 CPUID-based dispatch.'
+- id: risc-v-llvm-rvv-summit-2025
+  title: 'Benchmarking TinyML CNN Kernels on RVV 1.0 Hardware: GCC 14 vs. LLVM 19'
+  authors: RISC-V Summit Europe 2025
+  year: 2025
+  tier: A
+  type: conference-poster
+  url: https://riscv-europe.org/summit/2025/media/proceedings/2025-05-13-RISC-V-Summit-Europe-P1.1.01-VAN-KEMPEN-poster.pdf
+  notes: Evaluates GCC 14 vs LLVM 19 on K230 hardware for TinyML CNN kernels. LLVM
+    19 shows best trade-off between code size and performance. Auto-vectorization
+    impact negligible in scalar configurations.

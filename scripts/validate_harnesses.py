@@ -23,6 +23,7 @@ REQUIRED_HARNESS_FILES = {
     "graph-export.md",
     "meta-harness.md",
     "exploration-loop.md",
+    "cheap-model-drift-audit.md",
 }
 
 REQUIRED_SECTIONS = {

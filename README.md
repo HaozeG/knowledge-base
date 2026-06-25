@@ -31,7 +31,7 @@ The source of truth is Markdown. A small local indexer turns concept files and g
 - Graph files: JSONL edges plus wikilinks inside Markdown.
 - Index output: `graph/concept-index.json`.
 - First vertical slice: GPU architecture.
-- Quality rule: important claims must point to source IDs in `sources/source-registry.yaml`.
+- Quality rule: important claims must point to stable source IDs. Source lookup prefers `sources/source-registry.sqlite` when present and falls back to the compatibility export at `sources/source-registry.yaml`.
 
 ## Layout
 
@@ -92,6 +92,79 @@ system/harnesses/
 ```
 
 The harness defines mutable surfaces, immutable surfaces, sensors, evaluators, logging, promotion rules, and human escalation boundaries.
+
+## Autonomous Exploration Loop
+
+Use the exploration-loop harness when the next step is autonomous knowledge-base growth from a hardware/software/workload seed. The loop stages all candidate work under `temp/exploration-runs/<run-id>/` and promotes only runs that pass deterministic hard gates and the fixed score threshold.
+
+Preflight before starting an autonomous session:
+
+```bash
+python3 scripts/build_index.py
+python3 scripts/validate_ontology.py
+python3 scripts/validate_harnesses.py
+python3 scripts/test_evaluate_exploration.py
+```
+
+Create a seed for the run, either in the agent prompt or as a temporary file:
+
+```text
+temp/exploration-runs/<run-id>/seed.md
+```
+
+The seed should include:
+
+- accelerator architecture or design hypothesis
+- target workloads
+- relevant software stack assumptions
+- starting concept IDs or files
+- any previous run guidance that should constrain the next attempt
+
+Autonomous runner setup:
+
+1. Start from `system/agent-operating-manual.md`.
+2. Select `system/harnesses/exploration-loop.md`.
+3. Read the seed, related concept files, `system/ontology.md`, `system/source-quality.md`, and previous run guidance.
+4. For each attempt, start one clean-context subagent with only those inputs.
+5. Stage candidate files, candidate source notes, graph-edge additions, and `manifest.json` under `temp/exploration-runs/<run-id>/`.
+6. Evaluate the staged run:
+
+```bash
+python3 scripts/evaluate_exploration.py temp/exploration-runs/<run-id> --allow-reject
+```
+
+The evaluator emits versioned JSON. Schema version 2 keeps the legacy top-level `score` field but adds normalized `combined_score`, bounded scalar metrics, hard-gate records, artifact accounting, run-history streaks, and ranked `next_targets`. Older ledger rows with only `score` and `next_hint` remain valid historical input; do not recompute them under newer metrics.
+
+If the evaluator accepts the run, promote the staged draft content into the permanent knowledge-base locations allowed by the harness, then run:
+
+```bash
+python3 scripts/build_index.py
+python3 scripts/validate_ontology.py
+python3 scripts/validate_harnesses.py
+```
+
+Accepted runs should append a compact record to `system/run-ledger.jsonl`, including timestamp, run id, target, source summary, metric JSON, promotion actions, and next-step guidance.
+
+If the evaluator rejects the run, keep only a compact rejection log under the run folder, remove or quarantine unpromoted candidate artifacts, and follow `run_history.direction_policy`. `pivot_required` means choose a different layer or parent concept. `forced_pivot` means choose a sparse or stale category outside the failed direction. Neither policy is a stop condition.
+
+For the first autonomous test, run a bounded smoke session with a three-attempt cap before enabling the long-running mode. In long-running mode, the loop continues until the user asks it to stop, an external budget is exhausted, or repository validation reaches an unrecoverable failure. Do not stop or ask for permission merely because five runs have completed successfully.
+
+Source storage:
+
+- `sources/source-registry.yaml` remains the compatibility export agents can read and diff.
+- `sources/source-registry.sqlite` is preferred when present for scalable source lookup.
+- Initialize or refresh the database from YAML with:
+
+```bash
+python3 scripts/sync_sources.py --from-yaml
+```
+
+Stop and cleanup rules:
+
+- Finish the current file operation before stopping.
+- Preserve already-promoted permanent files.
+- Leave interrupted temporary artifacts under `temp/exploration-runs/<run-id>/` with an `interrupted` log entry, or quarantine them under that run folder.
+- Do not modify harnesses, validators, metric weights, ontology, source-quality rules, or existing verified concepts during the autonomous loop. Use the meta-harness for those changes.
 
 ## Concept Status
 

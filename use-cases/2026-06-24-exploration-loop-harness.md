@@ -23,18 +23,22 @@ The user describes a hardware accelerator, its software stack, and target worklo
 ## Accepted Design Decisions
 
 - Temporary artifacts are allowed only under `temp/exploration-runs/<run-id>/`.
-- Permanent draft promotion is automatic when hard gates pass and the fixed score crosses threshold.
-- The score is `(creativity_score + coverage_gap_score) * category_staleness_multiplier - quality_risk_penalty`.
+- Permanent draft promotion is automatic when hard gates pass and evaluator thresholds are crossed.
+- Evaluator output is versioned. Version 2 adds structured hard gates, normalized `combined_score`, bounded scalar metrics, artifact accounting, run-history streaks, and ranked next targets while preserving the legacy top-level `score` field.
 - `category_staleness_multiplier` is capped between `1.0` and `1.5`.
 - Metric weights and thresholds can change only through the meta-harness.
 - Each exploration attempt uses one clean-context subagent.
-- Five consecutive failures trigger fallback to the sparsest or stalest category and an escalation hint.
+- Consecutive rejections trigger direction guidance: two same-direction rejections prefer a new direction, three rejections require pivot, and five rejections force pivot without stopping the loop.
+- Five accepted runs are not a stop condition or permission prompt in long-running mode.
+- Old ledger rows with only `score` and `next_hint` remain readable and are not reinterpreted under new metrics.
+- Source lookup prefers `sources/source-registry.sqlite` when present and falls back to `sources/source-registry.yaml`.
 
 ## Validation Commands
 
 ```bash
 python3 scripts/test_build_index.py
 python3 scripts/test_evaluate_exploration.py
+python3 scripts/sync_sources.py --from-yaml --db /tmp/source-registry.sqlite
 python3 scripts/evaluate_exploration.py use-cases/fixtures/exploration-loop/accepted --index use-cases/fixtures/exploration-loop/index.json --ledger use-cases/fixtures/exploration-loop/run-ledger.jsonl --today 2026-06-24
 python3 scripts/evaluate_exploration.py use-cases/fixtures/exploration-loop/rejected --index use-cases/fixtures/exploration-loop/index.json --ledger use-cases/fixtures/exploration-loop/run-ledger.jsonl --today 2026-06-24 --allow-reject
 python3 scripts/build_index.py
@@ -45,4 +49,4 @@ git diff --check
 
 ## Expected Result
 
-The accepted fixture crosses the fixed threshold. The rejected fixture reports a below-threshold rejection without mutation. The hard-gate fixtures fail because verified promotion and tier-D source promotion are forbidden.
+The accepted fixture crosses the legacy and normalized thresholds and emits schema version 2 fields. The rejected fixture reports a below-threshold rejection without mutation. The hard-gate fixtures fail because verified promotion, tier-D source promotion, unknown edge types, or artifact-accounting drift are forbidden. Mixed old/new ledger rows load without migration.

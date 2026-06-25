@@ -11,7 +11,8 @@ Improve knowledge coverage without degrading citation quality or provenance.
 ## Mutable Surfaces
 
 - `concepts/`
-- `sources/source-registry.yaml`
+- `sources/source-registry.sqlite`, when present
+- `sources/source-registry.yaml` compatibility export
 - `graph/edges.jsonl`
 - `inbox/candidate-sources/`
 - `use-cases/`
@@ -83,4 +84,3 @@ Ask for approval before:
 - marking verified
 - deleting or merging concepts
 - adding stock or company conclusions
-

@@ -9,7 +9,7 @@ Convert new material into concept pages, claim-level citations, graph edges, and
 ## Environment
 
 - Source of truth: `knowledge-base/concepts/**/*.md`
-- Source registry: `knowledge-base/sources/source-registry.yaml`
+- Source registry: prefer `knowledge-base/sources/source-registry.sqlite` when present; keep `knowledge-base/sources/source-registry.yaml` as the compatibility export.
 - Graph edges: `knowledge-base/graph/edges.jsonl`
 - Raw inputs: `knowledge-base/inbox/`
 - Generated index: `knowledge-base/graph/concept-index.json`
@@ -25,7 +25,8 @@ users: human owner starts and accepts ingestion
 mutable_surfaces:
   - knowledge-base/concepts/
   - knowledge-base/graph/edges.jsonl
-  - knowledge-base/sources/source-registry.yaml
+  - knowledge-base/sources/source-registry.sqlite, when present
+  - knowledge-base/sources/source-registry.yaml compatibility export
   - knowledge-base/system/run-ledger.jsonl
 immutable_surfaces:
   - raw downloaded source files unless explicitly approved
@@ -58,7 +59,7 @@ human_controls:
 
 1. **Capture**
    - Put raw note, URL, PDF path, or excerpt under `inbox/`.
-   - Register bibliographic metadata and quality tier in `sources/source-registry.yaml`.
+   - Register bibliographic metadata and quality tier in the source registry. Use `sources/source-registry.sqlite` when present and keep `sources/source-registry.yaml` synchronized as the compatibility export.
 
 2. **Triage**
    - Identify whether the input is primary technical evidence, industry interpretation, market narrative, or unverified lead.

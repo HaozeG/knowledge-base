@@ -17,6 +17,7 @@ Temporary before acceptance:
 Permanent after acceptance:
 
 - `concepts/`
+- `sources/source-registry.sqlite`
 - `sources/source-registry.yaml`
 - `graph/edges.jsonl`
 - `inbox/candidate-sources/`
@@ -77,23 +78,32 @@ Hard gates pass only when:
 - promoted concepts are only `seed` or `draft`
 - important factual claims have source IDs or explicit uncertainty labels
 - source tiers are conservative
+- staged candidate artifacts match the accepted manifest, or rejected artifacts are explicitly accounted for
+- proposed graph edges use known ontology edge types
 - product-family-first placement is rejected
 - validator commands pass
 - the loop does not modify system rules, validators, metric weights, or ontology
 
-The fixed score is:
+Evaluator output is versioned. New output uses `evaluator_schema_version: 2`; older ledger rows without that field are treated as schema version 1 and remain valid historical evidence. Do not recompute old scores under new metrics.
+
+Hard gates decide eligibility. Scalar metrics explain quality, recovery state, and threshold guidance. Every scalar metric `value` and `combined_score` must stay in the `0..1` range. If a raw metric exceeds that range, the evaluator must retain `raw_value` and `range_status` so normalization does not hide metric-design drift:
 
 ```text
-score =
-  (creativity_score + coverage_gap_score)
-  * category_staleness_multiplier
-  - quality_risk_penalty
+graph_connectivity
+coverage_gap
+evidence_strength
+claim_hygiene
+focus_score
+rejection_recovery
+guidance_quality
+quality_risk_penalty
 ```
 
-Initial acceptance policy:
+The compatibility aggregate `score` remains available for older workflows and may exceed `1`. New accept/reject decisions should require both:
 
 ```text
-score >= 1.0
+legacy score >= 1.0
+combined_score >= 0.7
 1.0 <= category_staleness_multiplier <= 1.5
 ```
 
@@ -107,9 +117,18 @@ If hard gates fail or score is below threshold:
 
 - record a compact rejection log
 - remove or quarantine unpromoted candidate files
-- try a new focused target
+- try a new focused target based on evaluator guidance
 
-After five consecutive attempts fail to proceed, select the sparsest or stalest category and record an escalation hint that a higher-intelligence model may be useful.
+Continuous rejection recovery:
+
+- after two same-direction rejections, prefer a different layer or parent concept
+- after three consecutive rejections, follow `direction_policy: pivot_required`
+- after five consecutive rejections, follow `direction_policy: forced_pivot`
+- forced pivot is not a stop condition; select a sparse or stale category outside the failed direction and continue
+
+Milestone summaries are informational. Do not ask whether to proceed after a fixed number of successful runs in long-running mode. Continue until the user explicitly stops the loop, an external budget is exhausted, or repository validation fails in a way that cannot be recovered automatically.
+
+External hook failures, such as a missing local hook runtime, are non-blocking unless they corrupt repository state or cause validator failures. Record them as runtime notes and continue from the next valid run boundary.
 
 ## Logging Contract
 
@@ -124,6 +143,8 @@ For every attempt, record:
 - accept, reject, interrupted, or failed decision
 - promotion actions, if any
 - next-step guidance
+
+New ledger entries should include structured `metrics`, `run_history`, and `next_targets` when available. Agents must continue reading older rows that only have `score` and `next_hint`.
 
 Accepted runs append to `system/run-ledger.jsonl`. Rejected or interrupted runs keep compact logs under the run folder unless the user asks to preserve more detail.
 

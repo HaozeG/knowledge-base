@@ -57,7 +57,8 @@ future graph UI / search / query harness
 | Artifact | Role |
 | --- | --- |
 | `concepts/**/*.md` | Human-readable knowledge pages |
-| `sources/source-registry.yaml` | Stable source IDs and quality tiers |
+| `sources/source-registry.sqlite` | Scalable source ID and quality-tier store when present |
+| `sources/source-registry.yaml` | Compatibility source export for agents, review, and diffs |
 | `graph/edges.jsonl` | Typed graph edges for UI and reasoning |
 | `graph/concept-index.json` | Generated graph/search artifact |
 | `system/agent-operating-manual.md` | Required entry point for agents |
