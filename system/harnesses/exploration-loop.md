@@ -134,7 +134,7 @@ External hook failures, such as a missing local hook runtime, are non-blocking u
 
 For every attempt, record:
 
-- timestamp
+- timestamp (from `date` instruction)
 - run id
 - selected target
 - source summary

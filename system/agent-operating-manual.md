@@ -94,7 +94,7 @@ Every meaningful run appends one JSONL entry to `system/run-ledger.jsonl` with:
 
 ```text
 id
-timestamp
+timestamp (from `date` instruction)
 harness
 goal
 status

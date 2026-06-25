@@ -190,6 +190,24 @@ class ExplorationEvaluatorTests(unittest.TestCase):
         self.assertEqual(payload["decision"], "hard_gate_fail")
         self.assertEqual(payload["hard_gate_codes"], ["SOURCE_TIER_D"])
 
+    def test_tier_c_second_hand_source_penalizes_but_does_not_hard_gate(self) -> None:
+        module = load_module()
+        manifest = self.load_fixture("accepted")
+        manifest["proposed_sources"] = [
+            {
+                "id": "sample-second-hand-business-media",
+                "tier": "C",
+                "type": "second-hand-media-summary",
+            }
+        ]
+        manifest["proposed_nodes"][0]["sources"] = ["sample-second-hand-business-media"]
+
+        payload = module.evaluate(manifest, self.load_index(), LEDGER, "2026-06-24")
+
+        self.assertNotIn("SOURCE_TIER_D", payload["hard_gate_codes"])
+        self.assertGreater(payload["quality_risk_penalty"], 0.0)
+        self.assertLess(payload["metrics"]["evidence_strength"]["value"], 1.0)
+
     def test_layer_mismatch_hard_gate_failure_returns_error(self) -> None:
         module = load_module()
         manifest = self.load_fixture("accepted")
