@@ -147,7 +147,7 @@ Accepted runs should append a compact record to `system/run-ledger.jsonl`, inclu
 
 If the evaluator rejects the run, keep only a compact rejection log under the run folder, remove or quarantine unpromoted candidate artifacts, and follow `run_history.direction_policy`. `pivot_required` means choose a different layer or parent concept. `forced_pivot` means choose a sparse or stale category outside the failed direction. Neither policy is a stop condition.
 
-For the first autonomous test, run a bounded smoke session with a three-attempt cap before enabling the long-running mode. In long-running mode, the loop continues until the user asks it to stop, an external budget is exhausted, or repository validation reaches an unrecoverable failure. Do not stop or ask for permission merely because five runs have completed successfully.
+For the first autonomous test, run a bounded smoke session with a three-attempt cap before enabling the long-running mode. In long-running mode, the loop continues until the user asks it to stop, an external budget is exhausted, or repository validation reaches an unrecoverable failure.
 
 Source storage:
 

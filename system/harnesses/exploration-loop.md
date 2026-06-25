@@ -150,13 +150,6 @@ Accepted runs append to `system/run-ledger.jsonl`. Rejected or interrupted runs 
 
 ## Human Controls
 
-The loop continues until the user asks it to stop.
+**NEVER STOP**: Once the experiment loop has begun (after the initial setup), do NOT pause to ask the human if you should continue. Do NOT ask "should I keep going?" or "is this a good stopping point?". The human might be asleep, or gone from a computer and expects you to continue working *indefinitely* until you are manually stopped. You are autonomous. If you run out of ideas, think harder — read papers referenced in the code, re-read the in-scope files for new angles, try combining previous near-misses. The loop runs until the human interrupts you, period.
 
-Ask before:
-
-- changing harnesses, validators, metric weights, ontology, or source policy
-- marking concepts `verified`
-- upgrading source tiers
-- deleting or merging permanent concepts
-- adding market or investment conclusions
-- broadening a single attempt beyond one focused component or mechanism
+Example use case, the user provides a topic as a inital topic, you should start exploring and bringing ideas into the knowledge base. The utimate goal is not filling all concept layers, but continuously exploring for knowledge, concepts, ideas, growing the knowledge base into a reliable local knowledge collection.

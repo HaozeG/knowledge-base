@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 scripts/build_index.py)",
+      "Bash(python3 scripts/validate_ontology.py)",
+      "Bash(python3 scripts/validate_harnesses.py)",
+      "Bash(python3 scripts/test_evaluate_exploration.py)",
+      "Bash(python3 scripts/sync_sources.py *)",
+      "Bash(python3 scripts/evaluate_exploration.py *)",
+      "Bash(mkdir *)",
+      "Bash(cp *)"
+    ]
+  }
+}

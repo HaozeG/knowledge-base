@@ -602,3 +602,711 @@ sources:
   notes: Evaluates GCC 14 vs LLVM 19 on K230 hardware for TinyML CNN kernels. LLVM
     19 shows best trade-off between code size and performance. Auto-vectorization
     impact negligible in scalar configurations.
+- id: perotti-spatz-ieee-tcad-2025
+  tier: A
+  title: "Spatz: Clustering Compact RISC-V-Based Vector Units to Maximize Computing Efficiency"
+  authors: [Matteo Perotti, Samuel Riedel, Matheus Cavalcante, Luca Benini]
+  venue: IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD)
+  year: 2025
+  doi: 10.1109/TCAD.2025.3527830
+  url: https://ieeexplore.ieee.org/document/10836838
+  notes: Open-source Spatz VPU (RVV Zve64d subset), dual-PE cluster with 2 KiB latch VRF, 7.7 FMA/cycle at 1 GHz in GF 12LPP. First open-source multi-core RVV-based VPU.
+
+- id: nojehdeh-camp-micro-2025
+  tier: A
+  title: "Empowering Vector Architectures for ML: The CAMP Architecture for Matrix Multiplication"
+  authors: [Mohammadreza Esmali Nojehdeh, et al.]
+  venue: 58th IEEE/ACM International Symposium on Microarchitecture (MICRO 2025)
+  year: 2025
+  doi: 10.1145/3725843.3760547
+  url: https://arxiv.org/abs/2504.08137
+  notes: Cartesian Accumulative Matrix Pipeline with hierarchical accumulators; 17–23× speedup on ARM SVE and RISC-V edge SoCs with 1–4% area overhead.
+
+- id: cammarata-quadrilatero-acm-2025
+  tier: A
+  title: "Quadrilatero: A RISC-V programmable matrix coprocessor for low-power edge applications"
+  authors: [Danilo Cammarata, et al.]
+  venue: ACM (July 2025)
+  year: 2025
+  doi: 10.1145/3706594.3726978
+  url: https://dl.acm.org/doi/10.1145/3706594.3726978
+  notes: 4×4 weight-stationary systolic array, 0.65 mm² in 65nm, 34 mW at 100 MHz, 99.4% FPU utilization on MatMul.
+
+- id: saumell-mte-bsc-2025
+  tier: B
+  title: "RISC-V Reloaded: Adding Matrix Extension to an In-Order Core"
+  authors: [Pol Saumell Hill]
+  venue: BSc thesis, UPC / Barcelona Supercomputing Center
+  year: 2025
+  url: https://upcommons.upc.edu/handle/2117/425008
+  notes: In-core systolic array (Matrix Tile Extension) integrated into Sargantana RISC-V core; 3.5× speedup over RVV, 11× over scalar, 2.31% area increase.
+
+- id: venieri-ame-pim-acm-cf-2026
+  tier: A
+  title: "AME-PIM: Can Memory be Your Next Tensor Accelerator?"
+  authors: [Emanuele Venieri, et al.]
+  venue: ACM Computing Frontiers 2026
+  year: 2026
+  doi: TBD
+  url: https://arxiv.org/abs/2604.27808
+  notes: Reduction-free outer-product dataflow mapping AME ISA to Samsung Aquabolt-XL HBM-PIM; 14.9 GFLOP/s (59.4 FLOP/cycle) on single pseudo-channel.
+
+- id: ieee-outer-product-ci-2026
+  tier: A
+  title: "ISA-Based GEMM Acceleration: Maximizing Computational Intensity for Scalable Performance"
+  authors: [TBD]
+  venue: IEEE Access, Vol. 14, pp. 64596–64607
+  year: 2026
+  doi: TBD
+  url: https://ieeexplore.ieee.org/document/11488596
+  notes: Outer-product model achieves 99.6% of CI upper bound using existing RVV registers in 2D grid; analytical derivation of CI bounds under storage constraints.
+
+- id: cai-taurus-2025
+  tier: B
+  title: "Neural Network Acceleration Architecture Based on RISC-V Instruction Set Extension"
+  authors: [Cai Chenghuan, et al.]
+  venue: Computer Science (jsjkx.com), Vol. 52, No. 12
+  year: 2025
+  url: https://www.jsjkx.com/EN/abstract/abstract23999.shtml
+  notes: Taurus systolic array accelerator with matrix ISA extensions; 80% better utilization than Gemmini, 1.3× ResNet50 and 31.3× BERT speedups.
+
+- id: shen-mempool-spatz-date-2025
+  tier: A
+  title: "TCDM Burst Access: Breaking the Bandwidth Barrier in Shared-L1 RVV Clusters Beyond 1000 FPUs"
+  authors: [Diyou Shen, et al.]
+  venue: DATE 2025
+  year: 2025
+  url: https://pulp-platform.org/docs/date2025/
+  notes: MemPool-Spatz scales to 1024 FPUs with TCDM burst access; 3.26× bandwidth improvement; 16/256/1024-FPU configurations evaluated.
+
+- id: ieee-area-optimized-matrix-edge-2025
+  tier: A
+  title: "Area-Optimized RISC-V Matrix Extension Implementation for Edge Devices"
+  authors: [TBD]
+  venue: IEEE (Nov 2025 conf, Jan 2026 Xplore)
+  year: 2025
+  doi: TBD
+  url: https://ieeexplore.ieee.org/document/11314483
+  notes: XuanTie-RV matrix extension subset; 143 kGE in IHP SG13G2 130nm, 110 MHz, 9.2 MAC/cycle sustained (57% of peak), 3× smaller than SOTA matrix units.
+
+- id: sinigaglia-maestro-arxiv-2025
+  tier: B
+  title: "Maestro: A 302 GFLOPS/W and 19.8 GFLOPS RISC-V Vector-Tensor Architecture for Wearable Ultrasound Edge Computing"
+  authors: [Marco Sinigaglia, et al.]
+  venue: arXiv:2503.04581
+  year: 2025
+  url: https://arxiv.org/abs/2503.04581
+  notes: Extends Spatz with unified Vector-Tensor Unit (VTU) + FFT accelerator in TSMC 65nm; 30.2 GFLOPS/W (FP16).
+- id: riedel-floonoc-ieee-tvlsi-2025
+  tier: A
+  title: "FlooNoC: A 645-Gb/s/link 0.15-pJ/B/hop Open-Source NoC With Wide Physical Links and End-to-End AXI4 Parallel Multistream Support"
+  authors: [Samuel Riedel, Matheus Cavalcante, et al.]
+  venue: IEEE Transactions on Very Large Scale Integration Systems (TVLSI), Vol. 33(4)
+  year: 2025
+  doi: 10.1109/TVLSI.2025.3527225
+  url: https://ieeexplore.ieee.org/document/10848526
+  notes: Open-source FlooNoC; 645 Gb/s/link, 0.15 pJ/B/hop; demonstrated in 8×4 mesh of RISC-V cluster tiles (288 cores); 103 Tb/s aggregate, 3.5% area overhead in 12nm FinFET.
+
+- id: iguaz-fractalsync-acm-cf-2025
+  tier: A
+  title: "FractalSync: Lightweight Scalable Global Synchronization of Massive Bulk Synchronous Parallel AI Accelerators"
+  authors: [Iguaz, et al.]
+  venue: ACM Computing Frontiers 2025
+  year: 2025
+  doi: 10.1145/3719276.3725203
+  url: https://arxiv.org/abs/2506.11668
+  notes: MAGIA architecture — RISC-V cv32e40x + RedMulE 24×8 semi-systolic array per tile, FlooNoC 2D mesh, up to 256 tiles (16×16); FractalSync hardware barriers with 43× speedup over software atomics, <0.01% area overhead.
+
+- id: riedel-mempool-flavors-arxiv-2025
+  tier: A
+  title: "MemPool Flavors: Between Versatility and Specialization in a RISC-V Manycore Cluster"
+  authors: [Samuel Riedel, Matheus Cavalcante, Matteo Perotti, Luca Benini, et al.]
+  venue: RISC-V Summit Europe 2025 / arXiv:2504.03675
+  year: 2025
+  url: https://arxiv.org/abs/2504.03675
+  notes: Three MemPool flavors (Baseline, Systolic, Vectorial/Spatz); hierarchical shared-L1 interconnect with 1/3/5 cycle latency; 800 MHz in GF 12nm, 204.8 GFLOP/s peak; 94% Spatz utilization on vectorized workloads.
+
+- id: shen-mempool-spatz-date-2025
+  tier: A
+  title: "TCDM Burst Access: Breaking the Bandwidth Barrier in Shared-L1 RVV Clusters Beyond 1000 FPUs"
+  authors: [Diyou Shen, et al.]
+  venue: DATE 2025
+  year: 2025
+  url: https://pulp-platform.org/docs/date2025/
+  notes: MemPool-Spatz scaling to 1024 FPUs via TCDM burst access; 3.26× bandwidth improvement on memory-bound kernels.
+
+- id: rozk-reconfigurable-noc-ieee-jssc-2026
+  tier: A
+  title: "ROZK: An Energy-Efficient DNN Accelerator Based on Reconfigurable NoC and Local Zero-Skipping"
+  authors: [TBD]
+  venue: IEEE JSSC, Vol. 61(5)
+  year: 2026
+  doi: TBD
+  url: https://ieeexplore.ieee.org/document/11153790
+  notes: 64-bit RISC-V SoC with reconfigurable NoC; tri-stationary dataflow; 191 GOPS (0% sparsity), 324 GOPS (60% sparsity) at 409 MHz in 28nm.
+- id: lei-mlir-rvv-xdsl-2025
+  tier: A
+  title: "Enabling RISC-V Vector Code Generation in MLIR through Custom xDSL Lowerings"
+  authors: [Jie Lei, et al.]
+  venue: SemiIPHub Technical Article / Conference 2025
+  year: 2025
+  url: https://semiiphub.com/pulse/technical-articles/enabling-risc-v-vector-code-generation-in-mlir-through-custom-xdsl-lowerings
+  notes: MLIR + xDSL compilation generating optimized RVV intrinsics; 10–35% improvement over OpenBLAS on GEMM and BERT-Large; demonstrated on K230 and BananaPi F3.
+
+- id: puzikova-eigen-rvv-pact-2025
+  tier: A
+  title: "RISC-V Acceleration for Linear Algebra Problems: Eigen Library Enhancements with RVV Support"
+  authors: [Puzikova, Sokolov, Zaytseva]
+  venue: PaCT 2025 (Springer LNCS 16185)
+  year: 2025
+  doi: 10.1007/978-3-032-06751-7_13
+  url: https://dl.acm.org/doi/10.1007/978-3-032-06751-7_13
+  notes: Full RVV support for Eigen library; 2.5–3× speedup over scalar; outperforms OpenBLAS by 11%; critical for TensorFlow/PyTorch CPU backend on RISC-V.
+
+- id: greenblatt-tvm-rvv-autotune-2026
+  tier: A
+  title: "Tensor Program Optimization for the RISC-V Vector Extension Using Probabilistic Programs"
+  authors: [Greenblatt, et al.]
+  venue: arXiv:2507.01457
+  year: 2025
+  url: https://arxiv.org/abs/2507.01457
+  notes: TVM MetaSchedule for RVV; 46% mean improvement vs GCC autovectorization, 35% vs LLVM; open-sourced; 29% improvement over muRISCV-NN.
+
+- id: google-coral-roadmap-2026
+  tier: B
+  title: "Platform Roadmap — Coral (Google for Developers)"
+  authors: [Google]
+  venue: Google Developers Website
+  year: 2026
+  url: https://developers.google.com/coral/guides/roadmap
+  notes: RISC-V NPU roadmap; Milestone 2 (Q4 2025) RVV 1.0 VLEN=128 int8/int16; Milestone 3 (2026) VLEN=512 FP32/FP16/BF16 with JAX frontend.
+
+- id: ventana-ruca-ai-platform-2025
+  tier: B
+  title: "RISC-V AI Acceleration Platform — Scalable, Standards-Aligned Soft Chiplet IP"
+  authors: [Ventana Micro Systems]
+  venue: SemiIPHub
+  year: 2025
+  url: https://semiiphub.com/ip/risc-v-ai-acceleration-platform-scalable-standards-aligned-soft-chiplet-ip-23285
+  notes: RUCA unified ISA for scalar/vector/matrix; TVM, ONNX, TFLite support; PyTorch enablement tracked via RISE project.
+
+- id: riscv-ame-software-roadmap-2024
+  tier: B
+  title: "RISC-V AME Task Group — Software Enablement Roadmap"
+  authors: [RISC-V International AME TG]
+  venue: RISC-V AME TG Meeting (July 2024)
+  year: 2024
+  url: https://lists.riscv.org/g/tech-attached-matrix-extension/attachment/174/0/AME-20240715.pdf
+  notes: Staged software enablement: binutils, GCC intrinsics, LLVM, QEMU, OpenBLAS, Eigen, oneMKL, MLIR dialect for AME, MLPerf PoC.
+
+- id: riscv-matrix-software-tg-2025
+  tier: B
+  title: "Cross-Committee Discussion: Matrix Extensions Common Software APIs"
+  authors: [RISC-V International AI/ML SIG, HPC SIG, RISE]
+  venue: tech-attached-matrix-extension mailing list (April 2025)
+  year: 2025
+  url: https://lists.riscv.org/g/tech-attached-matrix-extension/messages
+  notes: Proposed service extensions for binary-compatible library distributions; Matrix Software TG/SIG proposed; portability vs. performance trade-off discussion.
+
+- id: riscv-eu-roadmap-2025
+  tier: B
+  title: "European RISC-V Roadmap — Matrix ISA Extensions and Platform Toolchain"
+  authors: [ECSSRIA]
+  venue: ECSSRIA Roadmap Document (v240216)
+  year: 2025
+  url: https://ecssria.eu/Roadmap_RISC-V_v240216_Final.pdf
+  notes: Matrix ISA extensions 2025–2027; octal-core AI engine 2027; full platform toolchain integration 2031; dual octal-core AI chiplet 2033.
+
+- id: nuclei-rvv-ai-library-2025
+  tier: B
+  title: "Accelerating AI Inference Using RISC-V Vector Extension — Nuclei AI Library"
+  authors: [Nuclei Technology]
+  venue: RISC-V China Summit / cicmag.com
+  year: 2025
+  url: https://cicmag.com/bbx/93858-93891.html
+  notes: RVV-optimized AI library for int8/int16/fp16/bf16/fp32; custom BF16; Xxlvqmacc matrix extension following IME specification.
+- id: purayil-troop-ieee-iccd-2025
+  tier: A
+  title: "TROOP: At-the-Roofline Performance for Vector Processors on Low Operational Intensity Workloads"
+  authors: [Purayil, Shen, Matteo Perotti, Luca Benini]
+  venue: IEEE ICCD 2025
+  year: 2025
+  url: https://arxiv.org/abs/2508.03900
+  notes: Micro-architectural optimizations on Spatz VPE in 12nm; 1.5× GEMV, 2.2× DOTP, 2.6× AXPY speedups; 45% energy improvement; <7% area overhead; decoupled load-store, shadow buffers, address scrambling.
+
+- id: morgado-carm-arxiv-2026
+  tier: A
+  title: "CARM Tool: Cache-Aware Roofline Model Automatic Benchmarking and Application Analysis"
+  authors: [Morgado, Sousa, Ilic]
+  venue: arXiv:2605.29740
+  year: 2026
+  url: https://arxiv.org/abs/2605.29740
+  notes: First automated CARM for RISC-V (alongside x86 and ARM); assembly microbenchmarks for all vector ISA extensions; <1% deviation in constructed roofs.
+
+- id: wang-ara-cooptimization-arxiv-2026
+  tier: A
+  title: "Microarchitectural Co-Optimization for Sustained Throughput of RISC-V Multi-Lane Chaining Vector Processors"
+  authors: [Wang, Zhang]
+  venue: arXiv:2604.22314 (CAS/UCAS)
+  year: 2026
+  url: https://arxiv.org/abs/2604.22314
+  notes: Ara multi-lane chaining RVV processor; 1.33× geometric-mean speedup; 12.2% roofline gap-closed ratio; gemm 59.3% gap closed, scal 93.7%.
+
+- id: sg2042-llm-inference-roofline-2025
+  tier: A
+  title: "Inference performance of large language models on a 64-core RISC-V CPU with silicon-enabled vectors"
+  authors: [TBD]
+  venue: ScienceDirect (Future Generation Computer Systems)
+  year: 2025
+  doi: TBD
+  url: https://www.sciencedirect.com/science/article/abs/pii/S0167739X25005369
+  notes: BERT, GPT-2, Gemma-2, LLaMA-3.2, DeepSeek-LLM on SOPHON SG2042 64-core with RVV v0.7.1; 1.3× speedup from RVV OpenBLAS; roofline used to explain configuration-dependent benefits.
+
+- id: spacemit-k1-ime-roofline-2025
+  tier: B
+  title: "K1 IME GEMM Roofline Model"
+  authors: [Spacemit Community]
+  venue: Spacemit Forum
+  year: 2025
+  url: https://forum.spacemit.com/t/topic/1034/1
+  notes: Community roofline analysis of Spacemit K1 IME; measured vs. ideal AI discrepancy due to VRF size limits; 16×16×16 kernel far below peak.
+
+- id: ieee-outer-product-ci-2026
+  tier: A
+  title: "ISA-Based GEMM Acceleration: Maximizing Computational Intensity for Scalable Performance"
+  authors: [TBD]
+  venue: IEEE Access, Vol. 14, pp. 64596–64607
+  year: 2026
+  url: https://ieeexplore.ieee.org/document/11488596
+  notes: (Reused from run-006) Outer-product model achieves 99.6% of CI upper bound using existing RVV registers in 2D grid.
+- id: wang-das-kilo-core-arxiv-2025
+  tier: A
+  title: "A Dynamic Allocation Scheme for Adaptive Shared-Memory Mapping on Kilo-core RV Clusters for Attention-Based Model Deployment"
+  authors: [Wang, Bowen, et al.]
+  venue: 36th IEEE ASAP Conference / arXiv:2508.01180
+  year: 2025
+  url: https://arxiv.org/abs/2508.01180
+  notes: Runtime-programmable address remapping for 1024-PE RISC-V clusters; 1.94× speedup, 0.81 PE utilization, <0.1% area overhead in 12nm FinFET.
+
+- id: medea-heterogeneous-arxiv-2025
+  tier: A
+  title: "MEDEA: A Design-Time Multi-Objective Manager for Energy-Efficient DNN Inference on Heterogeneous Ultra-Low Power Platforms"
+  authors: [TBD]
+  venue: arXiv:2506.19067 (submitted to ACM TECS)
+  year: 2025
+  url: https://arxiv.org/abs/2506.19067
+  notes: RISC-V + NMC + CGRA heterogeneous runtime; kernel-level DVFS, memory-aware tiling; 38% energy reduction.
+
+- id: montagna-copiftv2-arxiv-2026
+  tier: A
+  title: "Late Breaking Results: Boosting Efficient Dual-Issue Execution on Lightweight RISC-V Cores"
+  authors: [Montagna, et al.]
+  venue: DATE 2026 / arXiv:2601.17940
+  year: 2026
+  url: https://arxiv.org/abs/2601.17940
+  notes: Snitch RISC-V core with lightweight queues for integer-FP thread communication; 1.49× speedup, 1.47× energy efficiency, peak IPC 1.81.
+
+- id: burrello-multivic-arxiv-2025
+  tier: A
+  title: "MultiVic: A Time-Predictable RISC-V Multi-Core Processor Optimized for Neural Network Inference"
+  authors: [Burrello, et al.]
+  venue: arXiv:2511.05321
+  year: 2025
+  url: https://arxiv.org/abs/2511.05321
+  notes: Central management core orchestrates DMA transfers to local scratchpads; configurable from dual-core (1024-bit vectors) to hexadeca-core (128-bit vectors).
+
+- id: tisac-evas-isca-2026
+  tier: A
+  title: "Tile-level Virtual Instruction Set (TISA) — Dynamic Scheduling Architecture for AI Accelerators"
+  authors: [EVAS (奕行智能)]
+  venue: ISCA 2026
+  year: 2026
+  url: https://zhidx.com/p/548156.html
+  notes: Conflict-aware nanosecond-scale runtime scheduler; demonstrated on FlashAttention-3 with 30% less code, 50% fewer sync calls vs. CUDA.
+
+- id: tenstorrent-metal-runtime-2026
+  tier: B
+  title: "Software Engineer, Metal Runtime (Core Systems) — Tenstorrent"
+  authors: [Tenstorrent]
+  venue: Job posting / FOSDEM 2026 talk
+  year: 2026
+  url: https://fosdem.org/2026/schedule/event/799WTL-all_in_risc-v_risc-v_all_in_ai_solving_real_ai_compute_challenges_with_deepcompu/
+  notes: Bare-metal runtime for RISC-V-based AI accelerators; scheduling, memory movement, execution across mesh of RISC-V cores.
+- id: firefly-csc2-riscv-server-cnx-2026
+  tier: B
+  title: "Firefly CSC2-N48SPK3 — A 2880 TOPS RISC-V AI server with 48 SpacemiT K3 Nodes"
+  authors: [CNX Software]
+  venue: CNX Software (May 2026)
+  year: 2026
+  url: https://www.cnx-software.com/2026/05/20/firefly-csc2-n48spk3-a-2880-tops-risc-v-ai-server-with-48-spacemit-k3-nodes-48-nvme-ssds/
+  notes: Production 48-node RISC-V AI server; 2,880 TOPS; 10+ tok/s on 30B models; ~$38,829; 2U rack-mount.
+
+- id: sifive-nvlink-fusion-2026
+  tier: B
+  title: "SiFive to Power Next-Gen RISC-V AI Data Centers with NVIDIA NVLink Fusion"
+  authors: [SiFive / BusinessWire]
+  venue: BusinessWire (Jan 2026)
+  year: 2026
+  url: https://www.businesswire.com/news/home/20260115887207/en/
+  notes: SiFive integrating NVLink Fusion into RISC-V data center platforms; coherent high-bandwidth RISC-V-to-GPU connectivity.
+
+- id: tenstorrent-galaxy-blackhole-2026
+  tier: B
+  title: "Tenstorrent's Galaxy Blackhole: Can RISC-V Processors Expand Fast Inference Globally?"
+  authors: [Futurum Group]
+  venue: Futurum Group Analysis
+  year: 2026
+  url: https://futurumgroup.com/insights/tenstorrents-galaxy-blackhole-can-risc-v-processors-expand-fast-inference-globally/
+  notes: Blackhole chip on 6nm; 400G direct-attach Ethernet; Supercluster 36; 308 tok/s DeepSeek inference; 90% HuggingFace model pass rate.
+
+- id: qualcomm-tenstorrent-riscv-2026
+  tier: B
+  title: "Qualcomm Acquiring RISC-V Chip Start-Up Tenstorrent?"
+  authors: [Counterpoint Research]
+  venue: Counterpoint Research (June 2026)
+  year: 2026
+  url: https://counterpointresearch.com/insights/qualcomm-tenstorrent-riscv-chip/
+  notes: Qualcomm acquired Ventana; reportedly pursuing Tenstorrent at ~$8-10B; building full RISC-V data center stack.
+
+- id: ethz-mempool-manycore-2025
+  tier: B
+  title: "MemPool Flavors: Between Versatility and Specialization in a RISC-V Manycore Cluster"
+  authors: [Sergio Mazzola, ETH Zurich]
+  venue: RISC-V Summit Europe 2025
+  year: 2025
+  url: https://pulp-platform.org/docs/riscvsummiteu2025/Sergio_MemPoolFlavors.pdf
+  notes: 256+ core manycore cluster; multiple flavors (Baseline, Systolic, Vectorial, TeraPool); multiple tapeouts; open-source.
+
+- id: riscv-hpc-edge-cluster-iet-2025
+  tier: A
+  title: "Design and benchmarking of a low-cost RISC-V-based high-performance computing cluster for edge computing"
+  authors: [TBD]
+  venue: IET Conference Proceedings (ICEPECC 2025)
+  year: 2025
+  doi: 10.1049/icp.2025.1168
+  url: https://digital-library.theiet.org/doi/abs/10.1049/icp.2025.1168
+  notes: 10-node StarFive JH7110 cluster; 5.6× faster convergence; matrix computation 10.39s → 1.637s from 1 to 10 nodes.
+- id: wedbush-riscv-silicon-rebellion-2026
+  tier: B
+  title: "The Silicon Rebellion: RISC-V Breaks the x86-ARM Duopoly to Power the AI Data Center"
+  authors: [Wedbush Securities / TokenRing]
+  venue: Wedbush Investor Research
+  year: 2026
+  url: https://investor.wedbush.com/wedbush/article/tokenring-2026-1-9-the-silicon-rebellion-risc-v-breaks-the-x86-arm-duopoly-to-power-the-ai-data-center
+  notes: Comprehensive analysis of RISC-V data center disruption; RVA23 profile, VLA programming model, custom instruction advantages.
+
+- id: digitimes-qualcomm-google-riscv-2026
+  tier: B
+  title: "Qualcomm, Google bet big on RISC-V for AI dominance"
+  authors: [DigiTimes]
+  venue: DigiTimes (Jan 2026)
+  year: 2026
+  url: https://www.digitimes.com/news/a20260105PD226/risc-v-google-arm-qualcomm-demand.html
+  notes: Qualcomm acquired Ventana; Google 30K+ apps ported to RISC-V; Meta MTIA 2i/3 with RISC-V cores.
+
+- id: theregister-qualcomm-tenstorrent-2026
+  tier: B
+  title: "Qualcomm said to be circling AI chip biz Tenstorrent in $10B RISC-V power play"
+  authors: [The Register]
+  venue: The Register (June 2026)
+  year: 2026
+  url: https://www.theregister.com/systems/2026/06/16/qualcomm-said-to-be-circling-ai-chip-biz-tenstorrent-in-10b-risc-v-power-play/
+  notes: $8-10B Tenstorrent acquisition talks; Qualcomm building full RISC-V AI stack: Ventana CPU + Tenstorrent AI + Modular software.
+
+- id: wedbush-riscv-25pct-share-2026
+  tier: B
+  title: "RISC-V Hits 25% Market Share: The Rise of Open-Source Silicon Sovereignty"
+  authors: [Wedbush Securities / TokenRing]
+  venue: Wedbush Investor Research (Jan 2026)
+  year: 2026
+  url: https://investor.wedbush.com/wedbush/article/tokenring-2026-1-2-risc-v-hits-25-market-share-the-rise-of-open-source-silicon-sovereignty
+  notes: RISC-V captured ~25% global processor market by early 2026; RVA23 profile; VLA model enables single-binary portability.
+
+- id: ainvest-qualcomm-tenstorrent-software-2026
+  tier: B
+  title: "Qualcomm's Tenstorrent Bid Is About Software, Not Silicon — Here's What It Changes"
+  authors: [AI Invest]
+  venue: AI Invest Analysis (June 2026)
+  year: 2026
+  url: https://www.ainvest.com/news/qualcomm-tenstorrent-bid-software-2606/
+  notes: Analysis of Qualcomm's software motivation; Tenstorrent BUDA + Modular Mojo as CUDA alternative.
+
+- id: wedbush-riscv-great-pivot-2025
+  tier: B
+  title: "The Great Silicon Pivot: RISC-V Shatters the Data Center Duopoly as AI Demands Customization"
+  authors: [Wedbush Securities / TokenRing]
+  venue: Wedbush Investor Research (Dec 2025)
+  year: 2025
+  url: https://investor.wedbush.com/wedbush/article/tokenring-2025-12-18-the-great-silicon-pivot-risc-v-shatters-the-data-center-duopoly-as-ai-demands-customization
+  notes: Early analysis of RISC-V data center pivot; customization advantage for AI; comparison to Linux commoditization of OS layer.
+- id: m31-ull-memory-compiler-tsmc-n6e-2025
+  tier: B
+  title: "M31 Advances AIoT Innovation with Ultra Low Power Memory Compilers on TSMC N6e Platform"
+  authors: [M31 Technology Corporation]
+  venue: TSMC OIP Ecosystem Forum 2025 / Design-Reuse
+  year: 2025
+  url: https://www.design-reuse-embedded.com/news/202509142/m31-advances-aiot-innovation-with-ultra-low-power-memory-compilers-on-tsmc-n6e-platform/
+  notes: One Port Register File, ELL compilers with 50% deep-sleep power reduction, Low-VDD compilers operating down to 0.5V; high-sigma design methodology.
+
+- id: dream-cim-ieee-tcasai-2025
+  tier: A
+  title: "DREAM-CIM: A Digital SRAM-based Compute-in-Memory Hardware Acceleration Processor"
+  authors: [Asmae, et al.]
+  venue: IEEE Transactions on Circuits and Systems for Artificial Intelligence (TCASAI)
+  year: 2025
+  doi: TBD
+  url: https://pure.tudelft.nl/ws/portalfiles/portal/246634945/2025-TCASAI-Asmae-DREAM-CIM.pdf
+  notes: 8T SRAM cells for bitwise NAND multiplication; 5097 TOPS/W, 3854 TOPS/mm² at 22nm; 0.1 mJ MNIST, 11.0 mJ CIFAR-10.
+
+- id: accelcim-dataflow-arxiv-2026
+  tier: A
+  title: "AccelCIM: Systematic Dataflow Exploration for SRAM Compute-in-Memory Accelerator"
+  authors: [TBD]
+  venue: arXiv:2604.17692
+  year: 2026
+  url: https://arxiv.org/abs/2604.17692
+  notes: Systematic dataflow framework for CIM; addresses macro-to-system efficiency gap; cycle-accurate simulation + post-layout PPA.
+
+- id: lpae-cim-approximate-adder-2025
+  tier: A
+  title: "Low-Power and Area-Efficient CIM: An SRAM-based fully-digital computing-in-memory hardware acceleration processor with approximate adder tree"
+  authors: [TBD]
+  venue: ScienceDirect (Microelectronics Journal)
+  year: 2025
+  doi: TBD
+  url: https://www.sciencedirect.com/science/article/abs/pii/S1879239125003522
+  notes: OR-gate approximate adder tree; 148.5 TOPS/W at 4-bit; 1-8 bit dynamic precision; structured pruning support.
+
+- id: fermi-ml-sram-macro-arxiv-2025
+  tier: A
+  title: "FERMI-ML: A Flexible and Resource-Efficient Memory-In-Situ SRAM Macro for TinyML acceleration"
+  authors: [TBD]
+  venue: arXiv:2511.12544
+  year: 2025
+  url: https://arxiv.org/abs/2511.12544
+  notes: 9T XNOR bitcell (5T storage + 4T compute); 4 KB macro, 350 MHz at 0.9V in 65nm; 1.93 TOPS, 364 TOPS/W; Posit-4/FP-4 support.
+
+- id: nature-cfet-6t-sram-2026
+  tier: A
+  title: "3-Tier CFET 6T-SRAM with 2D-TMDs channels for Angstrom technology node"
+  authors: [TBD]
+  venue: Nature Scientific Reports
+  year: 2026
+  doi: TBD
+  url: https://www.nature.com/articles/s41598-026-37881-5
+  notes: 29.5% area reduction over 2-Tier CFET; >39% lower write energy; 24.9% EDP improvement; addresses SRAM density scaling wall.
+
+- id: microelectronics-pim-imc-survey-2026
+  tier: A
+  title: "Bridging Architectures, Mapping, and Learning for DNN Acceleration with Processing-in-Memory and In-Memory Computing Systems"
+  authors: [TBD]
+  venue: Microelectronics (MDPI), Vol. 2(2)
+  year: 2026
+  url: https://www.mdpi.com/3042-5344/2/2/10/xml
+  notes: 2019-2025 survey; SRAM CIM peaks 600 TOPS/W, 1.5 TOPS/mm²; ADC/DAC 50-95% of energy; converter chains 10-12× array size.
+
+- id: dmatrix-3d-dram-2026
+  tier: B
+  title: "Going Vertical: Why we created a 3D DRAM solution to advance low latency AI inference"
+  authors: [d-Matrix]
+  venue: d-Matrix Blog
+  year: 2026
+  url: https://www.d-matrix.ai/going-vertical-why-we-created-a-3d-dram-solution-to-advance-low-latency-ai-inference/
+  notes: 2 GB SRAM per card via chiplets; 3D DRAM 20 TB/s per stack (10× HBM4), 0.3-0.4 pJ/bit vs 3-4 pJ/bit for HBM4.
+
+- id: dac-photonic-sram-2025
+  tier: A
+  title: "A Mixed-Signal Photonic SRAM-Based High-Speed Energy-Efficient Photonic Tensor Core with Novel Electro-Optic ADC"
+  authors: [TBD]
+  venue: DAC 2025
+  year: 2025
+  doi: 10.1145/11132453
+  url: https://dl.acm.org/doi/abs/10.1109/DAC63849.2025.11132453
+  notes: Differential photonic SRAM bitcell; 4.10 TOPS, 3.02 TOPS/W in 45nm photonic CMOS; overcomes electrical SRAM bitline capacitance limits.
+- id: digitimes-packaging-frontier-2025
+  tier: B
+  title: "Advanced Packaging Becomes the Next Frontier in Chip Performance"
+  authors: [DIGITIMES]
+  venue: DIGITIMES / PackNode
+  year: 2025
+  url: https://www.packnode.org/en/innovation/advanced-packaging-next-frontier-chip-performance-digitimes
+  notes: Packaging now equally vital as chip design; TSMC CoWoS/InFO driving record AI demand; NVIDIA reserving ~60% of 2026 CoWoS capacity.
+
+- id: bloomberg-packaging-policy-2026
+  tier: B
+  title: "Technology and policy shifts reshape chip packaging"
+  authors: [Bloomberg Professional Services]
+  venue: Bloomberg
+  year: 2026
+  url: https://www.bloomberg.com/professional/insights/technology/technology-and-policy-shifts-reshape-chip-packaging/
+  notes: 16% CAGR for 2.5D/3D packaging; AI chip-package size tripling by 2030; US CHIPS Act $2.5B for packaging R&D.
+
+- id: patsnap-packaging-landscape-2026
+  tier: B
+  title: "Advanced packaging technology landscape 2026"
+  authors: [PatSnap]
+  venue: PatSnap Research
+  year: 2026
+  url: https://www.patsnap.com/de/resources/blog/articles/advanced-packaging-technology-landscape-2026/
+  notes: Advanced packaging displaced process-node scaling as primary performance lever; hybrid bonding at 9-10μm pitch now commercial.
+
+- id: sns-3dic-market-2026
+  tier: B
+  title: "Future of 3D IC Technology: Key Industry Innovations"
+  authors: [SNS Insider]
+  venue: SNS Insider Market Research
+  year: 2026
+  url: https://www.snsinsider.com/blogs/3d-ic-industry
+  notes: 3D IC market $16.85B (2025) → $66.06B (2035) at 14.64% CAGR.
+
+- id: packnode-strategic-spotlight-2026
+  tier: B
+  title: "Advanced Packaging Enters Strategic Spotlight as Industry Logic Evolves"
+  authors: [PackNode]
+  venue: PackNode
+  year: 2026
+  url: https://www.packnode.org/en/innovation/advanced-packaging-industry-logic-evolves
+  notes: Foundry-OSAT boundary blurring; top 10 players hold ~75% of global advanced packaging industry.
+
+- id: wedbush-silicon-revolution-2025
+  tier: B
+  title: "The Silicon Revolution: How Next-Gen Semiconductor Innovations are Forging the Future of AI"
+  authors: [Wedbush Securities]
+  venue: Wedbush Investor Research (Nov 2025)
+  year: 2025
+  url: https://investor.wedbush.com/wedbush/article/tokenring-2025-11-10-the-silicon-revolution-how-next-gen-semiconductor-innovations-are-forging-the-future-of-ai
+  notes: Comprehensive analysis of packaging-driven AI silicon revolution.
+
+- id: researchmarkets-chiplet-2025
+  tier: B
+  title: "Chiplet Global Market Insights 2025, Analysis and Forecast to 2030"
+  authors: [Research & Markets]
+  venue: Research & Markets
+  year: 2025
+  url: https://www.researchandmarkets.com/reports/5878254/chiplet-global-market-insights-analysis
+  notes: Chiplet market $10-15B (2025), 25-30% CAGR to 2030; driven by yield economics at advanced nodes.
+
+- id: digitaltoday-packaging-shift-2026
+  tier: B
+  title: "Foundry chip market shifts from shrinking nodes to packaging"
+  authors: [Digital Today Korea]
+  venue: Digital Today Korea (April 2026)
+  year: 2026
+  url: https://www.digitaltoday.co.kr/en/view/47360/foundry-market-packaging-share-grows-stacking-chiplet-tech-battleground
+  notes: Axis of semiconductor race shifting from advanced nodes to packaging; 2.5D/3D stacking and chiplets as key performance determinants.
+- id: acm-semiconductor-heat-2026
+  tier: B
+  title: "Semiconductor Manufacturers Feel the Heat"
+  authors: [Communications of the ACM]
+  venue: Communications of the ACM
+  year: 2026
+  doi: 10.1145/3788651
+  url: https://cacm.acm.org/news/semiconductor-manufacturers-feel-the-heat/
+  notes: H100 at ~90 W/cm²; future nodes +12-15% power density; BSPDN may increase hotspot temps by 14°C; liquid cooling now standard.
+
+- id: eetimes-moores-law-ai-2026
+  tier: B
+  title: "The Impact of the End of Moore's Law on the AI Gold Rush"
+  authors: [EE Times]
+  venue: EE Times
+  year: 2026
+  url: https://www.eetimes.com/the-impact-of-the-end-of-moores-law-on-the-ai-gold-rush/
+  notes: 2nm chip design >$1B; leading-edge fab costs tens of billions; economic limit may arrive before physical limit.
+
+- id: semiconductordigest-beyond-moores-2026
+  tier: B
+  title: "Beyond Moore's Law: Why the Next Era of Computing Will Be Powered by Light"
+  authors: [Semiconductor Digest]
+  venue: Semiconductor Digest
+  year: 2026
+  url: https://www.semiconductor-digest.com/beyond-moores-law-why-the-next-era-of-computing-will-be-powered-by-light/
+  notes: Data movement dominates energy in AI; optical interconnects and computing as long-term paradigm shift.
+
+- id: tetramem-ai-chip-limits-2026
+  tier: B
+  title: "Are AI Chips Approaching Their Limits?"
+  authors: [TetraMem]
+  venue: TetraMem Blog
+  year: 2026
+  url: https://tetramem.com/are-ai-chips-approaching-their-limits/
+  notes: Future AI accelerators thermally-limited not transistor-limited; FLOPs/W matters more than peak transistor count.
+
+- id: laserfocus-ai-new-physics-2026
+  tier: B
+  title: "The end of electronic compute: AI needs new physics"
+  authors: [Laser Focus World]
+  venue: Laser Focus World
+  year: 2026
+  url: https://www.laserfocusworld.com/optics/article/55356790/the-end-of-electronic-compute-ai-needs-new-physics
+  notes: Optical computing, analog in-memory, 2D materials as long-term escapes from the triple wall.
+
+- id: bisinfotech-moores-law-ai-era-2026
+  tier: B
+  title: "The Invisible Upgrade: Why Moore's Law is Evolving for the AI Era"
+  authors: [BIS Infotech]
+  venue: BIS Infotech
+  year: 2026
+  url: https://www.bisinfotech.com/the-invisible-upgrade-why-moores-law-is-evolving-for-the-ai-era/
+  notes: Moore's Law continues as transformed state; transistor density still increases but requires STCO.
+- id: wedbush-riscv-revolution-2026
+  tier: B
+  title: "The RISC-V Revolution: Open-Source Silicon Challenges ARM and x86 Dominance in 2026"
+  authors: [Wedbush Securities / TokenRing]
+  venue: Wedbush Investor Research (Jan 2026)
+  year: 2026
+  url: https://investor.wedbush.com/wedbush/article/tokenring-2026-1-16-the-risc-v-revolution-open-source-silicon-challenges-arm-and-x86-dominance-in-2026
+  notes: Comprehensive analysis of RISC-V market adoption; technical parity proven; 50% development cost savings vs. ARM.
+
+- id: 36kr-nvidia-sifive-riscv-2026
+  tier: B
+  title: "Nvidia Enters the Scene: Behind the $400M Financing, RISC-V Ushered in Spring"
+  authors: [36Kr]
+  venue: 36Kr (May 2026)
+  year: 2026
+  url: https://36kr.com/p/3797644221635588
+  notes: Nvidia leads SiFive $400M Series G; 130B+ RISC-V cores deployed; capital shifted from backup to main force.
+
+- id: wedbush-silicon-decoupling-2025
+  tier: B
+  title: "The Great Silicon Decoupling: How RISC-V Became the Geopolitical Pivot of Global Computing in 2025"
+  authors: [Wedbush Securities / TokenRing]
+  venue: Wedbush Investor Research (Dec 2025)
+  year: 2025
+  url: https://investor.wedbush.com/wedbush/article/tokenring-2025-12-29-the-great-silicon-decoupling-how-risc-v-became-the-geopolitical-pivot-of-global-computing-in-2025
+  notes: Geopolitical analysis of RISC-V as neutral open standard; Swiss governance resists export controls.
+
+- id: mordor-riscv-market-2026
+  tier: B
+  title: "RISC-V Tech — Market Share Analysis, Industry Trends & Statistics, Growth Forecasts (2026–2031)"
+  authors: [Mordor Intelligence]
+  venue: Mordor Intelligence Market Research
+  year: 2026
+  url: https://www.marketresearch.com/Mordor-Intelligence-LLP-v4018/RISC-Tech-Share-Trends-Statistics-43552776/
+  notes: $1.35B (2025) → $10.7B (2031) at 41.2% CAGR; data center 60.9% CAGR fastest segment.
+
+- id: leiphone-riscv-capital-2026
+  tier: B
+  title: "GPU Valuation Doubles, RISC-V Takes Center Stage: How Capital Locks in Certainty"
+  authors: [Leiphone / 雷锋网]
+  venue: Leiphone (May 2026)
+  year: 2026
+  url: https://www.leiphone.com/category/chips/xVFRx4zTPDx5EdV1.html
+  notes: Shanghai VC perspective on RISC-V as only path offering both openness and autonomy.
+
+- id: wedbush-riscv-conquered-ai-2026
+  tier: B
+  title: "The RISC-V Revolution: How Open Architecture Conquered the AI Landscape in 2026"
+  authors: [Wedbush Securities / TokenRing]
+  venue: Wedbush Investor Research (Jan 2026)
+  year: 2026
+  url: https://investor.wedbush.com/wedbush/article/tokenring-2026-1-21-the-risc-v-revolution-how-open-architecture-conquered-the-ai-landscape-in-2026
+  notes: RISC-V moving from management controller to primary CPU in high-performance AI clusters.
+
+- id: yahoo-qualcomm-10b-nvidia-2026
+  tier: B
+  title: "Qualcomm Goes All-In: The $10B Bet to Crush NVIDIA"
+  authors: [Yahoo Finance]
+  venue: Yahoo Finance (June 2026)
+  year: 2026
+  url: https://finance.yahoo.com/technology/ai/articles/qualcomm-goes-10b-bet-crush-181000295.html
+  notes: Qualcomm's $12-14B total RISC-V bet; Tenstorrent + Ventana + Modular as vertically integrated AI platform.

@@ -1,5 +1,5 @@
 {
-  "edge_count": 123,
+  "edge_count": 163,
   "edges": [
     {
       "confidence": "working",
@@ -407,6 +407,286 @@
       "source": "software.control.dsl-compiler-runtime",
       "target": "workload.ai.rvv-kernel-patterns",
       "type": "enables"
+    },
+    {
+      "confidence": "working",
+      "notes": "ISA proposals (AME/IME/VME) decompose into specific multi-PE microarchitectural organizations \u2014 the ISA defines what instructions exist, the microarchitecture defines how PEs execute them spatially.",
+      "source": "hw.riscv.matrix-extension-proposals",
+      "target": "hw.riscv.multi-pe-matrix-microarchitecture",
+      "type": "decomposes_into"
+    },
+    {
+      "confidence": "working",
+      "notes": "All multi-PE matrix microarchitectures except pure systolic arrays depend on RVV for vector operand supply and non-GEMM kernel execution.",
+      "source": "hw.riscv.multi-pe-matrix-microarchitecture",
+      "target": "hw.riscv.vector-extension",
+      "type": "depends_on"
+    },
+    {
+      "confidence": "working",
+      "notes": "The choice of multi-PE organization (clustered vs. systolic vs. accumulator-extended) constrains which kernel mapping strategies achieve high utilization.",
+      "source": "hw.riscv.multi-pe-matrix-microarchitecture",
+      "target": "workload.ai.rvv-kernel-patterns",
+      "type": "constrained_by"
+    },
+    {
+      "confidence": "working",
+      "notes": "RISC-V multi-PE matrix organizations are an architecturally distinct alternative to NVIDIA Tensor Cores for matrix acceleration \u2014 both spatially parallelize matrix multiply across hardware PEs but differ in ISA integration (CPU ISA extension vs. GPU warp-level primitive).",
+      "source": "hw.riscv.multi-pe-matrix-microarchitecture",
+      "target": "hw.gpu.tensor-cores",
+      "type": "competes_with"
+    },
+    {
+      "confidence": "working",
+      "notes": "Multi-PE matrix microarchitectures use explicit spatial PE organization (systolic arrays, clustered VPUs) as an alternative execution model to SIMT warp-level thread parallelism. The PE is a hardware concept; the thread is a software concept.",
+      "source": "hw.riscv.multi-pe-matrix-microarchitecture",
+      "target": "hw.gpu.simt",
+      "type": "competes_with"
+    },
+    {
+      "confidence": "working",
+      "notes": "The multi-PE memory hierarchy (shared L1 scratchpad in Spatz, weight-stationary buffers in Quadrilatero) inherits design principles from GPU memory hierarchies \u2014 both must manage data supply to parallel compute units.",
+      "source": "hw.riscv.multi-pe-matrix-microarchitecture",
+      "target": "hw.gpu.memory-hierarchy",
+      "type": "depends_on"
+    },
+    {
+      "confidence": "working",
+      "notes": "RISC-V vector memory hierarchy design decisions (scratchpad vs. cache, burst access modes) directly enable or constrain multi-PE matrix scaling, as demonstrated by MemPool-Spatz TCDM burst access enabling 1024-FPU clusters.",
+      "source": "hw.riscv.vector-memory-hierarchy",
+      "target": "hw.riscv.multi-pe-matrix-microarchitecture",
+      "type": "enables"
+    },
+    {
+      "confidence": "working",
+      "notes": "Multi-PE microarchitecture decomposes into interconnect fabric design \u2014 the PE organization determines the communication pattern the NoC must support.",
+      "source": "hw.riscv.multi-pe-matrix-microarchitecture",
+      "target": "hw.riscv.noc-interconnect-matrix-accelerators",
+      "type": "decomposes_into"
+    },
+    {
+      "confidence": "working",
+      "notes": "NoC design for matrix accelerators depends on memory hierarchy decisions \u2014 scratchpad banking, DMA engine placement, and burst access modes directly constrain interconnect topology choice.",
+      "source": "hw.riscv.noc-interconnect-matrix-accelerators",
+      "target": "hw.riscv.vector-memory-hierarchy",
+      "type": "depends_on"
+    },
+    {
+      "confidence": "working",
+      "notes": "Interconnect topology choice is constrained by scale-up vs. scale-out strategy \u2014 shared-L1 suits scale-up within a cluster, mesh NoC suits scale-out across clusters.",
+      "source": "hw.riscv.noc-interconnect-matrix-accelerators",
+      "target": "system.scale.scale-up-vs-scale-out",
+      "type": "constrained_by"
+    },
+    {
+      "confidence": "working",
+      "notes": "Memory hierarchy design enables interconnect scaling \u2014 TCDM burst access in MemPool-Spatz enables 1024-FPU shared-L1 clusters without interconnect saturation.",
+      "source": "hw.riscv.vector-memory-hierarchy",
+      "target": "hw.riscv.noc-interconnect-matrix-accelerators",
+      "type": "enables"
+    },
+    {
+      "confidence": "working",
+      "notes": "RISC-V NoC-based PE interconnect (shared L1, mesh NoC) competes architecturally with GPU shared memory + crossbar interconnect as data supply models for parallel compute units.",
+      "source": "hw.riscv.noc-interconnect-matrix-accelerators",
+      "target": "hw.gpu.memory-hierarchy",
+      "type": "competes_with"
+    },
+    {
+      "confidence": "working",
+      "notes": "Matrix ISA proposals (AME/IME/VME) decompose into a software enablement problem \u2014 each ISA requires compiler, library, and framework integration to be useful.",
+      "source": "hw.riscv.matrix-extension-proposals",
+      "target": "software.riscv.ai-software-ecosystem",
+      "type": "decomposes_into"
+    },
+    {
+      "confidence": "working",
+      "notes": "The AI software ecosystem depends on compiler auto-vectorization quality \u2014 without good baseline RVV code generation, framework-level optimizations start from a weak foundation.",
+      "source": "software.riscv.ai-software-ecosystem",
+      "target": "software.compiler.rvv-autovec-quality",
+      "type": "depends_on"
+    },
+    {
+      "confidence": "working",
+      "notes": "The software stack depends on efficient kernel patterns (GEMM, attention, convolution) \u2014 libraries and compilers target these patterns as their optimization primitives.",
+      "source": "software.riscv.ai-software-ecosystem",
+      "target": "workload.ai.rvv-kernel-patterns",
+      "type": "depends_on"
+    },
+    {
+      "confidence": "working",
+      "notes": "The AI software ecosystem inherits the DSL-compiler-runtime separation \u2014 ML frameworks occupy the DSL layer, MLIR/TVM the compiler layer, and LiteRT/ONNX Runtime the execution layer.",
+      "source": "software.riscv.ai-software-ecosystem",
+      "target": "software.control.dsl-compiler-runtime",
+      "type": "constrained_by"
+    },
+    {
+      "confidence": "working",
+      "notes": "Software stack performance depends on the underlying NoC/interconnect \u2014 the compiler must be aware of communication topology to generate efficient multi-PE code.",
+      "source": "software.riscv.ai-software-ecosystem",
+      "target": "hw.riscv.noc-interconnect-matrix-accelerators",
+      "type": "depends_on"
+    },
+    {
+      "confidence": "working",
+      "notes": "Multi-PE microarchitectural design choices are characterized and compared using roofline analysis \u2014 the roofline reveals whether a given design is compute-bound or memory-bound.",
+      "source": "hw.riscv.multi-pe-matrix-microarchitecture",
+      "target": "model.riscv.roofline-matrix-performance",
+      "type": "measured_by"
+    },
+    {
+      "confidence": "working",
+      "notes": "RISC-V-specific roofline modeling depends on the general roofline theory \u2014 compute roof, bandwidth roof, and arithmetic intensity are universal concepts applied to RISC-V hardware parameters.",
+      "source": "model.riscv.roofline-matrix-performance",
+      "target": "programmer.roofline-model",
+      "type": "depends_on"
+    },
+    {
+      "confidence": "working",
+      "notes": "AI kernel mapping efficiency on RVV is measured by roofline analysis \u2014 the gap between achieved and peak FLOP/s reveals optimization headroom.",
+      "source": "workload.ai.rvv-kernel-patterns",
+      "target": "model.riscv.roofline-matrix-performance",
+      "type": "measured_by"
+    },
+    {
+      "confidence": "working",
+      "notes": "The bandwidth roof in a RISC-V roofline model depends directly on the vector memory hierarchy design \u2014 scratchpad size, banking, and burst modes determine peak bandwidth.",
+      "source": "model.riscv.roofline-matrix-performance",
+      "target": "hw.riscv.vector-memory-hierarchy",
+      "type": "depends_on"
+    },
+    {
+      "confidence": "working",
+      "notes": "The roofline model is constrained by NoC/interconnect bandwidth \u2014 for multi-cluster systems, inter-cluster link bandwidth becomes the limiting roof for distributed GEMM.",
+      "source": "model.riscv.roofline-matrix-performance",
+      "target": "hw.riscv.noc-interconnect-matrix-accelerators",
+      "type": "constrained_by"
+    },
+    {
+      "confidence": "working",
+      "notes": "The AI software ecosystem decomposes into a runtime execution layer \u2014 compilers and libraries produce code, but the runtime decides when and where it executes on multi-PE hardware.",
+      "source": "software.riscv.ai-software-ecosystem",
+      "target": "software.riscv.ai-runtime-execution",
+      "type": "decomposes_into"
+    },
+    {
+      "confidence": "working",
+      "notes": "Runtime dispatch performance depends directly on NoC latency and bandwidth \u2014 the scheduler must account for inter-PE communication cost when assigning tiles.",
+      "source": "software.riscv.ai-runtime-execution",
+      "target": "hw.riscv.noc-interconnect-matrix-accelerators",
+      "type": "depends_on"
+    },
+    {
+      "confidence": "working",
+      "notes": "Runtime memory management depends on the vector memory hierarchy \u2014 scratchpad banking, DMA engine capabilities, and burst access modes constrain allocation strategies.",
+      "source": "software.riscv.ai-runtime-execution",
+      "target": "hw.riscv.vector-memory-hierarchy",
+      "type": "depends_on"
+    },
+    {
+      "confidence": "working",
+      "notes": "Runtime dispatch granularity is constrained by PE microarchitecture \u2014 the minimum schedulable unit is determined by PE count and per-PE tile size.",
+      "source": "software.riscv.ai-runtime-execution",
+      "target": "hw.riscv.multi-pe-matrix-microarchitecture",
+      "type": "constrained_by"
+    },
+    {
+      "confidence": "working",
+      "notes": "Single-chip multi-PE microarchitecture decomposes into the multi-chip scale-out problem \u2014 the PE is the building block, and the cluster is the scaled system.",
+      "source": "hw.riscv.multi-pe-matrix-microarchitecture",
+      "target": "system.riscv.distributed-ai-clusters",
+      "type": "decomposes_into"
+    },
+    {
+      "confidence": "working",
+      "notes": "Distributed RISC-V AI clusters are a concrete instantiation of the scale-out strategy \u2014 the general scale-up vs. scale-out framework provides the analytical lens.",
+      "source": "system.riscv.distributed-ai-clusters",
+      "target": "system.scale.scale-up-vs-scale-out",
+      "type": "depends_on"
+    },
+    {
+      "confidence": "working",
+      "notes": "Inter-node network performance in distributed clusters depends on the intra-chip NoC design \u2014 the same bandwidth/latency/area trade-offs recur at larger scale.",
+      "source": "system.riscv.distributed-ai-clusters",
+      "target": "hw.riscv.noc-interconnect-matrix-accelerators",
+      "type": "depends_on"
+    },
+    {
+      "confidence": "working",
+      "notes": "Distributed runtime execution (multi-node scheduling, gradient synchronization) builds on single-node multi-PE runtime primitives.",
+      "source": "system.riscv.distributed-ai-clusters",
+      "target": "software.riscv.ai-runtime-execution",
+      "type": "depends_on"
+    },
+    {
+      "confidence": "working",
+      "notes": "Distributed RISC-V cluster technology decomposes into a supply-chain and business question \u2014 who builds these clusters, at what cost, and under what competitive dynamics?",
+      "source": "system.riscv.distributed-ai-clusters",
+      "target": "industry.riscv.ai-supply-chain",
+      "type": "decomposes_into"
+    },
+    {
+      "confidence": "working",
+      "notes": "The business case for RISC-V explains the market logic behind scale-out strategies \u2014 low per-node cost makes scale-out economically rational.",
+      "source": "industry.riscv.ai-supply-chain",
+      "target": "system.scale.scale-up-vs-scale-out",
+      "type": "explains_market_logic_for"
+    },
+    {
+      "confidence": "working",
+      "notes": "Multi-PE microarchitecture decomposes into its circuit-level foundation \u2014 the SRAM arrays and CIM macros that supply operands to PEs.",
+      "source": "hw.riscv.multi-pe-matrix-microarchitecture",
+      "target": "chip.circuit.sram-cim-ai-accelerators",
+      "type": "decomposes_into"
+    },
+    {
+      "confidence": "working",
+      "notes": "SRAM circuit design enables the memory hierarchy \u2014 the bitcell topology, banking strategy, and memory compiler capabilities determine achievable bandwidth and capacity at each hierarchy level.",
+      "source": "chip.circuit.sram-cim-ai-accelerators",
+      "target": "hw.riscv.vector-memory-hierarchy",
+      "type": "enables"
+    },
+    {
+      "confidence": "working",
+      "notes": "Circuit-level SRAM design decomposes into the manufacturing question \u2014 how are these circuits fabricated, packaged, and integrated into working AI accelerators?",
+      "source": "chip.circuit.sram-cim-ai-accelerators",
+      "target": "silicon.process.advanced-packaging-ai",
+      "type": "decomposes_into"
+    },
+    {
+      "confidence": "working",
+      "notes": "Advanced packaging enables scale-up \u2014 2.5D/3D integration is the physical realization of making one local domain larger, tighter, and faster.",
+      "source": "silicon.process.advanced-packaging-ai",
+      "target": "system.scale.scale-up-vs-scale-out",
+      "type": "enables"
+    },
+    {
+      "confidence": "working",
+      "notes": "Manufacturing and packaging technologies exist to mitigate fundamental physical limits \u2014 the physics determines what manufacturing must overcome.",
+      "source": "silicon.process.advanced-packaging-ai",
+      "target": "physics.materials.ai-compute-limits",
+      "type": "decomposes_into"
+    },
+    {
+      "confidence": "working",
+      "notes": "The roofline model's ceilings (compute roof, bandwidth roof) are ultimately constrained by physical limits \u2014 thermal, power, and wire delay.",
+      "source": "physics.materials.ai-compute-limits",
+      "target": "programmer.roofline-model",
+      "type": "constrained_by"
+    },
+    {
+      "confidence": "working",
+      "notes": "Supply chain business dynamics decompose into the market narrative \u2014 the story investors tell about why RISC-V will win, which drives the capital that funds the supply chain.",
+      "source": "industry.riscv.ai-supply-chain",
+      "target": "market.riscv.ai-investment-narrative",
+      "type": "decomposes_into"
+    },
+    {
+      "confidence": "working",
+      "notes": "The market narrative explains the investment logic for distributed RISC-V AI clusters \u2014 cost-efficient scale-out is the economic story that attracts hyperscaler capital.",
+      "source": "market.riscv.ai-investment-narrative",
+      "target": "system.riscv.distributed-ai-clusters",
+      "type": "explains_market_logic_for"
     },
     {
       "confidence": "extracted",
@@ -858,16 +1138,20 @@
     }
   ],
   "errors": [],
-  "generated_at": "2026-06-25T03:32:22.609107+00:00",
+  "generated_at": "2026-06-25T06:19:01.072073+00:00",
   "indexes": {
     "by_concept_type": {
       "architecture_pattern": [
         "hw.gpu.overview",
         "hw.riscv.matrix-extension-proposals",
+        "hw.riscv.multi-pe-matrix-microarchitecture",
         "hw.riscv.vector-extension",
         "software.control.dsl-compiler-runtime",
         "stack.ai-accelerator-ontology",
         "stack.silicon-to-programmer"
+      ],
+      "business_constraint": [
+        "industry.riscv.ai-supply-chain"
       ],
       "case_study": [
         "case.cerebras.wafer-scale-engine"
@@ -876,29 +1160,46 @@
         "software.compiler.rvv-autovec-quality"
       ],
       "component": [
+        "chip.circuit.sram-cim-ai-accelerators",
         "hw.gpu.tensor-cores"
       ],
       "execution_model": [
         "hw.gpu.simt"
       ],
+      "interconnect_pattern": [
+        "hw.riscv.noc-interconnect-matrix-accelerators"
+      ],
       "kernel_algorithm": [
         "workload.ai.rvv-kernel-patterns"
+      ],
+      "manufacturing_method": [
+        "silicon.process.advanced-packaging-ai"
+      ],
+      "market_narrative": [
+        "market.riscv.ai-investment-narrative"
       ],
       "memory_pattern": [
         "hw.gpu.memory-hierarchy",
         "hw.riscv.vector-memory-hierarchy"
       ],
       "performance_model": [
+        "model.riscv.roofline-matrix-performance",
         "programmer.roofline-model"
+      ],
+      "physical_limit": [
+        "physics.materials.ai-compute-limits"
       ],
       "programming_interface": [
         "hw.gpu.thread-block-clusters",
-        "hw.gpu.thread-blocks-occupancy"
+        "hw.gpu.thread-blocks-occupancy",
+        "software.riscv.ai-software-ecosystem"
       ],
       "runtime_mechanism": [
-        "hw.gpu.tensor-memory-accelerator"
+        "hw.gpu.tensor-memory-accelerator",
+        "software.riscv.ai-runtime-execution"
       ],
       "scaling_strategy": [
+        "system.riscv.distributed-ai-clusters",
         "system.scale.scale-up-vs-scale-out"
       ]
     },
@@ -909,6 +1210,7 @@
       "concept": [
         "hw.gpu.memory-hierarchy",
         "hw.riscv.vector-memory-hierarchy",
+        "physics.materials.ai-compute-limits",
         "software.compiler.rvv-autovec-quality",
         "software.control.dsl-compiler-runtime",
         "system.scale.scale-up-vs-scale-out",
@@ -919,25 +1221,41 @@
         "stack.silicon-to-programmer"
       ],
       "mechanism": [
+        "chip.circuit.sram-cim-ai-accelerators",
         "hw.gpu.simt",
         "hw.gpu.tensor-cores",
         "hw.gpu.tensor-memory-accelerator",
         "hw.gpu.thread-block-clusters",
         "hw.gpu.thread-blocks-occupancy",
         "hw.riscv.matrix-extension-proposals",
-        "hw.riscv.vector-extension"
+        "hw.riscv.multi-pe-matrix-microarchitecture",
+        "hw.riscv.noc-interconnect-matrix-accelerators",
+        "hw.riscv.vector-extension",
+        "software.riscv.ai-runtime-execution"
       ],
       "model": [
+        "model.riscv.roofline-matrix-performance",
         "programmer.roofline-model"
       ],
       "overview": [
-        "hw.gpu.overview"
+        "hw.gpu.overview",
+        "industry.riscv.ai-supply-chain",
+        "market.riscv.ai-investment-narrative",
+        "silicon.process.advanced-packaging-ai",
+        "software.riscv.ai-software-ecosystem",
+        "system.riscv.distributed-ai-clusters"
       ]
     },
     "by_layer": {
       "00-orientation": [
         "stack.ai-accelerator-ontology",
         "stack.silicon-to-programmer"
+      ],
+      "10-physical-limits-materials": [
+        "physics.materials.ai-compute-limits"
+      ],
+      "100-runtime-execution-system": [
+        "software.riscv.ai-runtime-execution"
       ],
       "110-workload-mapping": [
         "workload.ai.rvv-kernel-patterns"
@@ -946,18 +1264,38 @@
         "case.cerebras.wafer-scale-engine",
         "system.scale.scale-up-vs-scale-out"
       ],
+      "130-scale-out-distributed-system": [
+        "system.riscv.distributed-ai-clusters"
+      ],
       "140-performance-cost-utilization-model": [
+        "model.riscv.roofline-matrix-performance",
         "programmer.roofline-model"
+      ],
+      "150-supply-chain-business": [
+        "industry.riscv.ai-supply-chain"
+      ],
+      "160-market-narrative": [
+        "market.riscv.ai-investment-narrative"
+      ],
+      "20-manufacturing-process-integration": [
+        "silicon.process.advanced-packaging-ai"
+      ],
+      "30-circuit-ip-primitives": [
+        "chip.circuit.sram-cim-ai-accelerators"
       ],
       "40-compute-substrate": [
         "hw.gpu.tensor-cores",
         "hw.riscv.matrix-extension-proposals",
+        "hw.riscv.multi-pe-matrix-microarchitecture",
         "hw.riscv.vector-extension"
       ],
       "50-memory-data-movement": [
         "hw.gpu.memory-hierarchy",
         "hw.gpu.tensor-memory-accelerator",
         "hw.riscv.vector-memory-hierarchy"
+      ],
+      "60-interconnect-power-thermal": [
+        "hw.riscv.noc-interconnect-matrix-accelerators"
       ],
       "70-execution-architecture": [
         "hw.gpu.overview",
@@ -966,7 +1304,8 @@
       "80-programming-interface-dsl": [
         "hw.gpu.thread-block-clusters",
         "hw.gpu.thread-blocks-occupancy",
-        "software.control.dsl-compiler-runtime"
+        "software.control.dsl-compiler-runtime",
+        "software.riscv.ai-software-ecosystem"
       ],
       "90-compiler-lowering-stack": [
         "software.compiler.rvv-autovec-quality"
@@ -983,10 +1322,20 @@
         "stack.silicon-to-programmer"
       ],
       "bottleneck": [
+        "chip.circuit.sram-cim-ai-accelerators",
         "hw.gpu.memory-hierarchy",
+        "hw.riscv.multi-pe-matrix-microarchitecture",
+        "hw.riscv.noc-interconnect-matrix-accelerators",
         "hw.riscv.vector-memory-hierarchy",
+        "industry.riscv.ai-supply-chain",
+        "model.riscv.roofline-matrix-performance",
+        "physics.materials.ai-compute-limits",
         "programmer.roofline-model",
+        "silicon.process.advanced-packaging-ai",
         "software.compiler.rvv-autovec-quality",
+        "software.riscv.ai-runtime-execution",
+        "software.riscv.ai-software-ecosystem",
+        "system.riscv.distributed-ai-clusters",
         "system.scale.scale-up-vs-scale-out",
         "workload.ai.rvv-kernel-patterns"
       ],
@@ -1004,9 +1353,19 @@
         "hw.riscv.vector-memory-hierarchy"
       ],
       "enabler": [
+        "chip.circuit.sram-cim-ai-accelerators",
         "hw.gpu.tensor-cores",
         "hw.riscv.matrix-extension-proposals",
+        "hw.riscv.multi-pe-matrix-microarchitecture",
+        "hw.riscv.noc-interconnect-matrix-accelerators",
         "hw.riscv.vector-extension",
+        "industry.riscv.ai-supply-chain",
+        "market.riscv.ai-investment-narrative",
+        "physics.materials.ai-compute-limits",
+        "silicon.process.advanced-packaging-ai",
+        "software.riscv.ai-runtime-execution",
+        "software.riscv.ai-software-ecosystem",
+        "system.riscv.distributed-ai-clusters",
         "workload.ai.rvv-kernel-patterns"
       ],
       "indicator": [
@@ -1024,9 +1383,13 @@
         "hw.gpu.overview",
         "hw.gpu.simt",
         "hw.gpu.thread-blocks-occupancy",
+        "hw.riscv.multi-pe-matrix-microarchitecture",
         "hw.riscv.vector-extension",
+        "model.riscv.roofline-matrix-performance",
         "software.compiler.rvv-autovec-quality",
         "software.control.dsl-compiler-runtime",
+        "software.riscv.ai-runtime-execution",
+        "software.riscv.ai-software-ecosystem",
         "stack.ai-accelerator-ontology",
         "stack.silicon-to-programmer",
         "system.scale.scale-up-vs-scale-out",
@@ -1046,9 +1409,12 @@
     "by_scale_scope": {
       "cluster": [
         "software.control.dsl-compiler-runtime",
+        "system.riscv.distributed-ai-clusters",
         "system.scale.scale-up-vs-scale-out"
       ],
       "datacenter": [
+        "physics.materials.ai-compute-limits",
+        "system.riscv.distributed-ai-clusters",
         "system.scale.scale-up-vs-scale-out"
       ],
       "die": [
@@ -1059,13 +1425,22 @@
         "hw.gpu.tensor-memory-accelerator",
         "hw.gpu.thread-block-clusters",
         "hw.gpu.thread-blocks-occupancy",
+        "hw.riscv.multi-pe-matrix-microarchitecture",
+        "hw.riscv.noc-interconnect-matrix-accelerators",
         "hw.riscv.vector-extension",
         "hw.riscv.vector-memory-hierarchy",
+        "model.riscv.roofline-matrix-performance",
+        "physics.materials.ai-compute-limits",
         "programmer.roofline-model",
+        "silicon.process.advanced-packaging-ai",
         "software.control.dsl-compiler-runtime",
+        "software.riscv.ai-runtime-execution",
         "workload.ai.rvv-kernel-patterns"
       ],
       "ecosystem": [
+        "industry.riscv.ai-supply-chain",
+        "market.riscv.ai-investment-narrative",
+        "software.riscv.ai-software-ecosystem",
         "stack.ai-accelerator-ontology",
         "stack.silicon-to-programmer"
       ],
@@ -1075,19 +1450,26 @@
         "hw.gpu.overview",
         "programmer.roofline-model",
         "software.control.dsl-compiler-runtime",
+        "system.riscv.distributed-ai-clusters",
         "system.scale.scale-up-vs-scale-out"
       ],
       "package": [
         "case.cerebras.wafer-scale-engine",
         "hw.gpu.memory-hierarchy",
         "hw.gpu.overview",
+        "hw.riscv.noc-interconnect-matrix-accelerators",
         "hw.riscv.vector-memory-hierarchy",
+        "physics.materials.ai-compute-limits",
+        "silicon.process.advanced-packaging-ai",
+        "software.riscv.ai-runtime-execution",
         "system.scale.scale-up-vs-scale-out"
       ],
       "rack": [
+        "system.riscv.distributed-ai-clusters",
         "system.scale.scale-up-vs-scale-out"
       ],
       "tile": [
+        "chip.circuit.sram-cim-ai-accelerators",
         "hw.gpu.memory-hierarchy",
         "hw.gpu.overview",
         "hw.gpu.simt",
@@ -1096,25 +1478,34 @@
         "hw.gpu.thread-block-clusters",
         "hw.gpu.thread-blocks-occupancy",
         "hw.riscv.matrix-extension-proposals",
+        "hw.riscv.multi-pe-matrix-microarchitecture",
+        "hw.riscv.noc-interconnect-matrix-accelerators",
         "hw.riscv.vector-extension",
         "hw.riscv.vector-memory-hierarchy",
+        "model.riscv.roofline-matrix-performance",
+        "physics.materials.ai-compute-limits",
         "programmer.roofline-model",
         "software.compiler.rvv-autovec-quality",
         "software.control.dsl-compiler-runtime",
+        "software.riscv.ai-runtime-execution",
         "workload.ai.rvv-kernel-patterns"
       ],
       "unit": [
+        "chip.circuit.sram-cim-ai-accelerators",
         "hw.gpu.memory-hierarchy",
         "hw.gpu.tensor-cores",
         "hw.riscv.matrix-extension-proposals",
+        "hw.riscv.multi-pe-matrix-microarchitecture",
         "hw.riscv.vector-extension",
         "hw.riscv.vector-memory-hierarchy",
+        "model.riscv.roofline-matrix-performance",
+        "physics.materials.ai-compute-limits",
         "software.compiler.rvv-autovec-quality",
         "workload.ai.rvv-kernel-patterns"
       ]
     }
   },
-  "node_count": 18,
+  "node_count": 29,
   "nodes": [
     {
       "aliases": [
@@ -1211,6 +1602,125 @@
           "target": "hw.gpu.overview"
         }
       ]
+    },
+    {
+      "aliases": [
+        "AI compute physics limits",
+        "semiconductor physics limits",
+        "Dennard scaling end"
+      ],
+      "concept_type": "physical_limit",
+      "granularity": "concept",
+      "href": "concepts/10-physical-limits-materials/ai-compute-limits.md",
+      "id": "physics.materials.ai-compute-limits",
+      "layer": "10-physical-limits-materials",
+      "layer_path": "10-physical-limits-materials/ai-compute-limits",
+      "parent": "silicon.process.advanced-packaging-ai",
+      "path": "concepts/10-physical-limits-materials/ai-compute-limits.md",
+      "reasoning_roles": [
+        "bottleneck",
+        "enabler"
+      ],
+      "scale_scope": [
+        "unit",
+        "tile",
+        "die",
+        "package",
+        "datacenter"
+      ],
+      "secondary_layers": [
+        "20-manufacturing-process-integration",
+        "30-circuit-ip-primitives",
+        "140-performance-cost-utilization-model"
+      ],
+      "source_refs": [
+        "acm-semiconductor-heat-2026",
+        "bisinfotech-moores-law-ai-era-2026",
+        "eetimes-moores-law-ai-2026",
+        "laserfocus-ai-new-physics-2026",
+        "semiconductordigest-beyond-moores-2026",
+        "tetramem-ai-chip-limits-2026"
+      ],
+      "sources": [
+        "acm-semiconductor-heat-2026",
+        "eetimes-moores-law-ai-2026",
+        "semiconductordigest-beyond-moores-2026",
+        "tetramem-ai-chip-limits-2026",
+        "laserfocus-ai-new-physics-2026",
+        "bisinfotech-moores-law-ai-era-2026"
+      ],
+      "status": "draft",
+      "tags": [
+        "physics",
+        "dennard-scaling",
+        "moores-law",
+        "thermal",
+        "power-density",
+        "wire-delay",
+        "transistor-scaling",
+        "ai-compute"
+      ],
+      "title": "Physical Limits on AI Compute Scaling",
+      "wikilinks": []
+    },
+    {
+      "aliases": [
+        "RISC-V AI runtime",
+        "multi-PE dispatch",
+        "RISC-V accelerator runtime"
+      ],
+      "concept_type": "runtime_mechanism",
+      "granularity": "mechanism",
+      "href": "concepts/100-runtime-execution-system/riscv-ai-runtime-execution.md",
+      "id": "software.riscv.ai-runtime-execution",
+      "layer": "100-runtime-execution-system",
+      "layer_path": "100-runtime-execution-system/riscv/ai-runtime",
+      "parent": "software.riscv.ai-software-ecosystem",
+      "path": "concepts/100-runtime-execution-system/riscv-ai-runtime-execution.md",
+      "reasoning_roles": [
+        "enabler",
+        "bottleneck",
+        "mapping"
+      ],
+      "scale_scope": [
+        "tile",
+        "die",
+        "package"
+      ],
+      "secondary_layers": [
+        "50-memory-data-movement",
+        "60-interconnect-power-thermal",
+        "80-programming-interface-dsl"
+      ],
+      "source_refs": [
+        "burrello-multivic-arxiv-2025",
+        "medea-heterogeneous-arxiv-2025",
+        "montagna-copiftv2-arxiv-2026",
+        "tenstorrent-metal-runtime-2026",
+        "wang-das-kilo-core-arxiv-2025"
+      ],
+      "sources": [
+        "wang-das-kilo-core-arxiv-2025",
+        "medea-heterogeneous-arxiv-2025",
+        "montagna-copiftv2-arxiv-2026",
+        "burrello-multivic-arxiv-2025",
+        "tisac-evas-isca-2026",
+        "tenstorrent-metal-runtime-2026"
+      ],
+      "status": "draft",
+      "tags": [
+        "riscv",
+        "runtime",
+        "scheduler",
+        "memory-management",
+        "dispatch",
+        "multi-pe",
+        "accelerator",
+        "dma",
+        "scratchpad"
+      ],
+      "title": "RISC-V AI Runtime Execution for Multi-PE Matrix Accelerators",
+      "wikilinks": []
     },
     {
       "aliases": [
@@ -1442,6 +1952,127 @@
     },
     {
       "aliases": [
+        "RISC-V AI clusters",
+        "distributed RISC-V training",
+        "RISC-V scale-out inference"
+      ],
+      "concept_type": "scaling_strategy",
+      "granularity": "overview",
+      "href": "concepts/130-scale-out-distributed-system/riscv-distributed-ai-clusters.md",
+      "id": "system.riscv.distributed-ai-clusters",
+      "layer": "130-scale-out-distributed-system",
+      "layer_path": "130-scale-out-distributed-system/riscv/distributed-clusters",
+      "parent": "hw.riscv.multi-pe-matrix-microarchitecture",
+      "path": "concepts/130-scale-out-distributed-system/riscv-distributed-ai-clusters.md",
+      "reasoning_roles": [
+        "enabler",
+        "bottleneck"
+      ],
+      "scale_scope": [
+        "node",
+        "rack",
+        "cluster",
+        "datacenter"
+      ],
+      "secondary_layers": [
+        "60-interconnect-power-thermal",
+        "100-runtime-execution-system",
+        "120-scale-up-system",
+        "150-supply-chain-business"
+      ],
+      "source_refs": [
+        "ethz-mempool-manycore-2025",
+        "firefly-csc2-riscv-server-cnx-2026",
+        "qualcomm-tenstorrent-riscv-2026",
+        "riscv-hpc-edge-cluster-iet-2025",
+        "sifive-nvlink-fusion-2026",
+        "tenstorrent-galaxy-blackhole-2026"
+      ],
+      "sources": [
+        "firefly-csc2-riscv-server-cnx-2026",
+        "sifive-nvlink-fusion-2026",
+        "tenstorrent-galaxy-blackhole-2026",
+        "qualcomm-tenstorrent-riscv-2026",
+        "ethz-mempool-manycore-2025",
+        "riscv-hpc-edge-cluster-iet-2025"
+      ],
+      "status": "draft",
+      "tags": [
+        "riscv",
+        "distributed",
+        "scale-out",
+        "cluster",
+        "ai",
+        "training",
+        "inference",
+        "datacenter",
+        "nvlink",
+        "tenstorrent"
+      ],
+      "title": "Distributed RISC-V AI Clusters \u2014 Scale-Out Training and Inference",
+      "wikilinks": []
+    },
+    {
+      "aliases": [
+        "RISC-V matrix roofline",
+        "RVV performance modeling",
+        "RISC-V accelerator bottleneck analysis"
+      ],
+      "concept_type": "performance_model",
+      "granularity": "model",
+      "href": "concepts/140-performance-cost-utilization-model/riscv-roofline-matrix-performance.md",
+      "id": "model.riscv.roofline-matrix-performance",
+      "layer": "140-performance-cost-utilization-model",
+      "layer_path": "140-performance-cost-utilization-model/riscv/roofline-matrix",
+      "parent": "hw.riscv.multi-pe-matrix-microarchitecture",
+      "path": "concepts/140-performance-cost-utilization-model/riscv-roofline-matrix-performance.md",
+      "reasoning_roles": [
+        "bottleneck",
+        "mapping"
+      ],
+      "scale_scope": [
+        "unit",
+        "tile",
+        "die"
+      ],
+      "secondary_layers": [
+        "40-compute-substrate",
+        "50-memory-data-movement",
+        "110-workload-mapping"
+      ],
+      "source_refs": [
+        "ieee-outer-product-ci-2026",
+        "morgado-carm-arxiv-2026",
+        "purayil-troop-ieee-iccd-2025",
+        "sg2042-llm-inference-roofline-2025",
+        "spacemit-k1-ime-roofline-2025",
+        "wang-ara-cooptimization-arxiv-2026"
+      ],
+      "sources": [
+        "purayil-troop-ieee-iccd-2025",
+        "morgado-carm-arxiv-2026",
+        "wang-ara-cooptimization-arxiv-2026",
+        "sg2042-llm-inference-roofline-2025",
+        "ieee-outer-product-ci-2026",
+        "spacemit-k1-ime-roofline-2025"
+      ],
+      "status": "draft",
+      "tags": [
+        "riscv",
+        "roofline",
+        "performance-model",
+        "arithmetic-intensity",
+        "gemm",
+        "rvv",
+        "matrix",
+        "utilization",
+        "bottleneck"
+      ],
+      "title": "Roofline and Performance Modeling for RISC-V Matrix Accelerators",
+      "wikilinks": []
+    },
+    {
+      "aliases": [
         "roofline model"
       ],
       "concept_type": "performance_model",
@@ -1494,6 +2125,240 @@
           "target": "hw.gpu.tensor-cores"
         }
       ]
+    },
+    {
+      "aliases": [
+        "RISC-V business dynamics",
+        "RISC-V semiconductor supply chain",
+        "RISC-V AI market"
+      ],
+      "concept_type": "business_constraint",
+      "granularity": "overview",
+      "href": "concepts/150-supply-chain-business/riscv-ai-supply-chain.md",
+      "id": "industry.riscv.ai-supply-chain",
+      "layer": "150-supply-chain-business",
+      "layer_path": "150-supply-chain-business/riscv/ai-supply-chain",
+      "parent": "system.riscv.distributed-ai-clusters",
+      "path": "concepts/150-supply-chain-business/riscv-ai-supply-chain.md",
+      "reasoning_roles": [
+        "enabler",
+        "bottleneck"
+      ],
+      "scale_scope": [
+        "ecosystem"
+      ],
+      "secondary_layers": [
+        "130-scale-out-distributed-system",
+        "160-market-narrative"
+      ],
+      "source_refs": [
+        "ainvest-qualcomm-tenstorrent-software-2026",
+        "digitimes-qualcomm-google-riscv-2026",
+        "theregister-qualcomm-tenstorrent-2026",
+        "wedbush-riscv-25pct-share-2026",
+        "wedbush-riscv-great-pivot-2025"
+      ],
+      "sources": [
+        "wedbush-riscv-silicon-rebellion-2026",
+        "digitimes-qualcomm-google-riscv-2026",
+        "theregister-qualcomm-tenstorrent-2026",
+        "wedbush-riscv-25pct-share-2026",
+        "ainvest-qualcomm-tenstorrent-software-2026",
+        "wedbush-riscv-great-pivot-2025"
+      ],
+      "status": "draft",
+      "tags": [
+        "riscv",
+        "supply-chain",
+        "business",
+        "qualcomm",
+        "tenstorrent",
+        "arm",
+        "x86",
+        "datacenter",
+        "ai",
+        "market"
+      ],
+      "title": "RISC-V AI Hardware Supply Chain and Competitive Dynamics",
+      "wikilinks": []
+    },
+    {
+      "aliases": [
+        "RISC-V market narrative",
+        "AI chip investment",
+        "RISC-V hype cycle"
+      ],
+      "concept_type": "market_narrative",
+      "granularity": "overview",
+      "href": "concepts/160-market-narrative/riscv-ai-investment-narrative.md",
+      "id": "market.riscv.ai-investment-narrative",
+      "layer": "160-market-narrative",
+      "layer_path": "160-market-narrative/riscv/ai-investment",
+      "parent": "industry.riscv.ai-supply-chain",
+      "path": "concepts/160-market-narrative/riscv-ai-investment-narrative.md",
+      "reasoning_roles": [
+        "enabler"
+      ],
+      "scale_scope": [
+        "ecosystem"
+      ],
+      "secondary_layers": [
+        "150-supply-chain-business",
+        "130-scale-out-distributed-system"
+      ],
+      "source_refs": [
+        "36kr-nvidia-sifive-riscv-2026",
+        "leiphone-riscv-capital-2026",
+        "mordor-riscv-market-2026",
+        "wedbush-riscv-conquered-ai-2026",
+        "wedbush-riscv-revolution-2026",
+        "wedbush-silicon-decoupling-2025",
+        "yahoo-qualcomm-10b-nvidia-2026"
+      ],
+      "sources": [
+        "wedbush-riscv-revolution-2026",
+        "36kr-nvidia-sifive-riscv-2026",
+        "wedbush-silicon-decoupling-2025",
+        "mordor-riscv-market-2026",
+        "leiphone-riscv-capital-2026",
+        "wedbush-riscv-conquered-ai-2026",
+        "yahoo-qualcomm-10b-nvidia-2026"
+      ],
+      "status": "draft",
+      "tags": [
+        "riscv",
+        "market",
+        "investment",
+        "hype-cycle",
+        "ai",
+        "semiconductor",
+        "geopolitics",
+        "venture-capital"
+      ],
+      "title": "RISC-V AI Market Narrative and Investment Dynamics",
+      "wikilinks": []
+    },
+    {
+      "aliases": [
+        "AI chip packaging",
+        "advanced packaging",
+        "chiplet integration",
+        "3D IC packaging"
+      ],
+      "concept_type": "manufacturing_method",
+      "granularity": "overview",
+      "href": "concepts/20-manufacturing-process-integration/advanced-packaging-ai.md",
+      "id": "silicon.process.advanced-packaging-ai",
+      "layer": "20-manufacturing-process-integration",
+      "layer_path": "20-manufacturing-process-integration/packaging/ai-accelerators",
+      "parent": "chip.circuit.sram-cim-ai-accelerators",
+      "path": "concepts/20-manufacturing-process-integration/advanced-packaging-ai.md",
+      "reasoning_roles": [
+        "enabler",
+        "bottleneck"
+      ],
+      "scale_scope": [
+        "die",
+        "package"
+      ],
+      "secondary_layers": [
+        "30-circuit-ip-primitives",
+        "120-scale-up-system"
+      ],
+      "source_refs": [
+        "bloomberg-packaging-policy-2026",
+        "digitaltoday-packaging-shift-2026",
+        "digitimes-packaging-frontier-2025",
+        "patsnap-packaging-landscape-2026",
+        "researchmarkets-chiplet-2025"
+      ],
+      "sources": [
+        "digitimes-packaging-frontier-2025",
+        "bloomberg-packaging-policy-2026",
+        "patsnap-packaging-landscape-2026",
+        "sns-3dic-market-2026",
+        "packnode-strategic-spotlight-2026",
+        "digitaltoday-packaging-shift-2026",
+        "wedbush-silicon-revolution-2025",
+        "researchmarkets-chiplet-2025"
+      ],
+      "status": "draft",
+      "tags": [
+        "semiconductor",
+        "packaging",
+        "chiplets",
+        "3d-integration",
+        "tsmc",
+        "cowos",
+        "hybrid-bonding",
+        "hbm",
+        "ai-accelerator"
+      ],
+      "title": "Advanced Semiconductor Packaging for AI Accelerators",
+      "wikilinks": []
+    },
+    {
+      "aliases": [
+        "SRAM for AI accelerators",
+        "compute-in-memory",
+        "AI memory circuits",
+        "on-chip SRAM scaling"
+      ],
+      "concept_type": "component",
+      "granularity": "mechanism",
+      "href": "concepts/30-circuit-ip-primitives/sram-cim-ai-accelerators.md",
+      "id": "chip.circuit.sram-cim-ai-accelerators",
+      "layer": "30-circuit-ip-primitives",
+      "layer_path": "30-circuit-ip-primitives/sram-cim/ai-accelerators",
+      "parent": "hw.riscv.multi-pe-matrix-microarchitecture",
+      "path": "concepts/30-circuit-ip-primitives/sram-cim-ai-accelerators.md",
+      "reasoning_roles": [
+        "enabler",
+        "bottleneck"
+      ],
+      "scale_scope": [
+        "unit",
+        "tile"
+      ],
+      "secondary_layers": [
+        "40-compute-substrate",
+        "50-memory-data-movement"
+      ],
+      "source_refs": [
+        "accelcim-dataflow-arxiv-2026",
+        "dac-photonic-sram-2025",
+        "dmatrix-3d-dram-2026",
+        "dream-cim-ieee-tcasai-2025",
+        "fermi-ml-sram-macro-arxiv-2025",
+        "lpae-cim-approximate-adder-2025",
+        "m31-ull-memory-compiler-tsmc-n6e-2025",
+        "microelectronics-pim-imc-survey-2026",
+        "nature-cfet-6t-sram-2026"
+      ],
+      "sources": [
+        "m31-ull-memory-compiler-tsmc-n6e-2025",
+        "dream-cim-ieee-tcasai-2025",
+        "accelcim-dataflow-arxiv-2026",
+        "lpae-cim-approximate-adder-2025",
+        "fermi-ml-sram-macro-arxiv-2025",
+        "nature-cfet-6t-sram-2026",
+        "microelectronics-pim-imc-survey-2026",
+        "dmatrix-3d-dram-2026",
+        "dac-photonic-sram-2025"
+      ],
+      "status": "draft",
+      "tags": [
+        "sram",
+        "compute-in-memory",
+        "cim",
+        "memory-compiler",
+        "ai-accelerator",
+        "circuit-design",
+        "bitcell",
+        "low-power"
+      ],
+      "title": "On-Chip SRAM and Compute-in-Memory for AI Accelerators",
+      "wikilinks": []
     },
     {
       "aliases": [
@@ -1572,6 +2437,72 @@
         "hpc"
       ],
       "title": "RISC-V Matrix Extension Proposals",
+      "wikilinks": []
+    },
+    {
+      "aliases": [
+        "RISC-V matrix PE organization",
+        "matrix spatial microarchitecture",
+        "RVV PE clustering"
+      ],
+      "concept_type": "architecture_pattern",
+      "granularity": "mechanism",
+      "href": "concepts/40-compute-substrate/riscv-multi-pe-matrix-microarchitecture.md",
+      "id": "hw.riscv.multi-pe-matrix-microarchitecture",
+      "layer": "40-compute-substrate",
+      "layer_path": "40-compute-substrate/riscv/multi-pe-matrix",
+      "parent": "hw.riscv.matrix-extension-proposals",
+      "path": "concepts/40-compute-substrate/riscv-multi-pe-matrix-microarchitecture.md",
+      "reasoning_roles": [
+        "enabler",
+        "bottleneck",
+        "mapping"
+      ],
+      "scale_scope": [
+        "unit",
+        "tile",
+        "die"
+      ],
+      "secondary_layers": [
+        "50-memory-data-movement",
+        "70-execution-architecture",
+        "110-workload-mapping"
+      ],
+      "source_refs": [
+        "cammarata-quadrilatero-acm-2025",
+        "ieee-outer-product-ci-2026",
+        "nojehdeh-camp-micro-2025",
+        "perotti-spatz-ieee-tcad-2025",
+        "saumell-mte-bsc-2025",
+        "shen-mempool-spatz-date-2025",
+        "venieri-ame-pim-acm-cf-2026"
+      ],
+      "sources": [
+        "perotti-spatz-ieee-tcad-2025",
+        "nojehdeh-camp-micro-2025",
+        "cammarata-quadrilatero-acm-2025",
+        "saumell-mte-bsc-2025",
+        "venieri-ame-pim-acm-cf-2026",
+        "ieee-outer-product-ci-2026",
+        "cai-taurus-2025",
+        "shen-mempool-spatz-date-2025",
+        "ieee-area-optimized-matrix-edge-2025",
+        "sinigaglia-maestro-arxiv-2025"
+      ],
+      "status": "draft",
+      "tags": [
+        "riscv",
+        "matrix",
+        "multi-pe",
+        "microarchitecture",
+        "systolic-array",
+        "outer-product",
+        "spatial-architecture",
+        "pe-array",
+        "gemm",
+        "ai-acceleration"
+      ],
+      "title": "Multi-PE Matrix Microarchitecture for RISC-V",
       "wikilinks": []
     },
     {
@@ -1940,6 +2871,65 @@
     },
     {
       "aliases": [
+        "RISC-V matrix accelerator interconnect",
+        "NoC for matrix PEs",
+        "PE interconnect fabric"
+      ],
+      "concept_type": "interconnect_pattern",
+      "granularity": "mechanism",
+      "href": "concepts/60-interconnect-power-thermal/riscv-noc-interconnect-matrix-accelerators.md",
+      "id": "hw.riscv.noc-interconnect-matrix-accelerators",
+      "layer": "60-interconnect-power-thermal",
+      "layer_path": "60-interconnect-power-thermal/riscv/noc-matrix-accelerators",
+      "parent": "hw.riscv.multi-pe-matrix-microarchitecture",
+      "path": "concepts/60-interconnect-power-thermal/riscv-noc-interconnect-matrix-accelerators.md",
+      "reasoning_roles": [
+        "bottleneck",
+        "enabler"
+      ],
+      "scale_scope": [
+        "tile",
+        "die",
+        "package"
+      ],
+      "secondary_layers": [
+        "40-compute-substrate",
+        "50-memory-data-movement",
+        "70-execution-architecture"
+      ],
+      "source_refs": [
+        "iguaz-fractalsync-acm-cf-2025",
+        "riedel-floonoc-ieee-tvlsi-2025",
+        "riedel-mempool-flavors-arxiv-2025",
+        "rozk-reconfigurable-noc-ieee-jssc-2026",
+        "shen-mempool-spatz-date-2025"
+      ],
+      "sources": [
+        "riedel-floonoc-ieee-tvlsi-2025",
+        "iguaz-fractalsync-acm-cf-2025",
+        "riedel-mempool-flavors-arxiv-2025",
+        "shen-mempool-spatz-date-2025",
+        "rozk-reconfigurable-noc-ieee-jssc-2026"
+      ],
+      "status": "draft",
+      "tags": [
+        "riscv",
+        "noc",
+        "interconnect",
+        "mesh",
+        "hierarchical",
+        "mempool",
+        "floonoc",
+        "multi-pe",
+        "matrix-accelerator",
+        "synchronization",
+        "scaling"
+      ],
+      "title": "NoC and Interconnect for Multi-PE RISC-V Matrix Accelerators",
+      "wikilinks": []
+    },
+    {
+      "aliases": [
         "gpu architecture"
       ],
       "concept_type": "architecture_pattern",
@@ -2117,6 +3107,72 @@
           "target": "system.scale.scale-up-vs-scale-out"
         }
       ]
+    },
+    {
+      "aliases": [
+        "RISC-V AI software stack",
+        "RVV ML ecosystem",
+        "RISC-V matrix software"
+      ],
+      "concept_type": "programming_interface",
+      "granularity": "overview",
+      "href": "concepts/80-programming-interface-dsl/riscv-ai-software-ecosystem.md",
+      "id": "software.riscv.ai-software-ecosystem",
+      "layer": "80-programming-interface-dsl",
+      "layer_path": "80-programming-interface-dsl/riscv/ai-ecosystem",
+      "parent": "hw.riscv.matrix-extension-proposals",
+      "path": "concepts/80-programming-interface-dsl/riscv-ai-software-ecosystem.md",
+      "reasoning_roles": [
+        "enabler",
+        "bottleneck",
+        "mapping"
+      ],
+      "scale_scope": [
+        "ecosystem"
+      ],
+      "secondary_layers": [
+        "90-compiler-lowering-stack",
+        "100-runtime-execution-system",
+        "110-workload-mapping"
+      ],
+      "source_refs": [
+        "google-coral-roadmap-2026",
+        "greenblatt-tvm-rvv-autotune-2026",
+        "lei-mlir-rvv-xdsl-2025",
+        "nuclei-rvv-ai-library-2025",
+        "puzikova-eigen-rvv-pact-2025",
+        "riscv-eu-roadmap-2025",
+        "riscv-matrix-software-tg-2025",
+        "ventana-ruca-ai-platform-2025"
+      ],
+      "sources": [
+        "lei-mlir-rvv-xdsl-2025",
+        "puzikova-eigen-rvv-pact-2025",
+        "greenblatt-tvm-rvv-autotune-2026",
+        "google-coral-roadmap-2026",
+        "ventana-ruca-ai-platform-2025",
+        "riscv-ame-software-roadmap-2024",
+        "riscv-matrix-software-tg-2025",
+        "riscv-eu-roadmap-2025",
+        "nuclei-rvv-ai-library-2025"
+      ],
+      "status": "draft",
+      "tags": [
+        "riscv",
+        "ai",
+        "software",
+        "mlir",
+        "tvm",
+        "openblas",
+        "eigen",
+        "compiler",
+        "framework",
+        "inference",
+        "training",
+        "ecosystem"
+      ],
+      "title": "RISC-V AI Software Ecosystem for Matrix Acceleration",
+      "wikilinks": []
     },
     {
       "aliases": [
@@ -2311,5 +3367,5 @@
     }
   ],
   "root": "knowledge-base",
-  "source_count": 63
+  "source_count": 138
 }
